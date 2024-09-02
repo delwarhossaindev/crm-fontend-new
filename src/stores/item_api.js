@@ -1,5 +1,4 @@
-// src/stores/item_api.js
-import { apiBase } from "@/config";
+import { apiBase } from "@/config"; // Adjust this to your API base URL
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -13,19 +12,32 @@ const apiClient = axios.create({
   },
 });
 
-export default {
-  fetchItemList(page = 1, perPage = 10, query = '', sortBy = '', orderBy = '') {
-    const params = {
-      page,
-      per_page: perPage,
-    };
-
-    if (query) params.q = query;
-    if (sortBy && orderBy) {
-      params.sortBy = sortBy;
-      params.orderBy = orderBy;
-    }
-
-    return apiClient.get('/items', { params });
+const apiClientMultiple = axios.create({
+  baseURL: apiBase,
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'multipart/form-data',
   },
+});
+
+export default {
+  insertItem(formdata) {
+    return apiClientMultiple.post(`/items`, formdata);
+  },
+  fetchItemList(page) {
+    
+    return apiClient.get(`/all-items-paginated?page=${page}`);
+  },
+  searchItemList(search) {
+    return apiClient.get(`/all-items-paginated?search=${search}`);
+  },
+  showItem(id) {
+    return apiClientMultiple.get(`/items/${id}`);
+  },
+  deleteItem(id) {
+    return apiClientMultiple.delete(`/items/${id}`);
+  },
+  updateItem(formdata, id) {
+    return apiClientMultiple.put(`/items/${id}`, formdata);
+  }
 };

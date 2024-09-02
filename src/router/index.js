@@ -21,8 +21,9 @@ import SupplierEdit from "@/views/supplier/Edit.vue";
 
 
 //Setting
-import ItemList from "@/views/item/List.vue";
-
+import ItemList from "@/views/item/index.vue"
+import ItemCreate from "@/views/item/create.vue";
+import ItemEdit from "@/views/item/edit.vue";
 
 
 
@@ -45,6 +46,20 @@ const routes = [
     component: ItemList,
    // meta: { isPermission: 'suppliers' }
   },
+  {
+    path: "/item/create",
+    name: "item-create",
+    component: ItemCreate,
+   
+
+  },
+  {
+    path: "/item/edit/:id",
+    name: "item-edit",
+    component: ItemEdit,
+
+  },
+
   {
     path: "/employee",
     name: "employee",
@@ -126,6 +141,7 @@ const routes = [
    // meta: { isPermission: 'users' }
 
   },
+ 
   {
     path: "/:catchAll(.*)",
     redirect: "/",

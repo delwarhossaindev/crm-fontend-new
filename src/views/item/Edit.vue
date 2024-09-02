@@ -1,340 +1,116 @@
 <template>
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
-      <div class="flex justify-between items-center">
-        <div>
-          <h6 class="title">Update Supplier</h6>
-        </div>
-        <div class="mb-3">
-          <button
-            type="button"
-            class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
-            @click="$router.go(-1)"
-          >
-            Back
-          </button>
-        </div>
+      <div class="flex justify-between items-center mb-3">
+        <h6 class="font-medium">Edit Item</h6>
+        <button
+          type="button"
+          class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+          @click="$router.go(-1)"
+        >
+          Back
+        </button>
       </div>
       <hr />
-      <form @submit.prevent="submitForm()">
-        <div class="lg:grid grid-cols-3 gap-4 items-center mt-4">
-          <!-- Company Name -->
-          <label for="company_name"
-            >Company Name <span class="text-red-500">*</span></label
-          >
+      <form @submit.prevent="submitForm">
+        <div class="lg:grid grid-cols-3 gap-4 items-center mt-3">
+          <label for="item_name">Item Name</label>
           <input
-            placeholder="Enter here . . ."
+            id="item_name"
             type="text"
-            id="company_name"
-            v-model="form.company_name"
-            :class="{ 'border-red-500': formErrors.company_name }"
+            placeholder="Enter here . . ."
+            v-model="form.item_name"
+            :class="{ 'border-red-500': formErrors.item_name }"
             class="input-text col-span-2"
-            required
           />
-          <!-- First Name -->
-          <label for="first_name">First Name:</label>
+          <label for="model">Model</label>
           <input
-            placeholder="Enter here . . ."
+            id="model"
             type="text"
-            id="firstName"
-            v-model="form.first_name"
-            :class="{ 'border-red-500': formErrors.first_name }"
-            class="input-text col-span-2"
-          />
-          <!-- Last Name -->
-          <label for="lastName">Last Name:</label>
-          <input
             placeholder="Enter here . . ."
-            type="text"
-            id="lastName"
-            v-model="form.last_name"
+            v-model="form.model"
+            :class="{ 'border-red-500': formErrors.model }"
             class="input-text col-span-2"
           />
-          <!-- Email -->
-          <label for="email">Email:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="email"
-            id="email"
-            v-model="form.email"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="contact">Contact:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="contact"
-            v-model="form.contact"
-            :class="{ 'border-red-500': formErrors.contact }"
-            class="input-text col-span-2"
-          />
-          <!-- Select Image -->
-
-          <label for="image_path">Select Image:</label>
-
-          <div class="col-span-2">
-            <input
-              placeholder="Enter here . . ."
-              type="file"
-              id="image_path"
-              @change="handleImageUpload($event)"
-              class="input-text col-span-2"
-            />
-
-            <span v-if="form.image_path" class="rounded-lg">
-              <img
-                v-if="imageLocal"
-                :src="`${localImagePath}`"
-                class="mt-4 rounded-lg shadow-md w-20 h-20"
-              />
-              <img
-                v-else
-                :src="`${imgBase}${form.image_path}`"
-                class="mt-4 rounded-lg shadow-md w-20 h-20"
-              />
-            </span>
-          </div>
-
-          <!-- Contact -->
-          <label for="address_1">Address 1:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="address_1"
-            v-model="form.address_1"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="address_2">Address 2:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="address_2"
-            v-model="form.address_2"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="city">City:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="city"
-            v-model="form.city"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="state">State/Proviance:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="state_or_province"
-            v-model="form.state_or_province"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="zip">Zip:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="zip"
-            v-model="form.zip"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="country">Country:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="country"
-            v-model="form.country"
-            class="input-text col-span-2"
-          />
-          <!-- Contact -->
-          <label for="comments">Comments:</label>
-          <textarea
-            placeholder="Enter here . . ."
-            type="text"
-            id="comments"
-            v-model="form.comments"
-            class="input-text col-span-2"
-          />
-          <label for="account_no">Account#:</label>
-          <input
-            placeholder="Enter here . . ."
-            type="text"
-            id="account_no"
-            v-model="form.account_no"
-            class="input-text col-span-2"
-          />
-          <button
-            type="button"
-            @click="addFileInput()"
-            class="px-4 py-2 bg-[#000180] text-white hover:bg-[#000180]-600"
-          >
-            Add Files
-          </button>
-          <div class="col-span-2">
-            <label>Select Files:</label>
-            <div
-              v-for="(file, index) in form.files"
-              :key="index"
-              class="mb-2 flex items-center col-span-1"
+       
+          <!-- Empty cell for spacing -->
+          <div class="col-span-3"></div>
+          <!-- Submit Button in a full-width cell -->
+          <div class="col-span-3 flex justify-end mt-3">
+            <button
+              type="submit"
+              :disabled="loading"
+              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600"
             >
-              <input
-                type="file"
-                @change="handleFileUpload($event, index)"
-                class="input-text"
-                multiple
-              />
-              <div v-if="file" class="p-4 bg-white rounded-lg shadow-md">
-                <a
-                  :href="`${imgBase}${file.path}`"
-                  target="_blank"
-                  class="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                >
-                  <i class="bi bi-file-earmark text-2xl mr-2"></i>
-                  <span class="font-medium">{{ file.original_name }}</span>
-                </a>
-                <!-- <img :src="`${imgBase}${file.path}`" :alt="file.original_name" class="mt-4 rounded-lg shadow-md max-w-full h-auto" /> -->
-              </div>
-              <button
-                type="button"
-                @click="removeFileInput(index)"
-                class="ml-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-              >
-                <i class="bi bi-trash text-white text-lg"></i>
-              </button>
-            </div>
+              Update
+            </button>
           </div>
-          <!-- Submit Button -->
-        </div>
-        <div>
-          <button
-            type="submit"
-            class="px-4 py-2 min-w-32 inline-block bg-[#000180] text-white rounded-lg mt-3"
-          >
-            Submit
-          </button>
         </div>
       </form>
     </div>
   </MainLayout>
 </template>
+
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import supplier from "@/stores/supplier_api.js";
+import item from "@/stores/item_api.js";
 import { showNotification } from "@/utilities/notification";
-import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { imgBase } from "@/config";
-const route = useRoute();
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
 const loading = ref(false);
-const imageLocal = ref(false);
+
 const form = ref({
-  company_name: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  contact: "",
-  image_path: null,
-  address_1: "",
-  address_2: "",
-  city: "",
-  state_or_province: "",
-  zip: "",
-  country: "",
-  comments: "",
-  account_no: "",
-  store_account_balance: 0,
-  files: [],
+  item_name: "",
+  model: "",
+  qty: "",
+  unit_price:""
 });
 
-// Define reactive form error state
 const formErrors = ref({});
-const localImagePath = ref(null);
-// Basic validation function
-function validateForm() {
-  const errors = {};
-  if (!form.value.company_name)
-    errors.company_name = "Company Name is required";
-  // if (!form.value.first_name) errors.first_name = "First Name is required";
-  // if (!form.value.email || !/\S+@\S+\.\S+/.test(form.value.email))
-  // errors.email = "A valid Email is required";
-  // Add more validations as needed
-  formErrors.value = errors;
-  return Object.keys(errors).length === 0;
-}
-const handleImageUpload = (event) => {
-  const img = event.target.files[0];
-  form.value.image_path = img;
 
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imageLocal.value = true;
-      localImagePath.value = e.target.result;
-    };
-    reader.readAsDataURL(file); // Read the file as a data URL
-  }
-};
-
-const handleFileUpload = (event, index) => {
-  const file = event.target.files[0];
-  form.value.files[index] = file;
-  console.log(form.value.files); // Log the first file
-};
-const addFileInput = () => {
-  form.value.files.push(null);
-};
-const removeFileInput = (index) => {
-  form.value.files.splice(index, 1);
-};
 const router = useRouter();
 
-const fetchData = async (id) => {
-  try {
-    const response = await supplier.fetchSupplier(id);
-    console.log(response.data);
-    const data = response.data;
-    form.value.company_name = data?.company_name;
-    form.value.first_name = data?.first_name;
-    form.value.last_name = data?.last_name;
-    form.value.email = data?.email;
-    form.value.contact = data?.contact;
-    form.value.image_path = data?.image_path;
-    form.value.address_1 = data?.address_1;
-    form.value.address_2 = data?.address_2;
-    form.value.city = data?.city;
-    form.value.state_or_province = data?.state_or_province;
-    form.value.zip = data?.zip;
-    form.value.country = data?.country;
-    form.value.comments = data?.comments;
-    form.value.files = data?.files;
-  } catch (error) {
-    console.error(error);
-  } finally {
+const validateForm = () => {
+  const errors = {};
+
+  if (!form.value.item_name) {
+    errors.item_name = "Item Name is required";
   }
+ 
+  formErrors.value = errors;
+  return Object.keys(errors).length === 0;
 };
 
-onMounted(() => fetchData(route.params.id));
+const fetchItemDetails = async () => {
+  try {
+    const id = route.params.id;
+    const response = await item.showItem(id);
+    form.value = response.data;
+  } catch (error) {
+    console.error("Failed to fetch item details:", error);
+  }
+};
 
 const submitForm = async () => {
   if (validateForm()) {
     loading.value = true;
     try {
-      const response = await supplier.updateSupplier(
-        route.params.id,
-        form.value
-      );
-      console.log(response.status);
-      if (response?.status === 201) {
-        showNotification("success", "Successfully updated");
-        router.push({ name: "supplier" });
+      const id = route.params.id;
+      const response = await item.updateItem(form.value, id);
+      if (response?.status === 200) {
+        showNotification(
+          "success",
+          response?.data?.message || "Updated successfully"
+        );
+        router.push({ name: "item" });
       }
     } catch (error) {
-      console.error(error);
+      console.error("Failed to submit item:", error);
+      showNotification(
+        "error",
+        error.response?.data?.message || "Failed to submit item"
+      );
     } finally {
       loading.value = false;
     }
@@ -342,4 +118,10 @@ const submitForm = async () => {
     console.log("Form contains errors:", formErrors.value);
   }
 };
+
+onMounted(() => {
+  if (route.params.id) {
+    fetchItemDetails();
+  }
+});
 </script>
