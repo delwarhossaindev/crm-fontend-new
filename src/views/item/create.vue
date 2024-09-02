@@ -18,15 +18,18 @@
           <label for="item_name">Item Name <span class="text-red-600">*</span></label>
           <input id="item_name" type="text" placeholder="Enter here . . ." v-model="form.item_name"
             :class="{ 'border-red-500': formErrors.item_name }" class="input-text col-span-2" />
+          
           <label for="model">Model</label>
           <input id="model" type="text" placeholder="Enter here . . ." v-model="form.model"
             :class="{ 'border-red-500': formErrors.model }" class="input-text col-span-2" />
-            <label for="qty">Qty </label>
-          <input id="qty" type="text" placeholder="Enter here . . ." v-model="form.qty"
-            :class="{ 'border-red-500': formErrors.model }" class="input-text col-span-2" />
-            <label for="unit_price">Unit Price</label>
-          <input id="unit_price" type="text" placeholder="Enter here . . ." v-model="form.unit_price"
-            :class="{ 'border-red-500': formErrors.model }" class="input-text col-span-2" />
+          
+          <label for="qty">Qty</label>
+          <input id="qty" type="number" placeholder="Enter here . . ." v-model="form.qty"
+            :class="{ 'border-red-500': formErrors.qty }" class="input-text col-span-2" />
+          
+          <label for="unit_price">Unit Price</label>
+          <input id="unit_price" type="number" placeholder="Enter here . . ." v-model="form.unit_price"
+            :class="{ 'border-red-500': formErrors.unit_price }" class="input-text col-span-2" />
       
           <!-- Empty cell for spacing -->
           <div class="col-span-3"></div>
@@ -48,25 +51,23 @@ import item from "@/stores/item_api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+
 const loading = ref(false);
 
 const form = ref({
   item_name: "",
   model: "",
   qty: "",
-  unit_price:""
+  unit_price: ""
 });
 
-
 const formErrors = ref({});
-
 
 function validateForm() {
   const errors = {};
 
   if (!form.value.item_name) errors.item_name = "Item Name is required";
- 
- 
+  
   formErrors.value = errors;
   return Object.keys(errors).length === 0;
 }
@@ -80,7 +81,6 @@ const submitForm = async () => {
       const response = await item.insertItem(form.value);
 
       if (response?.status === 201) {
-        console.log(response.data?.message);
         showNotification(
           "success",
           response?.data?.message || "Successfully inserted"
@@ -96,31 +96,23 @@ const submitForm = async () => {
           const errors = error.response.data.errors;
           for (const key in errors) {
             if (errors.hasOwnProperty(key)) {
-              const errorMessages = errors[key];
-              if (key == 'item') {
-                formErrors.value.item_name = "Item is required";
-              }
-
-              errorMessages.forEach((message) => {
-
-                showNotification("error", message);
-              });
+              formErrors.value[key] = errors[key][0];
             }
           }
-        } else {
+        } 
+        else {
           showNotification("error", error.response.data?.message || "An error occurred");
         }
-      } else {
-    
-        showNotification("error", "An error occurred. Please try again.");
       }
-    } finally {
+       
+    } 
+    
+    finally {
       loading.value = false;
     }
   
   } else {
     loading.value = false;
-
   }
 };
 </script>

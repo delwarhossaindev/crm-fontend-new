@@ -16,7 +16,6 @@ const apiClientMultiple = axios.create({
   baseURL: apiBase,
   headers: {
     'Authorization': `Bearer ${token}`,
-    'Content-Type': 'multipart/form-data',
   },
 });
 
@@ -25,7 +24,6 @@ export default {
     return apiClientMultiple.post(`/items`, formdata);
   },
   fetchItemList(page) {
-    
     return apiClient.get(`/all-items-paginated?page=${page}`);
   },
   searchItemList(search) {
@@ -38,6 +36,7 @@ export default {
     return apiClientMultiple.delete(`/items/${id}`);
   },
   updateItem(formdata, id) {
-    return apiClientMultiple.put(`/items/${id}`, formdata);
+     console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/items/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };
