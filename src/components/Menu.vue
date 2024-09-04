@@ -28,11 +28,63 @@ const menu = ref([
     class: "",
   },
   {
-    title: "Employees",
-    icon: "bi bi-download",
-    href: { name: "employee" },
+    title: "Attendence",
+    icon: "bi bi-exclude",
     isExpanded: false,
-    permission: "suppliers",
+    class: "",
+  },
+  {
+    title: "Order",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Prospect",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Quotation",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Supplier",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Lead",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Followup",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "SMS",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Task",
+    icon: "bi bi-exclude",
+    isExpanded: false,
+    class: "",
+  },
+  {
+    title: "Collection",
+    icon: "bi bi-exclude",
+    isExpanded: false,
     class: "",
   },
   {
@@ -56,6 +108,7 @@ const menu = ref([
       },
       {
         title: "Country",
+        href: { name: "country" },
         icon: "bi bi-list",
       },
       {

@@ -21,9 +21,16 @@ import SupplierEdit from "@/views/supplier/Edit.vue";
 
 
 //Setting
+
+//Item
 import ItemList from "@/views/item/index.vue"
 import ItemCreate from "@/views/item/create.vue";
 import ItemEdit from "@/views/item/edit.vue";
+
+//Country
+import CountryList from "@/views/country/index.vue"
+import CountryCreate from "@/views/country/create.vue";
+import CountryEdit from "@/views/country/edit.vue";
 
 
 
@@ -40,26 +47,6 @@ const routes = [
     component: Dashboard,
    // meta: { isPermission: 'dashboard' }
   },
-   {
-    path: "/item",
-    name: "item",
-    component: ItemList,
-   // meta: { isPermission: 'suppliers' }
-  },
-  {
-    path: "/item/create",
-    name: "item-create",
-    component: ItemCreate,
-   
-
-  },
-  {
-    path: "/item/edit/:id",
-    name: "item-edit",
-    component: ItemEdit,
-
-  },
-
   {
     path: "/employee",
     name: "employee",
@@ -140,6 +127,43 @@ const routes = [
     component: Permissionsedit,
    // meta: { isPermission: 'users' }
 
+  },
+
+  {
+    path: "/item",
+    name: "item",
+    component: ItemList,
+   // meta: { isPermission: 'suppliers' }
+  },
+  {
+    path: "/item/create",
+    name: "item-create",
+    component: ItemCreate,
+   
+
+  },
+  {
+    path: "/item/edit/:id",
+    name: "item-edit",
+    component: ItemEdit,
+  },
+
+  {
+    path: "/country",
+    name: "country",
+    component: CountryList,
+   // meta: { isPermission: 'suppliers' }
+  },
+  {
+    path: "/country/create",
+    name: "country-create",
+    component: CountryCreate,
+   
+  },
+  {
+    path: "/item/edit/:id",
+    name: "country-edit",
+    component: CountryEdit,
   },
  
   {
