@@ -5,7 +5,6 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 
 const dataStore = useDataStore();
-const { getDashboard } = dataStore;
 const { isLoading } = storeToRefs(dataStore);
 
 const topData = ref({
@@ -16,35 +15,7 @@ const topData = ref({
 });
 
 onMounted(async () => {
-  const res = await getDashboard();
-
-  topData.value = {
-    totalSales: res?.total_sale_amount
-      ? Number(res?.total_sale_amount).toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })
-      : 0,
-    totalPurchases: res?.total_purchase_amount
-      ? Number(res?.total_purchase_amount).toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })
-      : 0,
-    totalSupplier: res?.total_supplier
-      ? Number(res?.total_supplier).toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })
-      : 0,
-    totalProducts: res?.total_product
-      ? Number(res?.total_product).toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })
-      : 0,
-  };
-  series.value.at(0).data = res?.monthly_sale || 0;
+  
 });
 
 const chartOptions = ref({

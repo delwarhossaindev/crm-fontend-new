@@ -50,26 +50,7 @@ export const useDataStore = defineStore("dataStore", {
         else showNotification("error", error?.message);
       }
     },
-    // Dashboard
-    async getDashboard() {
-      this.isLoading = true;
-      try {
-        const token = Cookies.get("token");
-        const config = {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        }
-        const response = await axios.get(`${apiBase}/dashboard`, config);
-        this.isLoading = false;
-        if (response?.status == 200)
-          return response?.data;
-      } catch (error) {
-        this.isLoading = false;
-        console.log(error);
-        showNotification("error", error?.message);
-      }
-    },
+  
     // Product Search
     async getProduct(query, branch) {
       this.isPurchasing = true;

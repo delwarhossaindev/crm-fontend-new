@@ -15,6 +15,6 @@ const apiClient = axios.create({
 
 export default {
   fetchDashboardData() {
-    return apiClient.get(`/dashboard`);
+    // return apiClient.get(`/dashboard`);
   },
 };

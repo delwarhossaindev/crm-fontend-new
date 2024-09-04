@@ -36,80 +36,7 @@ const menu = ref([
     class: "",
   },
   {
-    title: "Setting",
-    icon: "bi bi-download",
-    isExpanded: false,
-    class: "",
-    child: [
-      {
-        title: "Items",
-        href: { name: "item" },
-        icon: "bi bi-list",
-      },
-      {
-        title: "Country",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Zone",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Organization Type",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Business Industry",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Designation",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Departments",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Professions",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Job Types",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Genders",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Influencing Roles",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Industry Types",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Divisions",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Districts",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Thana",
-        icon: "bi bi-list",
-      },
-      {
-        title: "Win Probabilities",
-        icon: "bi bi-list",
-      },
-    ],
-  },
-  {
-    title: "User",
+    title: "User Management",
     icon: "bi bi-people",
     href: { name: "users" },
     isExpanded: false,
@@ -118,7 +45,7 @@ const menu = ref([
   },
   {
     title: "Setting",
-    icon: "bi bi-download",
+    icon: "bi bi-sliders",
     isExpanded: false,
     class: "",
     child: [
