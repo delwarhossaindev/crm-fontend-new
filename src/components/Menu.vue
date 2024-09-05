@@ -3,7 +3,7 @@
     <sidebar-menu
       :menu="menu"
       :collapsed="isCollapsed"
-      width="200px"
+      width="210px"
       @update:collapsed="onToggleCollapse"
     />
   </div>
@@ -28,68 +28,68 @@ const menu = ref([
     class: "",
   },
   {
-    title: "Attendence",
-    icon: "bi bi-exclude",
+    title: "Attendance",
+    icon: "bi bi-calendar-check", // Represents attendance with a calendar and checkmark
     isExpanded: false,
     class: "",
   },
   {
     title: "Order",
-    icon: "bi bi-exclude",
+    icon: "bi bi-cart", // A shopping cart represents orders
     isExpanded: false,
     class: "",
   },
   {
     title: "Prospect",
-    icon: "bi bi-exclude",
+    icon: "bi bi-person-plus", // A person with a plus sign suggests potential customers or prospects
     isExpanded: false,
     class: "",
   },
   {
     title: "Quotation",
-    icon: "bi bi-exclude",
+    icon: "bi bi-receipt", // A receipt represents quotes or financial documents
     isExpanded: false,
     class: "",
   },
   {
     title: "Supplier",
-    icon: "bi bi-exclude",
+    icon: "bi bi-truck", // A truck icon represents suppliers and logistics
     isExpanded: false,
     class: "",
   },
   {
     title: "Lead",
-    icon: "bi bi-exclude",
+    icon: "bi bi-lightbulb", // A lightbulb represents ideas or potential leads
     isExpanded: false,
     class: "",
   },
   {
     title: "Followup",
-    icon: "bi bi-exclude",
+    icon: "bi bi-arrow-repeat", // A repeating arrow indicates follow-up actions
     isExpanded: false,
     class: "",
   },
   {
     title: "SMS",
-    icon: "bi bi-exclude",
+    icon: "bi bi-chat-dots", // A chat bubble represents SMS or communication
     isExpanded: false,
     class: "",
   },
   {
     title: "Task",
-    icon: "bi bi-exclude",
+    icon: "bi bi-list-check", // A checklist represents tasks or to-dos
     isExpanded: false,
     class: "",
   },
   {
     title: "Collection",
-    icon: "bi bi-exclude",
+    icon: "bi bi-cash", // Cash icon represents payment collection
     isExpanded: false,
     class: "",
   },
   {
     title: "User Management",
-    icon: "bi bi-people",
+    icon: "bi bi-people", // People icon for user management (already correct)
     href: { name: "users" },
     isExpanded: false,
     permission: "users",
@@ -104,68 +104,82 @@ const menu = ref([
       {
         title: "Items",
         href: { name: "item" },
-        icon: "bi bi-list",
+        icon: "bi bi-box", // Represents a physical or virtual item
       },
       {
         title: "Country",
         href: { name: "country" },
-        icon: "bi bi-list",
+        icon: "bi bi-flag", // Flag for representing countries
       },
       {
         title: "Zone",
-        icon: "bi bi-list",
+        href: { name: "zone" },
+        icon: "bi bi-geo", // Geo marker for zones or regions
       },
       {
         title: "Organization Type",
-        icon: "bi bi-list",
+        href: { name: "organization-type" },
+        icon: "bi bi-building", // Represents an organization or building
       },
       {
         title: "Business Industry",
-        icon: "bi bi-list",
+        href: { name: "business-industry" },
+        icon: "bi bi-briefcase", // Briefcase for business or industry
       },
       {
         title: "Designation",
-        icon: "bi bi-list",
+        href: { name: "designation" },
+        icon: "bi bi-person-badge", // Badge for a specific job title or role
       },
       {
-        title: "Departments",
-        icon: "bi bi-list",
+        title: "Department",
+        href: { name: "department" },
+        icon: "bi bi-diagram-3", // Represents organizational structure or department
       },
       {
-        title: "Professions",
-        icon: "bi bi-list",
+        title: "Profession",
+        href: { name: "profession" },
+        icon: "bi bi-person-workspace", // Workspace or job role symbol
       },
       {
-        title: "Job Types",
-        icon: "bi bi-list",
+        title: "Job Type",
+        href: { name: "job-type" },
+        icon: "bi bi-briefcase-fill", // Job symbol
       },
       {
-        title: "Genders",
-        icon: "bi bi-list",
+        title: "Gender",
+        href: { name: "gender" },
+        icon: "bi bi-gender-ambiguous", // Gender-specific icon
       },
       {
-        title: "Influencing Roles",
-        icon: "bi bi-list",
+        title: "Influencing Role",
+        href: { name: "influencing-role" },
+        icon: "bi bi-person-check", // Person in a role with influence or approval
       },
       {
-        title: "Industry Types",
-        icon: "bi bi-list",
+        title: "Industry Type",
+        href: { name: "industry-type" },
+        icon: "bi bi-tools", // Industry-related tools icon
       },
       {
-        title: "Divisions",
-        icon: "bi bi-list",
+        title: "Division",
+        href: { name: "division" },
+        icon: "bi bi-grid", // Grid for administrative divisions
       },
       {
-        title: "Districts",
-        icon: "bi bi-list",
+        title: "District",
+        href: { name: "district" },
+        icon: "bi bi-map", // Map icon for districts
       },
       {
         title: "Thana",
-        icon: "bi bi-list",
+        href: { name: "thana" },
+        icon: "bi bi-geo-alt", // Geo pin for local areas like Thana
       },
       {
         title: "Win Probabilities",
-        icon: "bi bi-list",
+        href: { name: "win-probabilities" },
+        icon: "bi bi-graph-up-arrow", // Graph for representing probabilities or chances
       },
     ],
   },
