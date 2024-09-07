@@ -6,7 +6,7 @@ import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);
 const districtData = ref([]);
-const allCountries = ref({});
+const allDistrict = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
@@ -15,7 +15,7 @@ const deleteDistrict = async (index) => {
   try {
     await district.deleteDistrict(districtId);
     districtData.value.splice(index, 1);
-    allCountries.value.total -= 1;
+    allDistrict.value.total -= 1;
   } catch (error) {
     console.error("Failed to delete district:", error);
   }
@@ -25,7 +25,7 @@ const getAllDistrict = async () => {
   isLoading.value = true;
   try {
     const response = await district.fetchDistrictList(page.value, paginate.value);
-    allCountries.value = response.data;
+    allDistrict.value = response.data;
     districtData.value = response.data.data;
   } catch (error) {
     console.error("Failed to fetch district:", error);
@@ -38,7 +38,7 @@ const districtSearch = async (input) => {
   if (input) {
     try {
       const response = await district.searchDistrictList(input);
-      allCountries.value = response.data;
+      allDistrict.value = response.data;
       districtData.value = response.data.data;
     } catch (error) {
       console.error("Failed to search district:", error);
@@ -74,7 +74,7 @@ onMounted(() => {
         </button>
       </router-link>
     </div>
-    <h6 class="font-medium">District ({{ allCountries?.total || 0 }})</h6>
+    <h6 class="font-medium">District ({{ allDistrict?.total || 0 }})</h6>
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
@@ -113,7 +113,7 @@ onMounted(() => {
               </button>
             </a-popconfirm>
           </td>
-          <td class="font-bold">{{ allCountries?.from + index }}</td>
+          <td class="font-bold">{{ allDistrict?.from + index }}</td>
           <td class="text-center">{{ district.name || '-' }}</td>
           <td class="text-center">
             <button
@@ -133,7 +133,7 @@ onMounted(() => {
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
-      :total="allCountries?.total"
+      :total="allDistrict?.total"
       :show-total="(total) => `Total ${total} district`"
       @change="handlePagination"
     />

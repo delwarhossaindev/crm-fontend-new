@@ -20,23 +20,23 @@ const apiClientMultiple = axios.create({
 });
 
 export default {
-  insertCountry(formdata) {
-    return apiClientMultiple.post(`/countries`, formdata);
+  insertWinProbabilities(formdata) {
+    return apiClientMultiple.post(`/win-probabilities`, formdata);
   },
-  fetchCountryList(page) {
-    return apiClient.get(`/all-countries-paginated?page=${page}`);
+  fetchWinProbabilitiesList(page) {
+    return apiClient.get(`/all-win-probabilities-paginated?page=${page}`);
   },
-  searchCountryList(search) {
-    return apiClient.get(`/all-countries-paginated?search=${search}`);
+  searchWinProbabilitiesList(search) {
+    return apiClient.get(`/all-win-probabilities-paginated?search=${search}`);
   },
-  showCountry(id) {
-    return apiClientMultiple.get(`/countries/${id}`);
+  showWinProbabilities(id) {
+    return apiClientMultiple.get(`/win-probabilities/${id}`);
   },
-  deleteCountry(id) {
-    return apiClientMultiple.delete(`/countries/${id}`);
+  deleteWinProbabilities(id) {
+    return apiClientMultiple.delete(`/win-probabilities/${id}`);
   },
-  updateCountry(formdata, id) {
+  updateWinProbabilities(formdata, id) {
      console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/countries/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/win-probabilities/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };

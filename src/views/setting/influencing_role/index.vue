@@ -1,60 +1,60 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import countries from "@/stores/setting/country_api.js";
+import influencingRole from "@/stores/setting/influencing_role_api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);
-const countriesData = ref([]);
-const allCountries = ref({});
+const influencingRoleData = ref([]);
+const allInfluencingRole = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
-const deleteCountry = async (index) => {
-  const countryId = countriesData.value[index].id;
+const deleteInfluencingRole = async (index) => {
+  const influencingRoleId = influencingRoleData.value[index].id;
   try {
-    await countries.deleteCountry(countryId);
-    countriesData.value.splice(index, 1);
-    allCountries.value.total -= 1;
+    await influencingRole.deleteInfluencingRole(influencingRoleId);
+    influencingRoleData.value.splice(index, 1);
+    allInfluencingRole.value.total -= 1;
   } catch (error) {
-    console.error("Failed to delete country:", error);
+    console.error("Failed to delete organization Type:", error);
   }
 };
 
-const getAllCountry = async () => {
+const getAllInfluencingRole = async () => {
   isLoading.value = true;
   try {
-    const response = await countries.fetchCountryList(page.value, paginate.value);
-    allCountries.value = response.data;
-    countriesData.value = response.data.data;
+    const response = await influencingRole.fetchInfluencingRoleList(page.value, paginate.value);
+    allInfluencingRole.value = response.data;
+    influencingRoleData.value = response.data.data;
   } catch (error) {
-    console.error("Failed to fetch countries:", error);
+    console.error("Failed to fetch organization Type:", error);
   } finally {
     isLoading.value = false;
   }
 };
 
-const countriesSearch = async (input) => {
+const influencingRoleSearch = async (input) => {
   if (input) {
     try {
-      const response = await countries.searchCountryList(input);
-      allCountries.value = response.data;
-      countriesData.value = response.data.data;
+      const response = await influencingRole.searchInfluencingRoleList(input);
+      allInfluencingRole.value = response.data;
+      influencingRoleData.value = response.data.data;
     } catch (error) {
-      console.error("Failed to search countries:", error);
+      console.error("Failed to search organization Type:", error);
     }
   } else {
-    getAllCountry();
+    getAllInfluencingRole();
   }
 };
 
 const handlePagination = (pageNo) => {
   page.value = pageNo;
-  getAllCountry();
+  getAllInfluencingRole();
 };
 
 onMounted(() => {
-  getAllCountry();
+  getAllInfluencingRole();
 });
 </script>
 
@@ -63,24 +63,24 @@ onMounted(() => {
     <div class="flex justify-between mb-4">
       <input
         type="text"
-        placeholder="Search Country..."
+        placeholder="Search Influencing Role..."
         class="px-4 py-2 border rounded"
-        @input="countriesSearch($event?.target?.value)"
+        @input="influencingRoleSearch($event?.target?.value)"
       />
-      <router-link :to="{ name: 'country-create' }">
+      <router-link :to="{ name: 'influencing-role-create' }">
         <button class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600">
           <PlusOutlined class="mr-2" />
-          New Country
+          New Influencing Role
         </button>
       </router-link>
     </div>
-    <h6 class="font-medium">Country ({{ allCountries?.total || 0 }})</h6>
+    <h6 class="font-medium">Influencing Role ({{ allInfluencingRole?.total || 0 }})</h6>
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
           <th>Actions</th>
           <th class="text-left font-bold">SL.</th>
-          <th class="text-center">Country Name</th>
+          <th class="text-center">Influencing Role Name</th>
           <th class="text-center">Status</th>
         </tr>
       </thead>
@@ -88,11 +88,11 @@ onMounted(() => {
         <tr v-if="isLoading">
           <td colspan="4" class="text-red-600">Loading . . .</td>
         </tr>
-        <tr v-if="!isLoading && !countriesData?.length">
-          <td colspan="4" class="text-red-600">No Country Found . . .</td>
+        <tr v-if="!isLoading && !influencingRoleData?.length">
+          <td colspan="4" class="text-red-600">No Influencing Role Found . . .</td>
         </tr>
         <tr
-          v-for="(country, index) in countriesData"
+          v-for="(influencingRole, index) in influencingRoleData"
           :key="index"
           class="hover:bg-gray-100 transition-colors duration-200"
         >
@@ -100,31 +100,31 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'country-edit', params: { id: country?.id } })"
+              @click="$router.push({ name: 'influencing-role-edit', params: { id: influencingRole?.id } })"
             >
               <EditOutlined class="align-middle" />
             </button>
             <a-popconfirm
               title="Are you sure you want to delete?"
-              @confirm="deleteCountry(index)"
+              @confirm="deleteInfluencingRole(index)"
             >
               <button type="button" class="del_btn ml-2">
                 <DeleteOutlined class="align-middle" />
               </button>
             </a-popconfirm>
           </td>
-          <td class="font-bold">{{ allCountries?.from + index }}</td>
-          <td class="text-center">{{ country.name || '-' }}</td>
+          <td class="font-bold">{{ allInfluencingRole?.from + index }}</td>
+          <td class="text-center">{{ influencingRole.name || '-' }}</td>
           <td class="text-center">
             <button
               :class="[
-                country.status === 1 ? 'bg-green-500' : 
-                country.status === 0 ? 'bg-red-500' : 'bg-gray-500',
+                influencingRole.status === 1 ? 'bg-green-500' : 
+                influencingRole.status === 0 ? 'bg-red-500' : 'bg-gray-500',
                 'text-white font-bold py-1 px-3 rounded text-sm'
               ]"
             >
-              {{ country.status === 1 ? 'Active' : 
-                 country.status === 0 ? 'Inactive' : '-' }}
+              {{ influencingRole.status === 1 ? 'Active' : 
+                 influencingRole.status === 0 ? 'Inactive' : '-' }}
             </button>
           </td>
         </tr>
@@ -133,8 +133,8 @@ onMounted(() => {
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
-      :total="allCountries?.total"
-      :show-total="(total) => `Total ${total} countries`"
+      :total="allInfluencingRole?.total"
+      :show-total="(total) => `Total ${total} influencing role`"
       @change="handlePagination"
     />
   </MainLayout>

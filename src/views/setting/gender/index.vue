@@ -6,7 +6,7 @@ import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);
 const genderData = ref([]);
-const allGenders = ref({});
+const allGender = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
@@ -15,7 +15,7 @@ const deleteGender = async (index) => {
   try {
     await gender.deleteGender(genderId);
     genderData.value.splice(index, 1);
-    allGenders.value.total -= 1;
+    allGender.value.total -= 1;
   } catch (error) {
     console.error("Failed to delete gender:", error);
   }
@@ -25,7 +25,7 @@ const getAllGender = async () => {
   isLoading.value = true;
   try {
     const response = await gender.fetchGenderList(page.value, paginate.value);
-    allGenders.value = response.data;
+    allGender.value = response.data;
     genderData.value = response.data.data;
   } catch (error) {
     console.error("Failed to fetch gender:", error);
@@ -38,7 +38,7 @@ const genderSearch = async (input) => {
   if (input) {
     try {
       const response = await gender.searchGenderList(input);
-      allGenders.value = response.data;
+      allGender.value = response.data;
       genderData.value = response.data.data;
     } catch (error) {
       console.error("Failed to search gender:", error);
@@ -74,7 +74,7 @@ onMounted(() => {
         </button>
       </router-link>
     </div>
-    <h6 class="font-medium">Gender ({{ allGenders?.total || 0 }})</h6>
+    <h6 class="font-medium">Gender ({{ allGender?.total || 0 }})</h6>
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
@@ -113,7 +113,7 @@ onMounted(() => {
               </button>
             </a-popconfirm>
           </td>
-          <td class="font-bold">{{ allGenders?.from + index }}</td>
+          <td class="font-bold">{{ allGender?.from + index }}</td>
           <td class="text-center">{{ gender.name || '-' }}</td>
           <td class="text-center">
             <button
@@ -133,7 +133,7 @@ onMounted(() => {
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
-      :total="allGenders?.total"
+      :total="allGender?.total"
       :show-total="(total) => `Total ${total} gender`"
       @change="handlePagination"
     />

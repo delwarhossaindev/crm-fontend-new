@@ -20,23 +20,23 @@ const apiClientMultiple = axios.create({
 });
 
 export default {
-  insertCountry(formdata) {
-    return apiClientMultiple.post(`/countries`, formdata);
+  insertJobType(formdata) {
+    return apiClientMultiple.post(`/job-types`, formdata);
   },
-  fetchCountryList(page) {
-    return apiClient.get(`/all-countries-paginated?page=${page}`);
+  fetchJobTypeList(page) {
+    return apiClient.get(`/all-job-types-paginated?page=${page}`);
   },
-  searchCountryList(search) {
-    return apiClient.get(`/all-countries-paginated?search=${search}`);
+  searchJobTypeList(search) {
+    return apiClient.get(`/all-job-types-paginated?search=${search}`);
   },
-  showCountry(id) {
-    return apiClientMultiple.get(`/countries/${id}`);
+  showJobType(id) {
+    return apiClientMultiple.get(`/job-types/${id}`);
   },
-  deleteCountry(id) {
-    return apiClientMultiple.delete(`/countries/${id}`);
+  deleteJobType(id) {
+    return apiClientMultiple.delete(`/job-types/${id}`);
   },
-  updateCountry(formdata, id) {
+  updateJobType(formdata, id) {
      console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/countries/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/job-types/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };

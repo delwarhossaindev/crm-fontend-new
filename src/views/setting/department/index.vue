@@ -6,7 +6,7 @@ import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);
 const departmentData = ref([]);
-const allCountries = ref({});
+const allDepartment = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
@@ -15,7 +15,7 @@ const deleteDepartment = async (index) => {
   try {
     await department.deleteDepartment(departmentId);
     departmentData.value.splice(index, 1);
-    allCountries.value.total -= 1;
+    allDepartment.value.total -= 1;
   } catch (error) {
     console.error("Failed to delete department:", error);
   }
@@ -25,7 +25,7 @@ const getAllDepartment = async () => {
   isLoading.value = true;
   try {
     const response = await department.fetchDepartmentList(page.value, paginate.value);
-    allCountries.value = response.data;
+    allDepartment.value = response.data;
     departmentData.value = response.data.data;
   } catch (error) {
     console.error("Failed to fetch department:", error);
@@ -38,7 +38,7 @@ const departmentSearch = async (input) => {
   if (input) {
     try {
       const response = await department.searchDepartmentList(input);
-      allCountries.value = response.data;
+      allDepartment.value = response.data;
       departmentData.value = response.data.data;
     } catch (error) {
       console.error("Failed to search department:", error);
@@ -74,7 +74,7 @@ onMounted(() => {
         </button>
       </router-link>
     </div>
-    <h6 class="font-medium">Department ({{ allCountries?.total || 0 }})</h6>
+    <h6 class="font-medium">Department ({{ allDepartment?.total || 0 }})</h6>
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
@@ -113,7 +113,7 @@ onMounted(() => {
               </button>
             </a-popconfirm>
           </td>
-          <td class="font-bold">{{ allCountries?.from + index }}</td>
+          <td class="font-bold">{{ allDepartment?.from + index }}</td>
           <td class="text-center">{{ department.name || '-' }}</td>
           <td class="text-center">
             <button
@@ -133,7 +133,7 @@ onMounted(() => {
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
-      :total="allCountries?.total"
+      :total="allDepartment?.total"
       :show-total="(total) => `Total ${total} department`"
       @change="handlePagination"
     />

@@ -20,23 +20,23 @@ const apiClientMultiple = axios.create({
 });
 
 export default {
-  insertCountry(formdata) {
-    return apiClientMultiple.post(`/countries`, formdata);
+  insertInfluencingRole(formdata) {
+    return apiClientMultiple.post(`/influencing-roles`, formdata);
   },
-  fetchCountryList(page) {
-    return apiClient.get(`/all-countries-paginated?page=${page}`);
+  fetchInfluencingRoleList(page) {
+    return apiClient.get(`/all-influencing-roles-paginated?page=${page}`);
   },
-  searchCountryList(search) {
-    return apiClient.get(`/all-countries-paginated?search=${search}`);
+  searchInfluencingRoleList(search) {
+    return apiClient.get(`/all-influencing-roles-paginated?search=${search}`);
   },
-  showCountry(id) {
-    return apiClientMultiple.get(`/countries/${id}`);
+  showInfluencingRole(id) {
+    return apiClientMultiple.get(`/influencing-roles/${id}`);
   },
-  deleteCountry(id) {
-    return apiClientMultiple.delete(`/countries/${id}`);
+  deleteInfluencingRole(id) {
+    return apiClientMultiple.delete(`/influencing-roles/${id}`);
   },
-  updateCountry(formdata, id) {
+  updateInfluencingRole(formdata, id) {
      console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/countries/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/influencing-roles/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };

@@ -20,23 +20,23 @@ const apiClientMultiple = axios.create({
 });
 
 export default {
-  insertCountry(formdata) {
-    return apiClientMultiple.post(`/countries`, formdata);
+  insertDistrict(formdata) {
+    return apiClientMultiple.post(`/districts`, formdata);
   },
-  fetchCountryList(page) {
-    return apiClient.get(`/all-countries-paginated?page=${page}`);
+  fetchDistrictList(page) {
+    return apiClient.get(`/all-districts-paginated?page=${page}`);
   },
-  searchCountryList(search) {
-    return apiClient.get(`/all-countries-paginated?search=${search}`);
+  searchDistrictList(search) {
+    return apiClient.get(`/all-districts-paginated?search=${search}`);
   },
-  showCountry(id) {
-    return apiClientMultiple.get(`/countries/${id}`);
+  showDistrict(id) {
+    return apiClientMultiple.get(`/districts/${id}`);
   },
-  deleteCountry(id) {
-    return apiClientMultiple.delete(`/countries/${id}`);
+  deleteDistrict(id) {
+    return apiClientMultiple.delete(`/districts/${id}`);
   },
-  updateCountry(formdata, id) {
+  updateDistrict(formdata, id) {
      console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/countries/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/districts/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };

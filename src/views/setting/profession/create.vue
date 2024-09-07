@@ -16,40 +16,45 @@
         </div>
       </div>
       <hr />
-      <form @submit.prevent="submitForm()">
+      <form @submit.prevent="submitForm">
         <div class="lg:grid grid-cols-3 gap-4 items-center">
           <!-- Profession Name -->
           <label for="name"
             >Profession Name <span class="text-red-600">*</span></label
           >
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter here . . ."
-            v-model="form.name"
-            :class="{ 'border-red-500': formErrors.name }"
-            class="input-text col-span-2"
-          />
+          <div class="col-span-2">
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter here . . ."
+              v-model="form.name"
+              :class="{ 'border-red-500': formErrors.name }"
+              class="input-text w-full"
+            />
+            <p v-if="formErrors.name" class="text-red-500">{{ formErrors.name }}</p>
+          </div>
+          
           <!-- Status -->
           <label for="status">Status</label>
-          <select
-            v-model="form.status"
-            id="status"
-            class="common-select col-span-2 rounded-lg"
-          >
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
-          </select>
-          <!-- Empty cell for spacing -->
-          <div class="col-span-3"></div>
+          <div class="col-span-2">
+            <select
+              v-model="form.status"
+              id="status"
+              class="common-select w-full rounded-lg"
+            >
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+          
           <!-- Submit Button -->
           <div class="col-span-3 flex justify-end mt-3">
             <button
               type="submit"
               :disabled="loading"
-              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg"
+              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600"
             >
-              Submit
+              {{ loading ? 'Submitting...' : 'Submit' }}
             </button>
           </div>
         </div>
@@ -69,7 +74,7 @@ const loading = ref(false);
 
 const form = ref({
   name: "",
-  status: "1", // Default value for status to Active
+  status: "1", // Default value for status set to "Active"
 });
 
 const formErrors = ref({});
@@ -78,8 +83,6 @@ function validateForm() {
   const errors = {};
 
   if (!form.value.name) errors.name = "Profession Name is required";
-  if (form.value.status === "") errors.status = "Status is required";
-
   formErrors.value = errors;
   return Object.keys(errors).length === 0;
 }
@@ -95,15 +98,16 @@ const submitForm = async () => {
       if (response?.status === 201) {
         showNotification(
           "success",
-          response?.data?.message || "Successfully inserted"
+          response?.data?.message || "Profession successfully created."
         );
-        router.push({ name: "countries" });
+        form.value = { name: "", status: "1" }; // Reset form fields
+        router.push({ name: "profession" });
       }
     } catch (error) {
       if (error.response) {
         showNotification(
           "error",
-          error.response.data.message || "Failed to insert item"
+          error.response.data.message || "Failed to create profession."
         );
       } else if (error.request) {
         showNotification("error", "Network error, please try again later.");

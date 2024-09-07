@@ -4,23 +4,14 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vu
 import zone from "@/stores/setting/zone_api.js";
 import { onMounted, ref } from "vue";
 
+// State
 const isLoading = ref(false);
 const zoneData = ref([]);
 const allZone = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
-const deleteZone = async (index) => {
-  const zoneId = zoneData.value[index].id;
-  try {
-    await zone.deleteZone(zoneId);
-    zoneData.value.splice(index, 1);
-    allZone.value.total -= 1;
-  } catch (error) {
-    console.error("Failed to delete zone:", error);
-  }
-};
-
+// Fetch zones
 const getAllZone = async () => {
   isLoading.value = true;
   try {
@@ -34,6 +25,19 @@ const getAllZone = async () => {
   }
 };
 
+// Delete zone
+const deleteZone = async (index) => {
+  const zoneId = zoneData.value[index].id;
+  try {
+    await zone.deleteZone(zoneId);
+    zoneData.value.splice(index, 1);
+    allZone.value.total -= 1;
+  } catch (error) {
+    console.error("Failed to delete zone:", error);
+  }
+};
+
+// Search zones
 const zoneSearch = async (input) => {
   if (input) {
     try {
@@ -48,14 +52,14 @@ const zoneSearch = async (input) => {
   }
 };
 
+// Handle pagination
 const handlePagination = (pageNo) => {
   page.value = pageNo;
   getAllZone();
 };
 
-onMounted(() => {
-  getAllZone();
-});
+// Fetch initial zone data
+onMounted(getAllZone);
 </script>
 
 <template>
@@ -65,7 +69,7 @@ onMounted(() => {
         type="text"
         placeholder="Search Zone..."
         class="px-4 py-2 border rounded"
-        @input="zoneSearch($event?.target?.value)"
+        @input="zoneSearch($event.target.value)"
       />
       <router-link :to="{ name: 'zone-create' }">
         <button class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600">
@@ -74,7 +78,9 @@ onMounted(() => {
         </button>
       </router-link>
     </div>
+
     <h6 class="font-medium">Zone ({{ allZone?.total || 0 }})</h6>
+    
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
@@ -84,13 +90,16 @@ onMounted(() => {
           <th class="text-center">Status</th>
         </tr>
       </thead>
+
       <tbody class="table-body">
         <tr v-if="isLoading">
           <td colspan="4" class="text-red-600">Loading . . .</td>
         </tr>
+
         <tr v-if="!isLoading && !zoneData?.length">
           <td colspan="4" class="text-red-600">No Zone Found . . .</td>
         </tr>
+
         <tr
           v-for="(zone, index) in zoneData"
           :key="index"
@@ -100,7 +109,7 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'zone-edit', params: { id: zone?.id } })"
+              @click="$router.push({ name: 'zone-edit', params: { id: zone.id } })"
             >
               <EditOutlined class="align-middle" />
             </button>
@@ -118,23 +127,22 @@ onMounted(() => {
           <td class="text-center">
             <button
               :class="[
-                zone.status === 1 ? 'bg-green-500' : 
-                zone.status === 0 ? 'bg-red-500' : 'bg-gray-500',
+                zone.status === 1 ? 'bg-green-500' : 'bg-red-500',
                 'text-white font-bold py-1 px-3 rounded text-sm'
               ]"
             >
-              {{ zone.status === 1 ? 'Active' : 
-                 zone.status === 0 ? 'Inactive' : '-' }}
+              {{ zone.status === 1 ? 'Active' : 'Inactive' }}
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
       :total="allZone?.total"
-      :show-total="(total) => `Total ${total} zone`"
+      :show-total="(total) => `Total ${total} zones`"
       @change="handlePagination"
     />
   </MainLayout>

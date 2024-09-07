@@ -17,7 +17,7 @@ const deleteBusinessIndustry = async (index) => {
     businessIndustryData.value.splice(index, 1);
     allBusinessIndustry.value.total -= 1;
   } catch (error) {
-    console.error("Failed To Delete Business Industry:", error);
+    console.error("Failed to delete organization Type:", error);
   }
 };
 
@@ -28,7 +28,7 @@ const getAllBusinessIndustry = async () => {
     allBusinessIndustry.value = response.data;
     businessIndustryData.value = response.data.data;
   } catch (error) {
-    console.error("Failed to fetch Business Industry:", error);
+    console.error("Failed to fetch organization Type:", error);
   } finally {
     isLoading.value = false;
   }
@@ -41,7 +41,7 @@ const businessIndustrySearch = async (input) => {
       allBusinessIndustry.value = response.data;
       businessIndustryData.value = response.data.data;
     } catch (error) {
-      console.error("Failed to search Business Industry:", error);
+      console.error("Failed to search organization Type:", error);
     }
   } else {
     getAllBusinessIndustry();
@@ -80,7 +80,7 @@ onMounted(() => {
         <tr>
           <th>Actions</th>
           <th class="text-left font-bold">SL.</th>
-          <th class="text-center">Name</th>
+          <th class="text-center">Business Industry Name</th>
           <th class="text-center">Status</th>
         </tr>
       </thead>
@@ -92,7 +92,7 @@ onMounted(() => {
           <td colspan="4" class="text-red-600">No Business Industry Found . . .</td>
         </tr>
         <tr
-          v-for="(business_industry, index) in businessIndustryData"
+          v-for="(businessIndustry, index) in businessIndustryData"
           :key="index"
           class="hover:bg-gray-100 transition-colors duration-200"
         >
@@ -100,7 +100,7 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'business-industry-edit', params: { id: business_industry?.id } })"
+              @click="$router.push({ name: 'business-industry-edit', params: { id: businessIndustry?.id } })"
             >
               <EditOutlined class="align-middle" />
             </button>
@@ -114,17 +114,17 @@ onMounted(() => {
             </a-popconfirm>
           </td>
           <td class="font-bold">{{ allBusinessIndustry?.from + index }}</td>
-          <td class="text-center">{{ business_industry.name || '-' }}</td>
+          <td class="text-center">{{ businessIndustry.name || '-' }}</td>
           <td class="text-center">
             <button
               :class="[
-                business_industry.status === 1 ? 'bg-green-500' : 
-                business_industry.status === 0 ? 'bg-red-500' : 'bg-gray-500',
+                businessIndustry.status === 1 ? 'bg-green-500' : 
+                businessIndustry.status === 0 ? 'bg-red-500' : 'bg-gray-500',
                 'text-white font-bold py-1 px-3 rounded text-sm'
               ]"
             >
-              {{ business_industry.status === 1 ? 'Active' : 
-                 business_industry.status === 0 ? 'Inactive' : '-' }}
+              {{ businessIndustry.status === 1 ? 'Active' : 
+                 businessIndustry.status === 0 ? 'Inactive' : '-' }}
             </button>
           </td>
         </tr>
@@ -134,7 +134,7 @@ onMounted(() => {
       v-model:current="page"
       v-model:page-size="paginate"
       :total="allBusinessIndustry?.total"
-      :show-total="(total) => `Total ${total} Business Industry`"
+      :show-total="(total) => `Total ${total} business industry`"
       @change="handlePagination"
     />
   </MainLayout>
