@@ -253,7 +253,29 @@ export const useDataStore = defineStore("dataStore", {
         console.log(error);
         showNotification("error", error?.message);
       }
-    }
+    },
+
+     // Supplier Search
+     async getEmployees(query) {
+      !query && (query = "");
+      this.isEmployee = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/employees?term=${query}`, config);
+        this.isEmployee = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isEmployee = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
   },
 
 

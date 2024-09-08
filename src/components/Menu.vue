@@ -30,6 +30,7 @@ const menu = ref([
   {
     title: "Attendance",
     icon: "bi bi-calendar-check", // Represents attendance with a calendar and checkmark
+    href: { name: "attendance" },
     isExpanded: false,
     class: "",
   },

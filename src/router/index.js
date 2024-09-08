@@ -23,78 +23,78 @@ import SupplierEdit from "@/views/supplier/Edit.vue";
 //Setting
 
 //Item
-import ItemList from "@/views/setting/item/index.vue"
+import ItemList from "@/views/setting/item/index.vue";
 import ItemCreate from "@/views/setting/item/create.vue";
 import ItemEdit from "@/views/setting/item/edit.vue";
 
 //Country
-import CountryList from "@/views/setting/country/index.vue"
+import CountryList from "@/views/setting/country/index.vue";
 import CountryCreate from "@/views/setting/country/create.vue";
 import CountryEdit from "@/views/setting/country/edit.vue";
 
 
 //Zone
-import ZoneList from "@/views/setting/zone/index.vue"
+import ZoneList from "@/views/setting/zone/index.vue";
 import ZoneCreate from "@/views/setting/zone/create.vue";
 import ZoneEdit from "@/views/setting/zone/edit.vue";
 
 //Win Probabilities
-import WinProbabilitiesList from "@/views/setting/win_probabilities/index.vue"
+import WinProbabilitiesList from "@/views/setting/win_probabilities/index.vue";
 import WinProbabilitiesCreate from "@/views/setting/win_probabilities/create.vue";
 import WinProbabilitiesEdit from "@/views/setting/win_probabilities/edit.vue";
 
 //Thana
-import ThanaList from "@/views/setting/thana/index.vue"
+import ThanaList from "@/views/setting/thana/index.vue";
 import ThanaCreate from "@/views/setting/thana/create.vue";
 import ThanaEdit from "@/views/setting/thana/edit.vue";
 
 //Profession
-import ProfessionList from "@/views/setting/profession/index.vue"
+import ProfessionList from "@/views/setting/profession/index.vue";
 import ProfessionCreate from "@/views/setting/profession/create.vue";
 import ProfessionEdit from "@/views/setting/profession/edit.vue";
 
 //Organization Type
-import OrganizationTypeList from "@/views/setting/organization_type/index.vue"
+import OrganizationTypeList from "@/views/setting/organization_type/index.vue";
 import OrganizationTypeCreate from "@/views/setting/organization_type/create.vue";
 import OrganizationTypeEdit from "@/views/setting/organization_type/edit.vue";
 
 //Job Type
-import JobTypeList from "@/views/setting/job_type/index.vue"
+import JobTypeList from "@/views/setting/job_type/index.vue";
 import JobTypeCreate from "@/views/setting/job_type/create.vue";
 import JobTypeEdit from "@/views/setting/job_type/edit.vue";
 
 //Influencing Role
-import InfluencingRoleList from "@/views/setting/influencing_role/index.vue"
+import InfluencingRoleList from "@/views/setting/influencing_role/index.vue";
 import InfluencingRoleCreate from "@/views/setting/influencing_role/create.vue";
 import InfluencingRoleEdit from "@/views/setting/influencing_role/edit.vue";
 
 //Industry Type
-import IndustryTypeList from "@/views/setting/industry_type/index.vue"
+import IndustryTypeList from "@/views/setting/industry_type/index.vue";
 import IndustryTypeCreate from "@/views/setting/industry_type/create.vue";
 import IndustryTypeEdit from "@/views/setting/industry_type/edit.vue";
 
 //Gender
-import GenderList from "@/views/setting/gender/index.vue"
+import GenderList from "@/views/setting/gender/index.vue";
 import GenderCreate from "@/views/setting/gender/create.vue";
 import GenderEdit from "@/views/setting/gender/edit.vue";
 
 //District
-import DistrictList from "@/views/setting/district/index.vue"
+import DistrictList from "@/views/setting/district/index.vue";
 import DistrictCreate from "@/views/setting/district/create.vue";
 import DistrictEdit from "@/views/setting/district/edit.vue";
 
 //Division
-import DivisionList from "@/views/setting/division/index.vue"
+import DivisionList from "@/views/setting/division/index.vue";
 import DivisionCreate from "@/views/setting/division/create.vue";
 import DivisionEdit from "@/views/setting/division/edit.vue";
 
 //Designation
-import DesignationList from "@/views/setting/designation/index.vue"
+import DesignationList from "@/views/setting/designation/index.vue";
 import DesignationCreate from "@/views/setting/designation/create.vue";
 import DesignationEdit from "@/views/setting/designation/edit.vue";
 
 //Department
-import DepartmentList from "@/views/setting/department/index.vue"
+import DepartmentList from "@/views/setting/department/index.vue";
 import DepartmentCreate from "@/views/setting/department/create.vue";
 import DepartmentEdit from "@/views/setting/department/edit.vue";
 
@@ -103,6 +103,12 @@ import BusinessIndustryList from "@/views/setting/business_industry/index.vue"
 import BusinessIndustryCreate from "@/views/setting/business_industry/create.vue";
 import BusinessIndustryEdit from "@/views/setting/business_industry/edit.vue";
 
+//System Module
+
+//Attendance
+import AttendanceList from "@/views/attendance/index.vue";
+import AttendanceCreate from "@/views/attendance/create.vue";
+import AttendanceEdit from "@/views/attendance/edit.vue";
 
 const routes = [
   {
@@ -470,6 +476,23 @@ const routes = [
     path: "/business-industry/edit/:id",
     name: "business-industry-edit",
     component: BusinessIndustryEdit,
+  },
+
+  // System Module
+  {
+    path: "/attendance",
+    name: "attendance",
+    component: AttendanceList,
+  },
+  {
+    path: "/attendance/create",
+    name: "attendance-create",
+    component: AttendanceCreate,
+  },
+  {
+    path: "/attendance/edit/:id",
+    name: "attendance-edit",
+    component: AttendanceEdit,
   },
 
   {
