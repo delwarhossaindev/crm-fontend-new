@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import division from "@/stores/setting/division_api.js";
+import division from "@/stores/setting/division-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

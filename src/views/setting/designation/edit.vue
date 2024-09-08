@@ -52,7 +52,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import designation from "@/stores/setting/designation_api.js";
+import designation from "@/stores/setting/designation-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

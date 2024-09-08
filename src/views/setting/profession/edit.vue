@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import profession from "@/stores/setting/profession_api.js";
+import profession from "@/stores/setting/profession-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

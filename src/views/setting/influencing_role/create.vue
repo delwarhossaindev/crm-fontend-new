@@ -65,7 +65,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import influencingRole from "@/stores/setting/influencing_role_api.js";
+import influencingRole from "@/stores/setting/influencing-role-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref } from "vue";
 import { useRouter } from "vue-router";

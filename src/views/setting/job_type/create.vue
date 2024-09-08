@@ -65,7 +65,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import jobType from "@/stores/setting/job_type_api.js";
+import jobType from "@/stores/setting/job-type-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref } from "vue";
 import { useRouter } from "vue-router";

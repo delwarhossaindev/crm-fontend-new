@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import thana from "@/stores/setting/thana_api.js";
+import thana from "@/stores/setting/thana-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);

@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import division from "@/stores/setting/division_api.js";
+import division from "@/stores/setting/division-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);

@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import district from "@/stores/setting/district_api.js";
+import district from "@/stores/setting/district-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

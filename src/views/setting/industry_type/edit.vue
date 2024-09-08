@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import industryType from "@/stores/setting/industry_type_api.js";
+import industryType from "@/stores/setting/industry-type-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

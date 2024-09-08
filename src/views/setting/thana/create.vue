@@ -65,7 +65,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import thana from "@/stores/setting/thana_api.js";
+import thana from "@/stores/setting/thana-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref } from "vue";
 import { useRouter } from "vue-router";

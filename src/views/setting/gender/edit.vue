@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import gender from "@/stores/setting/gender_api.js";
+import gender from "@/stores/setting/gender-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

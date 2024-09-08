@@ -49,7 +49,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import zone from "@/stores/setting/zone_api.js";
+import zone from "@/stores/setting/zone-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

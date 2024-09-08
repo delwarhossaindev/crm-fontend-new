@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import professions from "@/stores/setting/profession_api.js";
+import professions from "@/stores/setting/profession-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);

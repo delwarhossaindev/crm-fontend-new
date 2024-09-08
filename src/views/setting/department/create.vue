@@ -65,7 +65,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import department from "@/stores/setting/department_api.js";
+import department from "@/stores/setting/department-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref } from "vue";
 import { useRouter } from "vue-router";

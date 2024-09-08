@@ -48,7 +48,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import winProbabilities from "@/stores/setting/win_probabilities_api.js";
+import winProbabilities from "@/stores/setting/win-probabilities-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";

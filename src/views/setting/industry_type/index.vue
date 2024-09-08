@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import industryType from "@/stores/setting/industry_type_api.js";
+import industryType from "@/stores/setting/industry-type-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);

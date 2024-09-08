@@ -1,7 +1,7 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import influencingRole from "@/stores/setting/influencing_role_api.js";
+import influencingRole from "@/stores/setting/influencing-role-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);

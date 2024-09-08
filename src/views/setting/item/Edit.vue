@@ -74,7 +74,7 @@
 
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import item from "@/stores/setting/item_api.js";
+import item from "@/stores/setting/item-api.js";
 import { showNotification } from "@/utilities/notification";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
