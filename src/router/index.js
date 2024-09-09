@@ -15,10 +15,6 @@ import Permissionsadd from "@/views/users/Permissionsadd.vue";
 import Permissionsedit from "@/views/users/Permissionsedit.vue";
 //End Users
 
-import EmployeesList from "@/views/employees/List.vue";
-import SupplierAdd from "@/views/supplier/Add.vue";
-import SupplierEdit from "@/views/supplier/Edit.vue";
-
 
 //Setting
 
@@ -110,6 +106,31 @@ import AttendanceList from "@/views/attendance/index.vue";
 import AttendanceCreate from "@/views/attendance/create.vue";
 import AttendanceEdit from "@/views/attendance/edit.vue";
 
+//Order
+import OrderList from "@/views/order/index.vue";
+import OrderCreate from "@/views/order/create.vue";
+import OrderEdit from "@/views/order/edit.vue";
+
+//Lead
+import LeadList from "@/views/lead/index.vue";
+import LeadCreate from "@/views/lead/create.vue";
+import LeadEdit from "@/views/lead/edit.vue";
+
+//Task
+import TaskList from "@/views/task/index.vue";
+import TaskCreate from "@/views/task/create.vue";
+import TaskEdit from "@/views/task/edit.vue";
+
+//Quotation
+import QuotationList from "@/views/quotation/index.vue";
+import QuotationCreate from "@/views/quotation/create.vue";
+import QuotationEdit from "@/views/quotation/edit.vue";
+
+//Supplier
+import SupplierList from "@/views/supplier/index.vue";
+import SupplierCreate from "@/views/supplier/create.vue";
+import SupplierEdit from "@/views/supplier/edit.vue";
+
 const routes = [
   {
     path: "/",
@@ -122,24 +143,6 @@ const routes = [
     name: "home",
     component: Dashboard,
     // meta: { isPermission: 'dashboard' }
-  },
-  {
-    path: "/employee",
-    name: "employee",
-    component: EmployeesList,
-    // meta: { isPermission: 'suppliers' }
-  },
-  {
-    path: "/supplier/add",
-    name: "supplier-add",
-    component: SupplierAdd,
-    //  meta: { isPermission: 'suppliers' }
-  },
-  {
-    path: "/supplier/edit/:id",
-    name: "supplier-edit",
-    component: SupplierEdit,
-    // meta: { isPermission: 'suppliers' }
   },
   // Users
   {
@@ -493,6 +496,86 @@ const routes = [
     path: "/attendance/edit/:id",
     name: "attendance-edit",
     component: AttendanceEdit,
+  },
+
+  {
+    path: "/lead",
+    name: "lead",
+    component: LeadList,
+  },
+  {
+    path: "/lead/create",
+    name: "lead-create",
+    component: LeadCreate,
+  },
+  {
+    path: "/lead/edit/:id",
+    name: "lead-edit",
+    component: LeadEdit,
+  },
+
+  {
+    path: "/task",
+    name: "task",
+    component: TaskList,
+  },
+  {
+    path: "/task/create",
+    name: "task-create",
+    component: TaskCreate,
+  },
+  {
+    path: "/task/edit/:id",
+    name: "task-edit",
+    component: TaskEdit,
+  },
+
+  {
+    path: "/quotation",
+    name: "quotation",
+    component: QuotationList,
+  },
+  {
+    path: "/quotation/create",
+    name: "quotation-create",
+    component: QuotationCreate,
+  },
+  {
+    path: "/quotation/edit/:id",
+    name: "quotation-edit",
+    component: QuotationEdit,
+  },
+
+  {
+    path: "/supplier",
+    name: "supplier",
+    component: SupplierList,
+  },
+  {
+    path: "/supplier/create",
+    name: "supplier-create",
+    component: SupplierCreate,
+  },
+  {
+    path: "/supplier/edit/:id",
+    name: "supplier-edit",
+    component: SupplierEdit,
+  },
+
+  {
+    path: "/order",
+    name: "order",
+    component: OrderList,
+  },
+  {
+    path: "/order/create",
+    name: "order-create",
+    component: OrderCreate,
+  },
+  {
+    path: "/order/edit/:id",
+    name: "order-edit",
+    component: OrderEdit,
   },
 
   {

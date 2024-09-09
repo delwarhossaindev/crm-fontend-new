@@ -37,6 +37,7 @@ const menu = ref([
   {
     title: "Order",
     icon: "bi bi-cart", // A shopping cart represents orders
+    href: { name: "order" },
     isExpanded: false,
     class: "",
   },
@@ -49,45 +50,49 @@ const menu = ref([
   {
     title: "Quotation",
     icon: "bi bi-receipt", // A receipt represents quotes or financial documents
+    href: { name: "quotation" },
     isExpanded: false,
     class: "",
   },
   {
     title: "Supplier",
     icon: "bi bi-truck", // A truck icon represents suppliers and logistics
+    href: { name: "supplier" },
     isExpanded: false,
     class: "",
   },
   {
     title: "Lead",
     icon: "bi bi-lightbulb", // A lightbulb represents ideas or potential leads
+    href: { name: "lead" },
     isExpanded: false,
     class: "",
   },
-  {
-    title: "Followup",
-    icon: "bi bi-arrow-repeat", // A repeating arrow indicates follow-up actions
-    isExpanded: false,
-    class: "",
-  },
-  {
-    title: "SMS",
-    icon: "bi bi-chat-dots", // A chat bubble represents SMS or communication
-    isExpanded: false,
-    class: "",
-  },
+  // {
+  //   title: "Followup",
+  //   icon: "bi bi-arrow-repeat", // A repeating arrow indicates follow-up actions
+  //   isExpanded: false,
+  //   class: "",
+  // },
+  // {
+  //   title: "SMS",
+  //   icon: "bi bi-chat-dots", // A chat bubble represents SMS or communication
+  //   isExpanded: false,
+  //   class: "",
+  // },
   {
     title: "Task",
     icon: "bi bi-list-check", // A checklist represents tasks or to-dos
+    href: { name: "task" },
     isExpanded: false,
     class: "",
   },
-  {
-    title: "Collection",
-    icon: "bi bi-cash", // Cash icon represents payment collection
-    isExpanded: false,
-    class: "",
-  },
+  // {
+  //   title: "Collection",
+  //   icon: "bi bi-cash", // Cash icon represents payment collection
+  //   isExpanded: false,
+  //   class: "",
+  // },
   {
     title: "User Management",
     icon: "bi bi-people", // People icon for user management (already correct)
