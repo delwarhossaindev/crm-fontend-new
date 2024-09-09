@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Create New Attendance</h6>
+        <h6 class="font-medium">Create New Order</h6>
         <button
           type="button"
           class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
@@ -168,12 +168,12 @@ const submitForm = async () => {
 
   loading.value = true;
   try {
-    const response = await attendance.insertAttendance(form.value);
+    const response = await attendance.insertOrder(form.value);
 
     if (response?.status === 201) {
       showNotification(
         "success",
-        response?.data?.message || "Attendance successfully created."
+        response?.data?.message || "Order successfully created."
       );
       form.value = { ...initialFormState }; // Reset form
       router.push({ name: "attendance" });

@@ -1,60 +1,60 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import attendance from "@/stores/attendance-api.js";
+import supplier from "@/stores/supplier-api.js";
 import { onMounted, ref } from "vue";
 
 const isLoading = ref(false);
-const attendanceData = ref([]);
-const allAttendance = ref({});
+const supplierData = ref([]);
+const allSupplier = ref({});
 const page = ref(1);
 const paginate = ref(10);
 
-const deleteAttendance = async (index) => {
-  const attendanceId = attendanceData.value[index].id;
+const deleteSupplier = async (index) => {
+  const supplierId = supplierData.value[index].id;
   try {
-    await attendance.deleteAttendance(attendanceId);
-    attendanceData.value.splice(index, 1);
-    allAttendance.value.total -= 1;
+    await supplier.deleteSupplier(supplierId);
+    supplierData.value.splice(index, 1);
+    allSupplier.value.total -= 1;
   } catch (error) {
-    console.error("Failed to delete attendance:", error);
+    console.error("Failed to delete supplier:", error);
   }
 };
 
-const getAllAttendance = async () => {
+const getAllSupplier = async () => {
   isLoading.value = true;
   try {
-    const response = await attendance.fetchAttendanceList(page.value, paginate.value);
-    allAttendance.value = response.data;
-    attendanceData.value = response.data.data;
+    const response = await supplier.fetchSupplierList(page.value, paginate.value);
+    allSupplier.value = response.data;
+    supplierData.value = response.data.data;
   } catch (error) {
-    console.error("Failed to fetch attendance:", error);
+    console.error("Failed to fetch supplier:", error);
   } finally {
     isLoading.value = false;
   }
 };
 
-const attendanceSearch = async (input) => {
+const supplierSearch = async (input) => {
   if (input) {
     try {
-      const response = await attendance.searchAttendanceList(input);
-      allAttendance.value = response.data;
-      attendanceData.value = response.data.data;
+      const response = await supplier.searchSupplierList(input);
+      allSupplier.value = response.data;
+      supplierData.value = response.data.data;
     } catch (error) {
-      console.error("Failed to search attendance:", error);
+      console.error("Failed to search supplier:", error);
     }
   } else {
-    getAllAttendance();
+    getAllSupplier();
   }
 };
 
 const handlePagination = (pageNo) => {
   page.value = pageNo;
-  getAllAttendance();
+  getAllSupplier();
 };
 
 onMounted(() => {
-  getAllAttendance();
+  getAllSupplier();
 });
 </script>
 
@@ -63,44 +63,39 @@ onMounted(() => {
     <div class="flex justify-between mb-4">
       <input
         type="text"
-        placeholder="Search Attendance..."
+        placeholder="Search Supplier..."
         class="px-4 py-2 border rounded"
-        @input="attendanceSearch($event?.target?.value)"
+        @input="supplierSearch($event?.target?.value)"
       />
-      <router-link :to="{ name: 'attendance-create' }">
+      <router-link :to="{ name: 'supplier-create' }">
         <button class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600">
           <PlusOutlined class="mr-2" />
-          New Attendance
+          New Supplier
         </button>
       </router-link>
     </div>
-    <h6 class="font-medium">Attendance ({{ allAttendance?.total || 0 }})</h6>
+    <h6 class="font-medium">Supplier ({{ allSupplier?.total || 0 }})</h6>
     <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
       <thead class="table-header">
         <tr>
           <th>Actions</th>
           <th class="text-left font-bold">SL.</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Employee</th>
-          <th class="text-center">Designation</th>
-          <th class="text-center">Branch</th>
-          <th class="text-center">Check In</th>
-          <th class="text-center">Check Out</th>
-          <th class="text-center">Hours</th>
-          <th class="text-center">Late Time</th>
-          <th class="text-center">Over Time</th>
-          <th class="text-center">Status</th>
+          <th class="text-center">Created On</th>
+          <th class="text-center">Supplier Name, Zone &amp; Industry</th>
+          <th class="text-center">Supplier Item</th>
+          <th class="text-center">Primary Contact</th>
+          <th class="text-center">Created By</th>
         </tr>
       </thead>
       <tbody class="table-body">
         <tr v-if="isLoading">
           <td colspan="4" class="text-red-600">Loading . . .</td>
         </tr>
-        <tr v-if="!isLoading && !attendanceData?.length">
-          <td colspan="4" class="text-red-600">No Attendance Found . . .</td>
+        <tr v-if="!isLoading && !supplierData?.length">
+          <td colspan="4" class="text-red-600">No Supplier Found . . .</td>
         </tr>
         <tr
-          v-for="(attendance, index) in attendanceData"
+          v-for="(supplier, index) in supplierData"
           :key="index"
           class="hover:bg-gray-100 transition-colors duration-200"
         >
@@ -108,49 +103,33 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'attendance-edit', params: { id: attendance?.id } })"
+              @click="$router.push({ name: 'supplier-edit', params: { id: supplier?.id } })"
             >
               <EditOutlined class="align-middle" />
             </button>
             <a-popconfirm
               title="Are you sure you want to delete?"
-              @confirm="deleteAttendance(index)"
+              @confirm="deleteSupplier(index)"
             >
               <button type="button" class="del_btn ml-2">
                 <DeleteOutlined class="align-middle" />
               </button>
             </a-popconfirm>
           </td>
-          <td class="font-bold">{{ allAttendance?.from + index }}</td>
-          <td class="text-center">{{ attendance.date || '-' }}</td>
-          <td class="text-center">{{ attendance.name || '-' }}</td>
-          <td class="text-center">{{ attendance.designation || '-' }}</td>
-          <td class="text-center">{{ attendance.branch || '-' }}</td>
-          <td class="text-center">{{ attendance.check_in_time || '-' }}</td>
-          <td class="text-center">{{ attendance.check_out_time || '-' }}</td>
-          <td class="text-center">{{ attendance.hours || '-' }}</td>
-          <td class="text-center">{{ attendance.late_time || '-' }}</td>
-          <td class="text-center">{{ attendance.over_time || '-' }}</td>
-          <td class="text-center">
-            <button
-              :class="[
-                attendance.status === 1 ? 'bg-green-500' : 
-                attendance.status === 0 ? 'bg-red-500' : 'bg-gray-500',
-                'text-white font-bold py-1 px-3 rounded text-sm'
-              ]"
-            >
-              {{ attendance.status === 1 ? 'Present' : 
-                 attendance.status === 0 ? 'Absent' : '-' }}
-            </button>
-          </td>
+          <td class="font-bold">{{ allSupplier?.from + index }}</td>
+          <td class="text-center">{{ supplier.created_at || '-' }}</td>
+          <td class="text-center">{{ supplier.supplier_name+'-'+supplier.zone+'-'+supplier.supplier_reputation_brand || '-' }}</td>
+          <td class="text-center">{{ supplier.supplier_item || '-' }}</td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
         </tr>
       </tbody>
     </table>
     <a-pagination
       v-model:current="page"
       v-model:page-size="paginate"
-      :total="allAttendance?.total"
-      :show-total="(total) => `Total ${total} attendance`"
+      :total="allSupplier?.total"
+      :show-total="(total) => `Total ${total} supplier`"
       @change="handlePagination"
     />
   </MainLayout>

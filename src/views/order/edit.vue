@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Edit Attendance</h6>
+        <h6 class="font-medium">Edit Order</h6>
         <button type="button" class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
           @click="$router.go(-1)">
           Back
@@ -158,10 +158,10 @@ const validateForm = () => {
   return Object.keys(errors).length === 0;
 };
 
-const fetchAttendanceDetails = async () => {
+const fetchOrderDetails = async () => {
   try {
     const { id } = route.params;
-    const response = await attendance.showAttendance(id);
+    const response = await attendance.showOrder(id);
     form.value = response.data;
   } catch (error) {
     console.error("Failed to fetch attendance details:", error);
@@ -174,7 +174,7 @@ const submitForm = async () => {
   loading.value = true;
   try {
     const { id } = route.params;
-    const response = await attendance.updateAttendance(form.value, id);
+    const response = await attendance.updateOrder(form.value, id);
 
     if (response?.status === 200) {
       showNotification("success", response.data.message || "Updated successfully");
@@ -194,7 +194,7 @@ const submitForm = async () => {
 };
 
 onMounted(async () => {
-  await fetchAttendanceDetails();
+  await fetchOrderDetails();
   allEmployee.value = await getEmployees();
 });
 </script>
