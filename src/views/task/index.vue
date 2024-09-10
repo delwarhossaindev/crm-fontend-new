@@ -126,6 +126,7 @@ onMounted(() => {
           <td class="text-center">{{ task.attachment || '-' }}</td>
           <td class="text-center">{{ task.prospect_id+'-'+task.prospect_id || '-' }}</td>
           <td class="text-center">{{ task.contact || '-' }}</td>
+          <td class="text-center"></td>
           <td class="text-center">{{ task.assign_to || '-' }}</td>
           <td class="text-center">{{ task.priority_id || '-' }}</td>
           <td class="text-center">
