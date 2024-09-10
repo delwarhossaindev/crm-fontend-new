@@ -255,7 +255,7 @@ export const useDataStore = defineStore("dataStore", {
       }
     },
 
-     // Supplier Search
+     // Employees Search
      async getEmployees(query) {
       !query && (query = "");
       this.isEmployee = true;
@@ -272,6 +272,50 @@ export const useDataStore = defineStore("dataStore", {
           return response?.data;
       } catch (error) {
         this.isEmployee = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+     // Prospects Search
+     async getProspects(query) {
+      !query && (query = "");
+      this.isProspect = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/employees?term=${query}`, config);
+        this.isProspect = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isProspect = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+     // Leads Search
+     async getLeads(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/lead?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
         console.log(error);
         showNotification("error", error?.message);
       }

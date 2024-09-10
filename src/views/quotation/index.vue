@@ -1,6 +1,10 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from "@ant-design/icons-vue";
 import quotation from "@/stores/quotation-api.js";
 import { onMounted, ref } from "vue";
 
@@ -24,7 +28,10 @@ const deleteQuotation = async (index) => {
 const getAllQuotation = async () => {
   isLoading.value = true;
   try {
-    const response = await quotation.fetchQuotationList(page.value, paginate.value);
+    const response = await quotation.fetchQuotationList(
+      page.value,
+      paginate.value
+    );
     allQuotation.value = response.data;
     quotationData.value = response.data.data;
   } catch (error) {
@@ -61,21 +68,39 @@ onMounted(() => {
 <template>
   <MainLayout>
     <div class="flex justify-between mb-4">
+      <!-- Left: Search input -->
       <input
         type="text"
         placeholder="Search Quotation..."
         class="px-4 py-2 border rounded"
         @input="quotationSearch($event?.target?.value)"
       />
-      <router-link :to="{ name: 'quotation-create' }">
-        <button class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600">
-          <PlusOutlined class="mr-2" />
-          New Quotation
-        </button>
-      </router-link>
+
+      <!-- Right: Buttons aligned together -->
+      <div class="flex space-x-2">
+        <router-link :to="{ name: 'quotation-create' }">
+          <button
+            class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+          >
+            <PlusOutlined class="mr-2" />
+            Add New
+          </button>
+        </router-link>
+
+        <router-link :to="{ name: 'quotation-item-create' }">
+          <button
+            class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+          >
+            <PlusOutlined class="mr-2" />
+            Add Item Wise
+          </button>
+        </router-link>
+      </div>
     </div>
     <h6 class="font-medium">Quotation ({{ allQuotation?.total || 0 }})</h6>
-    <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
+    <table
+      class="table border-collapse border border-slate-400 w-full bg-white my-4"
+    >
       <thead class="table-header">
         <tr>
           <th>Actions</th>
@@ -104,7 +129,12 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'quotation-edit', params: { id: quotation?.id } })"
+              @click="
+                $router.push({
+                  name: 'quotation-edit',
+                  params: { id: quotation?.id },
+                })
+              "
             >
               <EditOutlined class="align-middle" />
             </button>
@@ -118,11 +148,11 @@ onMounted(() => {
             </a-popconfirm>
           </td>
           <td class="font-bold">{{ allQuotation?.from + index }}</td>
-          <td class="text-center">{{ quotation.quotation_number || '-' }}</td>
-          <td class="text-center">{{ quotation.quotation_subject || '-' }}</td>
-          <td class="text-center">{{ quotation.lead_id || '-' }}</td>
-          <td class="text-center">{{ quotation.prospect_id || '-' }}</td>
-          <td class="text-center">{{ quotation.quoted_amount || '-' }}</td>
+          <td class="text-center">{{ quotation.quotation_number || "-" }}</td>
+          <td class="text-center">{{ quotation.quotation_subject || "-" }}</td>
+          <td class="text-center">{{ quotation.lead_id || "-" }}</td>
+          <td class="text-center">{{ quotation.prospect_id || "-" }}</td>
+          <td class="text-center">{{ quotation.quoted_amount || "-" }}</td>
           <td class="text-center"></td>
         </tr>
       </tbody>

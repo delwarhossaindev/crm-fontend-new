@@ -124,6 +124,7 @@ import TaskEdit from "@/views/task/edit.vue";
 //Quotation
 import QuotationList from "@/views/quotation/index.vue";
 import QuotationCreate from "@/views/quotation/create.vue";
+import QuotationItemCreate from "@/views/quotation/item-wise-create.vue";
 import QuotationEdit from "@/views/quotation/edit.vue";
 
 //Supplier
@@ -539,6 +540,11 @@ const routes = [
     path: "/quotation/create",
     name: "quotation-create",
     component: QuotationCreate,
+  },
+  {
+    path: "/quotation/item/create",
+    name: "quotation-item-create",
+    component: QuotationItemCreate,
   },
   {
     path: "/quotation/edit/:id",
