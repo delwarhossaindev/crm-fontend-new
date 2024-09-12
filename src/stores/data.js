@@ -313,6 +313,7 @@ export const useDataStore = defineStore("dataStore", {
         const response = await axios.get(`${apiBase}/lead?term=${query}`, config);
         this.isLead = false;
         if (response?.status == 200)
+          console.log(response);
           return response?.data;
       } catch (error) {
         this.isLead = false;
@@ -320,6 +321,79 @@ export const useDataStore = defineStore("dataStore", {
         showNotification("error", error?.message);
       }
     },
+
+
+      // Items Search
+      async getItems(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/items?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
+      // Designation Search
+      async getDesignation(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/designations?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
+      
+
+      
+      // Department Search
+      async getDepartment(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/departments?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
+
+
   },
 
 
