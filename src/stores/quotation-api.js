@@ -23,6 +23,9 @@ export default {
   insertQuotation(formdata) {
     return apiClientMultiple.post(`/quotations`, formdata);
   },
+  insertItemWiseQuotation(formdata) {
+    return apiClientMultiple.post(`/item-wise-quotations`, formdata);
+  },
   fetchQuotationList(page) {
     return apiClient.get(`/all-quotations-paginated?page=${page}`);
   },

@@ -92,70 +92,201 @@
             ></v-select>
           </div>
 
-     
-
           <div class="col-span-12">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table
-                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border border-gray-200"
               >
                 <thead
                   class="text-xs text-white uppercase bg-black dark:bg-black dark:text-white"
                 >
                   <tr>
-                    <th scope="col" class="px-6 py-3">SL</th>
-                    <th scope="col" class="px-6 py-3">Item #</th>
-                    <th scope="col" class="px-6 py-3">Description</th>
-                    <th scope="col" class="px-6 py-3">Model</th>
-                    <th scope="col" class="px-6 py-3">Qty</th>
-                    <th scope="col" class="px-6 py-3">U. Price</th>
-                    <th scope="col" class="px-6 py-3">Line Total</th>
+                    <th scope="col" class="px-2 py-2 w-1/12">SL</th>
+                    <th scope="col" class="px-2 py-2 w-2/12">Item #</th>
+                    <th scope="col" class="px-2 py-2 w-2/12">Description</th>
+                    <th scope="col" class="px-2 py-2 w-2/12">Model</th>
+                    <th scope="col" class="px-2 py-2 w-1/12">Qty</th>
+                    <th scope="col" class="px-2 py-2 w-1/12">U. Price</th>
+                    <th scope="col" class="px-2 py-2 w-2/12">Line Total</th>
+                    <th scope="col" class="px-2 py-2 w-1/12">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Table rows go here -->
+                  <tr
+                    v-for="(item, index) in form.quotation_items"
+                    :key="index"
+                  >
+                    <td class="px-2 py-2">{{ index + 1 }}</td>
+                    <td class="px-2 py-2">
+                      <v-select
+                        v-model="item.item_id"
+                        :options="allItems"
+                        :reduce="(itemData) => itemData.id"
+                        label="item_name"
+                        @update:modelValue="onItemSelect(index, $event)"
+                        class="input-text w-full"
+                        placeholder="Select item..."
+                      ></v-select>
+                    </td>
+                    <td class="px-2 py-2">
+                      <input
+                        type="text"
+                        v-model="item.description"
+                        class="input-text w-full"
+                        placeholder="Enter description..."
+                      />
+                    </td>
+                    <td class="px-2 py-2">
+                      <input
+                        type="text"
+                        v-model="item.model"
+                        class="input-text w-full"
+                        placeholder="Enter model..."
+                      />
+                    </td>
+                    <td class="px-2 py-2">
+                      <input
+                        type="number"
+                        v-model="item.qty"
+                        step="0.0001"
+                        class="input-text w-full"
+                        placeholder="Enter qty..."
+                      />
+                    </td>
+                    <td class="px-2 py-2">
+                      <input
+                        type="number"
+                        v-model="item.unit_price"
+                        step="0.0001"
+                        class="input-text w-full"
+                        placeholder="Enter unit price..."
+                      />
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                      {{ item.qty * item.unit_price || 0 }}
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                      <button
+                        type="button"
+                        class="text-red-600 hover:text-red-900"
+                        @click="removeItem(index)"
+                      >
+                        <i class="bi bi-trash" style="font-size: 2rem"></i>
+                      </button>
+                    </td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">Sub Total</td>
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      Sub Total
+                    </td>
+                    <td scope="col" colspan="2" class="px-1 py-1">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.subTotal"
+                        readonly
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">(-)Discount(%)</td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      (-)Discount(%)
+                    </td>
 
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td scope="col" colspan="2" class="px-2 py-2">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.discount"
+                        @input="grandTotalUpdate"
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">Amount After Discount</td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      Amount After Discount
+                    </td>
 
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td scope="col" class="px-2 py-2" colspan="2">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.amountAfterDiscount"
+                        @input="grandTotalUpdate"
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">(+)VAT(%)</td>
-
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      (+)VAT(%)
+                    </td>
+                    <td scope="col" class="px-1 py-1" colspan="2">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.vat"
+                        @input="grandTotalUpdate"
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">(+)AIT(%)</td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      (+)AIT(%)
+                    </td>
 
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td scope="col" class="px-1 py-1" colspan="2">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.ait"
+                        @input="grandTotalUpdate"
+                      />
+                    </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td scope="col" class="px-6 py-3">Grand Total</td>
+                    <td
+                      scope="col"
+                      class="px-1 py-1 font-bold text-black text-right"
+                    >
+                      Grand Total
+                    </td>
 
-                    <td scope="col" class="px-6 py-3"></td>
+                    <td scope="col" class="px-1 py-1" colspan="2">
+                      <input
+                        type="text"
+                        class="input-text w-full"
+                        v-model="form.grandTotal"
+                        @input="grandTotalUpdate"
+                      />
+                    </td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
-
 
           <!-- Submit Button -->
           <div class="col-span-12 flex justify-end mt-3">
@@ -186,94 +317,127 @@ import { useDataStore } from "@/stores/data";
 // Initial form state
 const initialFormState = {
   quotation_number: "",
-  quotation_date: "",
-  quotation_subject: "",
-  quoted_amount: "",
-  prospect_id: null,
   lead_id: null,
+  quotation_subject: "",
   attention_person: "",
-  designation: null,
-  department: null,
-  phone: "",
   email: "",
-  quotation_sent: "1",
-  quotation_description: "",
-  quotation_items: [],
-  attachments: null,
+  designation: null,
+  subTotal: 0,
+  discount: 0,
+  amountAfterDiscount: 0,
+  vat: 0,
+  ait: 0,
+  grandTotal: 0,
+
+  quotation_items: [
+    {
+      item_id: "",
+      description: "",
+      model: "",
+      qty: 0,
+      unit_price: 0,
+      line_total: 0,
+    },
+  ],
 };
 
 const loading = ref(false);
 const form = ref({ ...initialFormState });
 const formErrors = ref({});
-const allProspects = ref([]);
 const allLeads = ref([]);
 const allDesignations = ref([]);
-const allDepartments = ref([]);
 const allItems = ref([]);
 
 const router = useRouter();
-const { getItems, getDepartment, getDesignation, getProspects, getLeads } =
-  useDataStore();
+const { getItems, getDesignation, getLeads } = useDataStore();
 
 // Form validation
 const validateForm = () => {
   formErrors.value = {};
   if (!form.value.quotation_number)
     formErrors.value.quotation_number = "Quotation number is required.";
-  if (!form.value.quotation_date)
-    formErrors.value.quotation_date = "Quotation date is required.";
-  if (!form.value.quoted_amount)
-    formErrors.value.quoted_amount = "Quoted amount is required.";
 
   return Object.keys(formErrors.value).length === 0;
 };
 
-// Handle file upload
-const handleFileUpload = (event) => {
-  form.value.attachments = event.target.files[0]; // Store the file in the form
-};
-
 // Fetching data on mount
 onMounted(() => {
-  getProspects().then((res) => (allProspects.value = res));
   getLeads().then((res) => (allLeads.value = res));
   getDesignation().then((res) => (allDesignations.value = res));
-  getDepartment().then((res) => (allDepartments.value = res));
   getItems().then((res) => (allItems.value = res));
 });
 
+const grandTotalUpdate = () => {
+  const amountAfterDiscount = form.value.subTotal - form.value.discount;
+  form.value.amountAfterDiscount = amountAfterDiscount;
+  const vat = (form.value.amountAfterDiscount * form.value.vat) / 100;
+  const ait = (form.value.amountAfterDiscount * form.value.ait) / 100;
+  form.value.grandTotal = amountAfterDiscount - (vat + ait);
+};
+
+const onItemSelect = (index, itemId) => {
+  const selectedItem = allItems.value.find((item) => item.id === itemId);
+  form.value.quotation_items[index].description = selectedItem.description;
+  form.value.quotation_items[index].model = selectedItem.model;
+  form.value.quotation_items[index].qty = selectedItem.qty;
+  form.value.quotation_items[index].unit_price = selectedItem.unit_price;
+  form.value.quotation_items[index].line_total =
+    selectedItem.qty * selectedItem.unit_price || 0;
+
+  form.value.subTotal =
+    form.value.subTotal + form.value.quotation_items[index].line_total;
+
+  addItem();
+  grandTotalUpdate();
+};
+
+// Add new quotation item
+const addItem = () => {
+  form.value.quotation_items.push({
+    item_id: "",
+    description: "",
+    model: "",
+    qty: 0,
+    unit_price: 0,
+    line_total: 0,
+  });
+};
+
+// Remove quotation item
+const removeItem = (index) => {
+  form.value.subTotal =
+    form.value.subTotal - form.value.quotation_items[index].line_total;
+  grandTotalUpdate();
+  form.value.quotation_items.splice(index, 1);
+};
+
 // Submitting the form
 const submitForm = async () => {
+  console.log("Okay.........!!!");
+
   if (!validateForm()) return;
 
   const formData = new FormData();
   formData.append("quotation_number", form.value.quotation_number);
-  formData.append("quotation_date", form.value.quotation_date);
   formData.append("quotation_subject", form.value.quotation_subject);
-  formData.append("quoted_amount", form.value.quoted_amount);
-  formData.append("prospect_id", form.value.prospect_id);
   formData.append("lead_id", form.value.lead_id);
   formData.append("attention_person", form.value.attention_person);
-  formData.append("designation", form.value.designation);
-  formData.append("department", form.value.department);
-  formData.append("phone", form.value.phone);
   formData.append("email", form.value.email);
-  formData.append("quotation_sent", form.value.quotation_sent);
-  formData.append("quotation_description", form.value.quotation_description);
+  formData.append("designation", form.value.designation);
+  formData.append("subTotal", form.value.subTotal);
+  formData.append("discount", form.value.discount);
+  formData.append("amountAfterDiscount", form.value.amountAfterDiscount);
+  formData.append("vat", form.value.vat);
+  formData.append("ait", form.value.ait);
+  formData.append("grandTotal", form.value.grandTotal);
 
-  // If there are quotation items
   form.value.quotation_items.forEach((item, index) => {
-    // Convert each item to a JSON string before appending
     formData.append(`quotation_items[${index}]`, JSON.stringify(item));
   });
-  // Append the file if it exists
-  if (form.value.attachments) {
-    formData.append("attachments", form.value.attachments);
-  }
 
   loading.value = true;
   try {
-    await quotation.insertQuotation(formData); // Send form data as FormData
+    await quotation.insertItemWiseQuotation(formData); // Send form data as FormData
     showNotification("success", "Quotation created successfully!");
     router.push("/quotation");
   } catch (error) {
@@ -286,7 +450,6 @@ const submitForm = async () => {
   }
 };
 </script>
-
 <style scoped>
 .input-text {
   border: 1px solid #d1d5db;
@@ -295,5 +458,20 @@ const submitForm = async () => {
 }
 .common-select {
   border: 1px solid #d1d5db;
+}
+
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #f1f1f1;
+}
+thead {
+  background-color: #000;
+  color: #f1f1f1;
+}
+tfoot {
+  background-color: #f1f1f1; /* Light gray background for the footer */
 }
 </style>
