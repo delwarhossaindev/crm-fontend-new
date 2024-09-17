@@ -3,11 +3,8 @@
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
         <h6 class="font-medium">Create New Quotation Item Wise</h6>
-        <button
-          type="button"
-          class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
-          @click="$router.go(-1)"
-        >
+        <button type="button" class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+          @click="$router.go(-1)">
           Back
         </button>
       </div>
@@ -20,14 +17,9 @@
             <label for="quotation_number" class="block">
               Quotation Number <span class="text-red-600">*</span>
             </label>
-            <input
-              id="quotation_number"
-              type="text"
-              v-model="form.quotation_number"
-              :class="{ 'border-red-500': formErrors.quotation_number }"
-              class="input-text w-full"
-              placeholder="Enter quotation number..."
-            />
+            <input id="quotation_number" type="text" v-model="form.quotation_number"
+              :class="{ 'border-red-500': formErrors.quotation_number }" class="input-text w-full"
+              placeholder="Enter quotation number..." />
             <p v-if="formErrors.quotation_number" class="text-red-500">
               {{ formErrors.quotation_number }}
             </p>
@@ -36,70 +28,41 @@
           <!-- Lead -->
           <div class="col-span-6">
             <label for="lead_id">Lead</label>
-            <v-select
-              v-model="form.lead_id"
-              :options="allLeads"
-              label="lead_name"
-              :reduce="(lead) => lead.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select lead..."
-            ></v-select>
+            <v-select v-model="form.lead_id" :options="allLeads" label="lead_name" :reduce="(lead) => lead.id"
+              class="common-select w-full rounded-lg" placeholder="Select lead..."></v-select>
           </div>
 
           <!-- Quotation Subject -->
           <div class="col-span-6">
             <label for="quotation_subject">Quotation Subject</label>
-            <input
-              id="quotation_subject"
-              type="text"
-              v-model="form.quotation_subject"
-              class="input-text w-full"
-              placeholder="Enter subject..."
-            />
+            <input id="quotation_subject" type="text" v-model="form.quotation_subject" class="input-text w-full"
+              placeholder="Enter subject..." />
           </div>
 
           <!-- Attention Person -->
           <div class="col-span-6">
             <label for="attention_person">Attention Person</label>
-            <input
-              id="attention_person"
-              type="text"
-              v-model="form.attention_person"
-              class="input-text col-span-2"
-              placeholder="Enter person name..."
-            />
+            <input id="attention_person" type="text" v-model="form.attention_person" class="input-text col-span-2"
+              placeholder="Enter person name..." />
           </div>
           <div class="col-span-6">
             <label for="email">Email Address</label>
-            <input
-              id="email"
-              type="email"
-              v-model="form.email"
-              class="input-text col-span-2"
-              placeholder="Enter email..."
-            />
+            <input id="email" type="email" v-model="form.email" class="input-text col-span-2"
+              placeholder="Enter email..." />
           </div>
 
           <div class="col-span-6">
             <label for="designation">Designation</label>
-            <v-select
-              v-model="form.designation"
-              :options="allDesignations"
-              label="name"
-              :reduce="(designation) => designation.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select designation..."
-            ></v-select>
+            <v-select v-model="form.designation" :options="allDesignations" label="name"
+              :reduce="(designation) => designation.id" class="common-select w-full rounded-lg"
+              placeholder="Select designation..."></v-select>
           </div>
 
           <div class="col-span-12">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table
-                class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border border-gray-200"
-              >
-                <thead
-                  class="text-xs text-white uppercase bg-black dark:bg-black dark:text-white"
-                >
+                class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border border-gray-200">
+                <thead class="text-xs text-white uppercase bg-black dark:bg-black dark:text-white">
                   <tr>
                     <th scope="col" class="px-2 py-2 w-1/12">SL</th>
                     <th scope="col" class="px-2 py-2 w-2/12">Item #</th>
@@ -112,65 +75,33 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    v-for="(item, index) in form.quotation_items"
-                    :key="index"
-                  >
+                  <tr v-for="(item, index) in form.quotation_items" :key="index">
                     <td class="px-2 py-2">{{ index + 1 }}</td>
                     <td class="px-2 py-2">
-                      <v-select
-                        v-model="item.item_id"
-                        :options="allItems"
-                        :reduce="(itemData) => itemData.id"
-                        label="item_name"
-                        @update:modelValue="onItemSelect(index, $event)"
-                        class="input-text w-full"
-                        placeholder="Select item..."
-                      ></v-select>
+                      <v-select v-model="item.id" :options="allItems" :reduce="(itemData) => itemData.id"
+                        label="item_name" @update:modelValue="onItemSelect(index, $event)" class="input-text w-full"
+                        placeholder="Select item..."></v-select>
                     </td>
                     <td class="px-2 py-2">
-                      <input
-                        type="text"
-                        v-model="item.description"
-                        class="input-text w-full"
-                        placeholder="Enter description..."
-                      />
+                      <input type="text" v-model="item.description" class="input-text w-full"
+                        placeholder="Enter description..." />
                     </td>
                     <td class="px-2 py-2">
-                      <input
-                        type="text"
-                        v-model="item.model"
-                        class="input-text w-full"
-                        placeholder="Enter model..."
-                      />
+                      <input type="text" v-model="item.model" class="input-text w-full" placeholder="Enter model..." />
                     </td>
                     <td class="px-2 py-2">
-                      <input
-                        type="number"
-                        v-model="item.qty"
-                        step="0.0001"
-                        class="input-text w-full"
-                        placeholder="Enter qty..."
-                      />
+                      <input type="number" v-model="item.qty" step="0.0001" class="input-text w-full"
+                        placeholder="Enter qty..." />
                     </td>
                     <td class="px-2 py-2">
-                      <input
-                        type="number"
-                        v-model="item.unit_price"
-                        step="0.0001"
-                        class="input-text w-full"
-                        placeholder="Enter unit price..."
-                      />
+                      <input type="number" v-model="item.unit_price" step="0.0001" class="input-text w-full"
+                        placeholder="Enter unit price..." />
                     </td>
                     <td class="px-2 py-2 text-center">
                       {{ item.qty * item.unit_price || 0 }}
                     </td>
                     <td class="px-2 py-2 text-center">
-                      <button
-                        type="button"
-                        class="text-red-600 hover:text-red-900"
-                        @click="removeItem(index)"
-                      >
+                      <button type="button" class="text-red-600 hover:text-red-900" @click="removeItem(index)">
                         <i class="bi bi-trash" style="font-size: 2rem"></i>
                       </button>
                     </td>
@@ -179,108 +110,65 @@
                 <tfoot>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       Sub Total
                     </td>
                     <td scope="col" colspan="2" class="px-1 py-1">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.subTotal"
-                        readonly
-                      />
+                      <input type="number" step="0.0001" class="input-text w-full" v-model="form.subTotal" readonly />
                     </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       (-)Discount(%)
                     </td>
 
                     <td scope="col" colspan="2" class="px-2 py-2">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.discount"
-                        @input="grandTotalUpdate"
-                      />
+                      <input type="number" step="0.0001" class="input-text w-full" v-model="form.discount"
+                        @input="grandTotalUpdate" />
                     </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       Amount After Discount
                     </td>
 
                     <td scope="col" class="px-2 py-2" colspan="2">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.amountAfterDiscount"
-                        @input="grandTotalUpdate"
-                      />
+                      <input type="number" step="0.0001" class="input-text w-full" v-model="form.amountAfterDiscount"
+                        @input="grandTotalUpdate" />
                     </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       (+)VAT(%)
                     </td>
                     <td scope="col" class="px-1 py-1" colspan="2">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.vat"
-                        @input="grandTotalUpdate"
-                      />
+                      <input type="number" step="0.0001" class="input-text w-full" v-model="form.vat"
+                        @input="grandTotalUpdate" />
                     </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       (+)AIT(%)
                     </td>
 
                     <td scope="col" class="px-1 py-1" colspan="2">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.ait"
-                        @input="grandTotalUpdate"
-                      />
+                      <input type="number" step="0.0001" class="input-text w-full" v-model="form.ait"
+                        @input="grandTotalUpdate" />
                     </td>
                   </tr>
                   <tr>
                     <td scope="col" colspan="5"></td>
-                    <td
-                      scope="col"
-                      class="px-1 py-1 font-bold text-black text-right"
-                    >
+                    <td scope="col" class="px-1 py-1 font-bold text-black text-right">
                       Grand Total
                     </td>
 
                     <td scope="col" class="px-1 py-1" colspan="2">
-                      <input
-                        type="text"
-                        class="input-text w-full"
-                        v-model="form.grandTotal"
-                        @input="grandTotalUpdate"
-                      />
+                      <input type="number" step="0.01" class="input-text w-full" v-model="form.grandTotal"
+                        @input="grandTotalUpdate" />
                     </td>
                   </tr>
                 </tfoot>
@@ -290,11 +178,8 @@
 
           <!-- Submit Button -->
           <div class="col-span-12 flex justify-end mt-3">
-            <button
-              type="submit"
-              :disabled="loading"
-              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600"
-            >
+            <button type="submit" :disabled="loading"
+              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600">
               {{ loading ? "Submitting..." : "Create Quotation" }}
             </button>
           </div>
@@ -331,7 +216,7 @@ const initialFormState = {
 
   quotation_items: [
     {
-      item_id: "",
+      id: "",
       description: "",
       model: "",
       qty: 0,
@@ -456,6 +341,7 @@ const submitForm = async () => {
   border-radius: 6px;
   padding: 8px 12px;
 }
+
 .common-select {
   border: 1px solid #d1d5db;
 }
@@ -463,15 +349,19 @@ const submitForm = async () => {
 table {
   border-collapse: collapse;
 }
+
 th,
 td {
   border: 1px solid #f1f1f1;
 }
+
 thead {
   background-color: #000;
   color: #f1f1f1;
 }
+
 tfoot {
-  background-color: #f1f1f1; /* Light gray background for the footer */
+  background-color: #f1f1f1;
+  /* Light gray background for the footer */
 }
 </style>
