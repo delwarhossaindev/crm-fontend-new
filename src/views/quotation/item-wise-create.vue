@@ -257,7 +257,7 @@ const grandTotalUpdate = () => {
   form.value.amountAfterDiscount = amountAfterDiscount;
   const vat = (form.value.amountAfterDiscount * form.value.vat) / 100;
   const ait = (form.value.amountAfterDiscount * form.value.ait) / 100;
-  form.value.grandTotal = amountAfterDiscount - (vat + ait);
+  form.value.grandTotal = amountAfterDiscount + (vat + ait);
 };
 
 const onItemSelect = (index, itemId) => {
