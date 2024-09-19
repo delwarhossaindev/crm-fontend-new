@@ -367,9 +367,6 @@ export const useDataStore = defineStore("dataStore", {
         }
       },
 
-      
-
-      
       // Department Search
       async getDepartment(query) {
         !query && (query = "");
@@ -382,6 +379,28 @@ export const useDataStore = defineStore("dataStore", {
             },
           }
           const response = await axios.get(`${apiBase}/departments?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
+      // Department Search
+      async getWinProbability(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/win-probabilities?term=${query}`, config);
           this.isLead = false;
           if (response?.status == 200)
             return response?.data;
