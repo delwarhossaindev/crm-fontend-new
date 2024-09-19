@@ -10,101 +10,258 @@
       </div>
       <hr />
       <form @submit.prevent="submitForm">
-        <div class="lg:grid grid-cols-3 gap-4 items-center">
-          <!-- Date -->
-          <label for="date">Date <span class="text-red-600">*</span></label>
-          <div class="col-span-2">
+        <div class="lg:grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-4">
+            <!-- Task Title -->
+            <label for="task_title">
+              Task Title <span class="text-red-600">*</span>
+            </label>
             <input
-              id="date"
+              id="task_title"
+              type="text"
+              v-model="form.task_title"
+              :class="{ 'border-red-500': formErrors.task_title }"
+              class="input-text w-full"
+              placeholder="Enter Task Title..."
+            />
+            <p v-if="formErrors.task_title" class="text-red-500">
+              {{ formErrors.task_title }}
+            </p>
+          </div>
+
+          <div class="col-span-4">
+            <!-- type -->
+            <label for="type"> Type <span class="text-red-600">*</span> </label>
+            <select
+              v-model="form.type"
+              id="type"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task type</option>
+              <option value="Follow-up Tasks">Follow-up Tasks</option>
+              <option value="Meetings or Appointments">
+                Meetings or Appointments
+              </option>
+              <option value="Calls">Calls</option>
+              <option value="Emails">Emails</option>
+              <option value="Sales Tasks">Sales Tasks</option>
+              <option value="Customer Support or Service Tasks">
+                Customer Support or Service Tasks
+              </option>
+              <option value="Lead Qualification Tasks">
+                Lead Qualification Tasks
+              </option>
+              <option value="Internal Tasks">Internal Tasks</option>
+            </select>
+            <p v-if="formErrors.type" class="text-red-500">
+              {{ formErrors.type }}
+            </p>
+          </div>
+
+          <div class="col-span-4">
+            <!-- Priority -->
+            <label for="priority">Priority</label>
+            <select
+              v-model="form.priority"
+              id="priority"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task priority</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Critical">Critical</option>
+            </select>
+            <p v-if="formErrors.priority" class="text-red-500">
+              {{ formErrors.priority }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Start Date -->
+            <label for="start_date">
+              Start Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="start_date"
               type="date"
-              v-model="form.date"
-              :class="{ 'border-red-500': formErrors.date }"
+              v-model="form.start_date"
+              :class="{ 'border-red-500': formErrors.start_date }"
               class="input-text w-full"
+              placeholder="Enter start date..."
+              required
             />
-            <p v-if="formErrors.date" class="text-red-500">
-              {{ formErrors.date }}
+            <p v-if="formErrors.start_date" class="text-red-500">
+              {{ formErrors.start_date }}
             </p>
           </div>
 
-          <!-- Employee ID -->
-          <label for="employee_id"
-            >Employee Name <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
-            <v-select
-              v-model="form.employee_id"
-              :options="allEmployee"
-              label="name"
-              :reduce="(employee) => employee.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select Employee..."
-            ></v-select>
-            <p v-if="formErrors.employee_id" class="text-red-500">
-              {{ formErrors.employee_id }}
-            </p>
-          </div>
-
-          <label for="item_name">
-            Location <span class="text-red-600">*</span>
-          </label>
-          <input
-            id="location"
-            type="text"
-            placeholder="Enter here . . ."
-            v-model="form.location "
-            :class="{ 'border-red-500': formErrors.location  }"
-            class="input-text col-span-2"
-          />
-          <p v-if="formErrors.location" class="text-red-500">
-              {{ formErrors.location }}
-            </p>
-
-          <!-- Check-In Latitude & Longitude -->
-          <label for="check_in_latitude">Check-In Latitude</label>
-          <div class="col-span-2">
+          <div class="col-span-3">
+            <!-- Start Time -->
+            <label for="start_time">
+              Start Time <span class="text-red-600">*</span>
+            </label>
             <input
-              id="check_in_latitude"
-              type="number"
-               step="0.00000000001"
-              placeholder="Enter check-in latitude..."
-              v-model="form.check_in_latitude"
-              class="input-text w-full"
-            />
-          </div>
-
-          <label for="check_in_longitude">Check-In Longitude</label>
-          <div class="col-span-2">
-            <input
-              id="check_in_longitude"
-              type="number"
-              step="0.00000000001"
-              placeholder="Enter check-in longitude..."
-              v-model="form.check_in_longitude"
-              class="input-text w-full"
-            />
-          </div>
-
-          <!-- Check-In Time -->
-          <label for="check_in_time"
-            >Check-Out Time <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
-            <input
-              id="check_out_time"
+              id="start_time"
               type="time"
-              v-model="form.check_out_time"
-              :class="{ 'border-red-500': formErrors.check_out_time }"
+              v-model="form.start_time"
+              :class="{ 'border-red-500': formErrors.start_time }"
               class="input-text w-full"
+              placeholder="Enter start time..."
+              required
             />
-            <p v-if="formErrors.check_out_time" class="text-red-500">
-              {{ formErrors.check_out_time }}
+            <p v-if="formErrors.start_time" class="text-red-500">
+              {{ formErrors.start_time }}
             </p>
           </div>
 
-        
+          <div class="col-span-3">
+            <!-- Due Date -->
+            <label for="due_date">
+              Due Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="due_date"
+              type="date"
+              v-model="form.due_date"
+              :class="{ 'border-red-500': formErrors.due_date }"
+              class="input-text w-full"
+              placeholder="Enter due date..."
+              required
+            />
+            <p v-if="formErrors.due_date" class="text-red-500">
+              {{ formErrors.due_date }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Due Time -->
+            <label for="due_time">
+              Due Time <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="due_time"
+              type="time"
+              v-model="form.due_time"
+              :class="{ 'border-red-500': formErrors.due_time }"
+              class="input-text w-full"
+              placeholder="Enter due time..."
+              required
+            />
+            <p v-if="formErrors.due_time" class="text-red-500">
+              {{ formErrors.due_time }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Prospect -->
+            <label for="prospect_id">Prospect</label>
+            <v-select
+              v-model="form.prospect_id"
+              :options="allProspects"
+              label="name"
+              :reduce="(prospect) => prospect.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select prospect..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Contact -->
+            <label for="contact">Contact</label>
+            <select
+              v-model="form.contact"
+              id="contact"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select contact</option>
+              <option value="Customer">Customer</option>
+              <option value="Lead">Lead</option>
+              <option value="Prospect">Prospect</option>
+              <option value="Internal Contact">Internal Contact</option>
+              <option value="Business Contact">Business Contact</option>
+            </select>
+            <p v-if="formErrors.contact" class="text-red-500">
+              {{ formErrors.contact }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Lead -->
+            <label for="lead_id">Lead</label>
+            <v-select
+              v-model="form.lead_id"
+              :options="allLeads"
+              label="lead_name"
+              :reduce="(lead) => lead.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select lead..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Attention Person -->
+            <label for="assign_to">Attention Person</label>
+            <input
+              id="assign_to"
+              type="text"
+              v-model="form.assign_to"
+              class="input-text w-full"
+              placeholder="Enter person name..."
+            />
+          </div>
+
+          <div class="col-span-4">
+            <!-- Status -->
+            <label for="status">Status</label>
+            <select
+              v-model="form.status"
+              id="status"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Deferred">Deferred</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <p v-if="formErrors.status" class="text-red-500">
+              {{ formErrors.status }}
+            </p>
+          </div>
+
+
+          <div class="col-span-4">
+            <!-- Task Description -->
+            <label for="description">Task Description</label>
+            <textarea
+              id="description"
+              v-model="form.description"
+              class="input-text w-full"
+              placeholder="Enter Task Description..."
+            ></textarea>
+          </div>
+
+          <div class="col-span-4">
+            <!-- Attachments -->
+            <label for="attachment">Attachments Doc/Media</label>
+            <input
+              id="attachment"
+              type="file"
+              @change="handleFileUpload"
+              class="input-text w-full"
+            />
+          </div>
 
           <!-- Submit Button -->
-          <div class="col-span-3 flex justify-end mt-3">
+          <div class="col-span-12 flex justify-end mt-3">
             <button
               type="submit"
               :disabled="loading"
@@ -120,81 +277,123 @@
 </template>
 
 <script setup>
-import vSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
-import MainLayout from "@/components/MainLayout.vue";
-import attendance from "@/stores/attendance-api.js";
-import { showNotification } from "@/utilities/notification";
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useDataStore } from "@/stores/data";
+import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router'; // Import useRoute to get route params
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
+import MainLayout from '@/components/MainLayout.vue';
+import task from '@/stores/task-api.js';
+import { showNotification } from '@/utilities/notification';
+import { useDataStore } from '@/stores/data';
+
+// Initial form state
+const initialFormState = {
+  task_title: '',
+  type: '',
+  priority: '',
+  start_date: '',
+  start_time: '',
+  due_date: '',
+  due_time: '',
+  prospect_id: '',
+  contact: '',
+  lead_id: '',
+  assign_to: '',
+  status: '', 
+  description: '',
+  attachment: null, // Store attachment file(s)
+};
 
 const loading = ref(false);
-const initialFormState = {
-  date: "",
-  employee_id: "",
-  check_in_latitude: "",
-  check_in_longitude: "",
-  check_out_time: "",
-  location :""
-};
 const form = ref({ ...initialFormState });
 const formErrors = ref({});
-const allEmployee = ref([]);
+const allProspects = ref([]);
+const allLeads = ref([]);
+
+// Access route params to get task ID
 const route = useRoute();
 const router = useRouter();
-const dataStore = useDataStore();
-const { getEmployees } = dataStore;
+const taskId = route.params.id; // Assume task ID is passed as a route param
 
+const { getProspects, getLeads } = useDataStore();
+
+// Form validation
 const validateForm = () => {
-  const errors = {};
-  if (!form.value.date) errors.date = "Date is required";
-  if (!form.value.location) errors.location = "Location is required";
-  if (!form.value.employee_id) errors.employee_id = "Employee ID is required";
-  if (!form.value.check_out_time)
-    errors.check_out_time = "Check-Out Time is required";
+  formErrors.value = {};
+  if (!form.value.task_title) formErrors.value.task_title = 'Task title is required.';
+  if (!form.value.type) formErrors.value.type = 'Task type is required.';
+  if (!form.value.start_date) formErrors.value.start_date = 'Start date is required.';
+  if (!form.value.start_time) formErrors.value.start_time = 'Start time is required.';
+  if (!form.value.due_date) formErrors.value.due_date = 'Due date is required.';
+  if (!form.value.due_time) formErrors.value.due_time = 'Due time is required.';
 
-  formErrors.value = errors;
-  return Object.keys(errors).length === 0;
+  return Object.keys(formErrors.value).length === 0;
 };
 
-const fetchAttendanceDetails = async () => {
-  try {
-    const { id } = route.params;
-    const response = await attendance.showAttendance(id);
-    form.value = response.data;
-  } catch (error) {
-    console.error("Failed to fetch attendance details:", error);
+// Handle file upload
+const handleFileUpload = (event) => {
+  form.value.attachment = event.target.files[0]; // Store the file in the form
+};
+
+// Fetching data on mount
+onMounted(async () => {
+  if (taskId) {
+    try {
+      const response = await task.showTask(taskId); // Fetch task details
+      Object.assign(form.value, response.data); // Populate form with task data
+    } catch (error) {
+      showNotification('error', 'Error fetching task details.');
+    }
   }
-};
 
+  try {
+    const prospects = await getProspects();
+    allProspects.value = prospects;
+  } catch (error) {
+    showNotification('error', 'Error fetching prospects.');
+  }
+
+  try {
+    const leads = await getLeads();
+    allLeads.value = leads;
+  } catch (error) {
+    showNotification('error', 'Error fetching leads.');
+  }
+});
+
+// Submitting the form
 const submitForm = async () => {
   if (!validateForm()) return;
 
+  const formData = new FormData();
+  formData.append('task_title', form.value.task_title);
+  formData.append('type', form.value.type);
+  formData.append('priority', form.value.priority);
+  formData.append('start_date', form.value.start_date);
+  formData.append('start_time', form.value.start_time);
+  formData.append('due_date', form.value.due_date);
+  formData.append('due_time', form.value.due_time);
+  formData.append('contact', form.value.contact);
+  formData.append('prospect_id', form.value.prospect_id);
+  formData.append('lead_id', form.value.lead_id);
+  formData.append('assign_to', form.value.assign_to);
+  formData.append('status', form.value.status);
+  formData.append('description', form.value.description);
+
+  if (form.value.attachment) {
+    formData.append('attachment', form.value.attachment);
+  }
+
   loading.value = true;
   try {
-    const { id } = route.params;
-    const response = await attendance.updateAttendance(form.value, id);
-
-    if (response?.status === 200) {
-      showNotification("success", response.data.message || "Updated successfully");
-      router.push({ name: "attendance" });
-    }
-  }
-  catch (error) {
-    if (error.response) {
-      showNotification("error", error.response.data.message || "Failed to update attendance");
-    } else if (error.request) {
-      showNotification("error", "Network error, please try again later.");
-    }
-  }
-  finally {
+    await task.insertTask(formData); // Assuming `insertTask` is the API call
+    showNotification('success', 'Task created successfully!');
+    router.push('/task'); // Navigate back to the task list
+  } catch (error) {
+    showNotification('error', 'Error creating task.');
+  } finally {
     loading.value = false;
   }
 };
-
-onMounted(async () => {
-  await fetchAttendanceDetails();
-  allEmployee.value = await getEmployees();
-});
 </script>
+

@@ -13,12 +13,12 @@
       </div>
       <hr />
       <form @submit.prevent="submitForm">
-        <div class="lg:grid grid-cols-3 gap-4 items-center">
-          <!-- Quotation Number -->
-          <label for="quotation_number">
-            Quotation Number <span class="text-red-600">*</span>
-          </label>
-          <div class="col-span-2">
+        <div class="lg:grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-6">
+            <!-- Quotation Number -->
+            <label for="quotation_number">
+              Quotation Number <span class="text-red-600">*</span>
+            </label>
             <input
               id="quotation_number"
               type="text"
@@ -32,11 +32,11 @@
             </p>
           </div>
 
-          <!-- Quotation Date -->
-          <label for="quotation_date">
-            Quotation Date <span class="text-red-600">*</span>
-          </label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quotation Date -->
+            <label for="quotation_date">
+              Quotation Date <span class="text-red-600">*</span>
+            </label>
             <input
               id="quotation_date"
               type="date"
@@ -49,9 +49,9 @@
             </p>
           </div>
 
-          <!-- Quotation Subject -->
-          <label for="quotation_subject">Quotation Subject</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quotation Subject -->
+            <label for="quotation_subject">Quotation Subject</label>
             <input
               id="quotation_subject"
               type="text"
@@ -61,11 +61,11 @@
             />
           </div>
 
-          <!-- Quoted Amount -->
-          <label for="quoted_amount">
-            Quoted Amount <span class="text-red-600">*</span>
-          </label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quoted Amount -->
+            <label for="quoted_amount">
+              Quoted Amount <span class="text-red-600">*</span>
+            </label>
             <input
               id="quoted_amount"
               type="number"
@@ -79,9 +79,9 @@
             </p>
           </div>
 
-          <!-- Prospect -->
-          <label for="prospect_id">Prospect</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Prospect -->
+            <label for="prospect_id">Prospect</label>
             <v-select
               v-model="form.prospect_id"
               :options="allProspects"
@@ -92,9 +92,9 @@
             ></v-select>
           </div>
 
-          <!-- Lead -->
-          <label for="lead_id">Lead</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Lead -->
+            <label for="lead_id">Lead</label>
             <v-select
               v-model="form.lead_id"
               :options="allLeads"
@@ -105,19 +105,21 @@
             ></v-select>
           </div>
 
-          <!-- Attention Person -->
-          <label for="attention_person">Attention Person</label>
-          <input
-            id="attention_person"
-            type="text"
-            v-model="form.attention_person"
-            class="input-text col-span-2"
-            placeholder="Enter person name..."
-          />
+          <div class="col-span-6">
+            <!-- Attention Person -->
+            <label for="attention_person">Attention Person</label>
+            <input
+              id="attention_person"
+              type="text"
+              v-model="form.attention_person"
+              class="input-text w-full"
+              placeholder="Enter person name..."
+            />
+          </div>
 
-          <!-- Designation -->
-          <label for="designation">Designation</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Designation -->
+            <label for="designation">Designation</label>
             <v-select
               v-model="form.designation"
               :options="allDesignations"
@@ -128,9 +130,9 @@
             ></v-select>
           </div>
 
-          <!-- Department -->
-          <label for="department">Department</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Department -->
+            <label for="department">Department</label>
             <v-select
               v-model="form.department"
               :options="allDepartments"
@@ -141,29 +143,33 @@
             ></v-select>
           </div>
 
-          <!-- Phone -->
-          <label for="phone">Phone</label>
-          <input
-            id="phone"
-            type="text"
-            v-model="form.phone"
-            class="input-text col-span-2"
-            placeholder="Enter phone number..."
-          />
+          <div class="col-span-6">
+            <!-- Phone -->
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              type="text"
+              v-model="form.phone"
+              class="input-text w-full"
+              placeholder="Enter phone number..."
+            />
+          </div>
 
-          <!-- Email -->
-          <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            v-model="form.email"
-            class="input-text col-span-2"
-            placeholder="Enter email..."
-          />
+          <div class="col-span-6">
+            <!-- Email -->
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              v-model="form.email"
+              class="input-text w-full"
+              placeholder="Enter email..."
+            />
+          </div>
 
-          <!-- Quotation Items -->
-          <label for="quotation_items">Quotation Items</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quotation Items -->
+            <label for="quotation_items">Quotation Items</label>
             <v-select
               id="quotation_items"
               v-model="form.quotation_items"
@@ -175,9 +181,9 @@
             ></v-select>
           </div>
 
-          <!-- Quotation Not Sent -->
-          <label for="quotation_sent">Quotation Sent Status</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quotation Sent Status -->
+            <label for="quotation_sent">Quotation Sent Status</label>
             <select
               v-model="form.quotation_sent"
               id="quotation_sent_status"
@@ -188,8 +194,9 @@
             </select>
           </div>
 
-          <label for="quotation_description">Quotation Description</label>
-          <div class="col-span-2">
+          <div class="col-span-6">
+            <!-- Quotation Description -->
+            <label for="quotation_description">Quotation Description</label>
             <textarea
               id="quotation_description"
               v-model="form.quotation_description"
@@ -198,18 +205,19 @@
             ></textarea>
           </div>
 
-          <label for="attachments">Attachments</label>
-          <div class="col-span-2">
-          <input
-            id="attachments"
-            type="file"
-            @change="handleFileUpload"
-            class="input-text w-full"
-          />
-        </div>
+          <div class="col-span-6">
+            <!-- Attachments -->
+            <label for="attachments">Attachments</label>
+            <input
+              id="attachments"
+              type="file"
+              @change="handleFileUpload"
+              class="input-text w-full"
+            />
+          </div>
 
           <!-- Submit Button -->
-          <div class="col-span-3 flex justify-end mt-3">
+          <div class="col-span-12 flex justify-end mt-3">
             <button
               type="submit"
               :disabled="loading"

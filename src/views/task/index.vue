@@ -1,8 +1,13 @@
 <script setup>
 import MainLayout from "@/components/MainLayout.vue";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons-vue";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from "@ant-design/icons-vue";
 import task from "@/stores/task-api.js";
 import { onMounted, ref } from "vue";
+import { imgBase } from "@/config";
 
 const isLoading = ref(false);
 const taskData = ref([]);
@@ -68,14 +73,18 @@ onMounted(() => {
         @input="taskSearch($event?.target?.value)"
       />
       <router-link :to="{ name: 'task-create' }">
-        <button class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600">
+        <button
+          class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+        >
           <PlusOutlined class="mr-2" />
           New Task
         </button>
       </router-link>
     </div>
     <h6 class="font-medium">Task ({{ allTask?.total || 0 }})</h6>
-    <table class="table border-collapse border border-slate-400 w-full bg-white my-4">
+    <table
+      class="table border-collapse border border-slate-400 w-full bg-white my-4"
+    >
       <thead class="table-header">
         <tr>
           <th>Actions</th>
@@ -107,7 +116,9 @@ onMounted(() => {
             <button
               type="button"
               class="edit_btn"
-              @click="$router.push({ name: 'task-edit', params: { id: task?.id } })"
+              @click="
+                $router.push({ name: 'task-edit', params: { id: task?.id } })
+              "
             >
               <EditOutlined class="align-middle" />
             </button>
@@ -122,16 +133,27 @@ onMounted(() => {
           </td>
           <td class="font-bold">{{ allTask?.from + index }}</td>
           <td class="text-center"></td>
-          <td class="text-center">{{ task.title+'-'+task.description || '-' }}</td>
-          <td class="text-center">{{ task.attachment || '-' }}</td>
-          <td class="text-center">{{ task.prospect_id+'-'+task.prospect_id || '-' }}</td>
-          <td class="text-center">{{ task.contact || '-' }}</td>
-          <td class="text-center"></td>
-          <td class="text-center">{{ task.assign_to || '-' }}</td>
-          <td class="text-center">{{ task.priority_id || '-' }}</td>
           <td class="text-center">
-          
+            {{ task.title + "-" + task.description || "-" }}
           </td>
+          <td class="text-center">
+            <img
+              v-if="task.attachment"
+              :src="imgBase+task.attachment"
+              alt="Attachment"
+              class="w-16 h-16 object-cover"
+            />
+            <span v-else>-</span>
+          </td>
+          <td class="text-center">
+            {{ task.prospect_id + "-" + task.prospect_id || "-" }}
+          </td>
+          <td class="text-center">{{ task.contact || "-" }}</td>
+          <td class="text-center"></td>
+
+          <td class="text-center">{{ task.assign_to || "-" }}</td>
+          <td class="text-center">{{ task.priority || "-" }}</td>
+          <td class="text-center">{{ task.status || "-" }}</td>
         </tr>
       </tbody>
     </table>

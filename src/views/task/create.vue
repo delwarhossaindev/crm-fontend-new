@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Create New Attendance</h6>
+        <h6 class="font-medium">Create New Task</h6>
         <button
           type="button"
           class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
@@ -13,101 +13,258 @@
       </div>
       <hr />
       <form @submit.prevent="submitForm">
-        <div class="lg:grid grid-cols-3 gap-4 items-center">
-          <!-- Date -->
-          <label for="date">Date <span class="text-red-600">*</span></label>
-          <div class="col-span-2">
+        <div class="lg:grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-4">
+            <!-- Task Title -->
+            <label for="task_title">
+              Task Title <span class="text-red-600">*</span>
+            </label>
             <input
-              id="date"
+              id="task_title"
+              type="text"
+              v-model="form.task_title"
+              :class="{ 'border-red-500': formErrors.task_title }"
+              class="input-text w-full"
+              placeholder="Enter Task Title..."
+            />
+            <p v-if="formErrors.task_title" class="text-red-500">
+              {{ formErrors.task_title }}
+            </p>
+          </div>
+
+          <div class="col-span-4">
+            <!-- type -->
+            <label for="type"> Type <span class="text-red-600">*</span> </label>
+            <select
+              v-model="form.type"
+              id="type"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task type</option>
+              <option value="Follow-up Tasks">Follow-up Tasks</option>
+              <option value="Meetings or Appointments">
+                Meetings or Appointments
+              </option>
+              <option value="Calls">Calls</option>
+              <option value="Emails">Emails</option>
+              <option value="Sales Tasks">Sales Tasks</option>
+              <option value="Customer Support or Service Tasks">
+                Customer Support or Service Tasks
+              </option>
+              <option value="Lead Qualification Tasks">
+                Lead Qualification Tasks
+              </option>
+              <option value="Internal Tasks">Internal Tasks</option>
+            </select>
+            <p v-if="formErrors.type" class="text-red-500">
+              {{ formErrors.type }}
+            </p>
+          </div>
+
+          <div class="col-span-4">
+            <!-- Priority -->
+            <label for="priority">Priority</label>
+            <select
+              v-model="form.priority"
+              id="priority"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task priority</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+              <option value="Critical">Critical</option>
+            </select>
+            <p v-if="formErrors.priority" class="text-red-500">
+              {{ formErrors.priority }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Start Date -->
+            <label for="start_date">
+              Start Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="start_date"
               type="date"
-              v-model="form.date"
-              :class="{ 'border-red-500': formErrors.date }"
+              v-model="form.start_date"
+              :class="{ 'border-red-500': formErrors.start_date }"
               class="input-text w-full"
+              placeholder="Enter start date..."
+              required
             />
-            <p v-if="formErrors.date" class="text-red-500">
-              {{ formErrors.date }}
+            <p v-if="formErrors.start_date" class="text-red-500">
+              {{ formErrors.start_date }}
             </p>
           </div>
 
-          <!-- Employee ID -->
-          <label for="employee_id"
-            >Employee Name <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
-            <v-select
-              v-model="form.employee_id"
-              :options="allEmployee"
-              label="name"
-              :reduce="(employee) => employee.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select Employee..."
-            ></v-select>
-            <p v-if="formErrors.employee_id" class="text-red-500">
-              {{ formErrors.employee_id }}
-            </p>
-          </div>
-
-          <label for="item_name">
-            Location <span class="text-red-600">*</span>
-          </label>
-          <input
-            id="location"
-            type="text"
-            placeholder="Enter here . . ."
-            v-model="form.location "
-            :class="{ 'border-red-500': formErrors.location  }"
-            class="input-text col-span-2"
-          />
-          <p v-if="formErrors.location" class="text-red-500">
-              {{ formErrors.location }}
-            </p>
-
-          <!-- Check-In Latitude & Longitude -->
-          <label for="check_in_latitude">Check-In Latitude</label>
-          <div class="col-span-2">
+          <div class="col-span-3">
+            <!-- Start Time -->
+            <label for="start_time">
+              Start Time <span class="text-red-600">*</span>
+            </label>
             <input
-              id="check_in_latitude"
-              type="number"
-               step="0.00000000001"
-              placeholder="Enter check-in latitude..."
-              v-model="form.check_in_latitude"
-              class="input-text w-full"
-            />
-          </div>
-
-          <label for="check_in_longitude">Check-In Longitude</label>
-          <div class="col-span-2">
-            <input
-              id="check_in_longitude"
-              type="number"
-              step="0.00000000001"
-              placeholder="Enter check-in longitude..."
-              v-model="form.check_in_longitude"
-              class="input-text w-full"
-            />
-          </div>
-
-          <!-- Check-In Time -->
-          <label for="check_in_time"
-            >Check-In Time <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
-            <input
-              id="check_in_time"
+              id="start_time"
               type="time"
-              v-model="form.check_in_time"
-              :class="{ 'border-red-500': formErrors.check_in_time }"
+              v-model="form.start_time"
+              :class="{ 'border-red-500': formErrors.start_time }"
               class="input-text w-full"
+              placeholder="Enter start time..."
+              required
             />
-            <p v-if="formErrors.check_in_time" class="text-red-500">
-              {{ formErrors.check_in_time }}
+            <p v-if="formErrors.start_time" class="text-red-500">
+              {{ formErrors.start_time }}
             </p>
           </div>
 
-        
+          <div class="col-span-3">
+            <!-- Due Date -->
+            <label for="due_date">
+              Due Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="due_date"
+              type="date"
+              v-model="form.due_date"
+              :class="{ 'border-red-500': formErrors.due_date }"
+              class="input-text w-full"
+              placeholder="Enter due date..."
+              required
+            />
+            <p v-if="formErrors.due_date" class="text-red-500">
+              {{ formErrors.due_date }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Due Time -->
+            <label for="due_time">
+              Due Time <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="due_time"
+              type="time"
+              v-model="form.due_time"
+              :class="{ 'border-red-500': formErrors.due_time }"
+              class="input-text w-full"
+              placeholder="Enter due time..."
+              required
+            />
+            <p v-if="formErrors.due_time" class="text-red-500">
+              {{ formErrors.due_time }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Prospect -->
+            <label for="prospect_id">Prospect</label>
+            <v-select
+              v-model="form.prospect_id"
+              :options="allProspects"
+              label="name"
+              :reduce="(prospect) => prospect.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select prospect..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Contact -->
+            <label for="contact">Contact</label>
+            <select
+              v-model="form.contact"
+              id="contact"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select contact</option>
+              <option value="Customer">Customer</option>
+              <option value="Lead">Lead</option>
+              <option value="Prospect">Prospect</option>
+              <option value="Internal Contact">Internal Contact</option>
+              <option value="Business Contact">Business Contact</option>
+            </select>
+            <p v-if="formErrors.contact" class="text-red-500">
+              {{ formErrors.contact }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Lead -->
+            <label for="lead_id">Lead</label>
+            <v-select
+              v-model="form.lead_id"
+              :options="allLeads"
+              label="lead_name"
+              :reduce="(lead) => lead.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select lead..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Attention Person -->
+            <label for="attention_person">Attention Person</label>
+            <input
+              id="attention_person"
+              type="text"
+              v-model="form.attention_person"
+              class="input-text w-full"
+              placeholder="Enter person name..."
+            />
+          </div>
+
+          <div class="col-span-4">
+            <!-- Status -->
+            <label for="status">Status</label>
+            <select
+              v-model="form.status"
+              id="status"
+              class="common-select w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+            >
+              <option disabled value="">Select task status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Deferred">Deferred</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <p v-if="formErrors.status" class="text-red-500">
+              {{ formErrors.status }}
+            </p>
+          </div>
+
+
+          <div class="col-span-4">
+            <!-- Task Description -->
+            <label for="task_description">Task Description</label>
+            <textarea
+              id="task_description"
+              v-model="form.task_description"
+              class="input-text w-full"
+              placeholder="Enter Task Description..."
+            ></textarea>
+          </div>
+
+          <div class="col-span-4">
+            <!-- Attachments -->
+            <label for="attachment">Attachments Doc/Media</label>
+            <input
+              id="attachment"
+              type="file"
+              @change="handleFileUpload"
+              class="input-text w-full"
+            />
+          </div>
 
           <!-- Submit Button -->
-          <div class="col-span-3 flex justify-end mt-3">
+          <div class="col-span-12 flex justify-end mt-3">
             <button
               type="submit"
               :disabled="loading"
@@ -123,71 +280,117 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import MainLayout from "@/components/MainLayout.vue";
-import attendance from "@/stores/attendance-api.js";
+import task from "@/stores/task-api.js";
 import { showNotification } from "@/utilities/notification";
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { useDataStore } from "@/stores/data";
 
-const loading = ref(false);
-
+// Initial form state
 const initialFormState = {
-  date: "",
-  employee_id: "",
-  check_in_latitude: "",
-  check_in_longitude: "",
-  check_in_time: "",
-  location :""
+  task_title: "",
+  type: "",
+  priority: "",
+  start_date: "",
+  start_time: "",
+  due_date: "",
+  due_time: "",
+  prospect_id: "",
+  contact: "",
+  lead_id: "",
+  attention_person: "",
+  status: "", 
+  task_description: "",
+  attachment: null, // Store attachment file(s)
 };
 
+const loading = ref(false);
 const form = ref({ ...initialFormState });
 const formErrors = ref({});
-const allEmployee = ref([]);
+const allProspects = ref([]);
+const allLeads = ref([]);
 
 const router = useRouter();
-const dataStore = useDataStore();
-const { getEmployees } = dataStore;
+const {getProspects, getLeads } =
+  useDataStore();
 
+// Form validation
 const validateForm = () => {
-  const errors = {};
-  if (!form.value.date) errors.date = "Date is required";
-  if (!form.value.location) errors.location = "Location is required";
-  if (!form.value.employee_id) errors.employee_id = "Employee ID is required";
-  if (!form.value.check_in_time)
-    errors.check_in_time = "Check-In Time is required";
+  formErrors.value = {};
+  if (!form.value.task_title)
+    formErrors.value.task_title = "Task title is required.";
+  if (!form.value.type)
+    formErrors.value.type = "Task type is required.";
+  if (!form.value.start_date)
+    formErrors.value.start_date = "Start date is required.";
+  if (!form.value.start_time)
+    formErrors.value.start_time = "Start time is required.";
+  if (!form.value.due_date)
+    formErrors.value.due_date = "Due date is required.";
+  if (!form.value.due_time)
+    formErrors.value.due_time = "Due time is required.";
 
-  formErrors.value = errors;
-  return Object.keys(errors).length === 0;
+  return Object.keys(formErrors.value).length === 0;
 };
 
+// Handle file upload
+const handleFileUpload = (event) => {
+  form.value.attachment = event.target.files[0]; // Store the file in the form
+};
+
+// Fetching data on mount
+onMounted(() => {
+  getProspects().then((res) => (allProspects.value = res));
+  getLeads().then((res) => (allLeads.value = res));
+});
+
+// Submitting the form
 const submitForm = async () => {
   if (!validateForm()) return;
 
+  const formData = new FormData();
+  formData.append("task_title", form.value.task_title);
+  formData.append("type", form.value.type);
+  formData.append("priority", form.value.priority);
+  formData.append("start_date", form.value.start_date);
+  formData.append("start_time", form.value.start_time);
+  formData.append("due_date", form.value.due_date);
+  formData.append("due_time", form.value.due_time);
+  formData.append("contact", form.value.contact);
+  formData.append("prospect_id", form.value.prospect_id);
+  formData.append("lead_id", form.value.lead_id);
+  formData.append("attention_person", form.value.attention_person);
+  formData.append("status", form.value.status);
+  formData.append("task_description", form.value.task_description);
+
+  if (form.value.attachment) {
+    formData.append("attachment", form.value.attachment);
+  }
+
   loading.value = true;
   try {
-    const response = await attendance.insertAttendance(form.value);
-
-    if (response?.status === 201) {
-      showNotification(
-        "success",
-        response?.data?.message || "Attendance successfully created."
-      );
-      form.value = { ...initialFormState }; // Reset form
-      router.push({ name: "attendance" });
-    }
+    await task.insertTask(formData); // Assuming `insertTask` is the API call
+    showNotification("success", "Task created successfully!");
+    router.push("/task"); // Navigate back to the task list
   } catch (error) {
-    const message =
-      error.response?.data?.message || "Failed to create attendance.";
-    showNotification("error", message);
+    showNotification("error", "Error creating task.");
   } finally {
     loading.value = false;
   }
 };
 
-onMounted(async () => {
-  allEmployee.value = await getEmployees();
-});
 </script>
+
+<style scoped>
+.input-text {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.common-select {
+  border: 1px solid #d1d5db;
+}
+</style>
