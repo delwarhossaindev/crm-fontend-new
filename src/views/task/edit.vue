@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Edit Attendance</h6>
+        <h6 class="font-medium">Edit Task</h6>
         <button type="button" class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
           @click="$router.go(-1)">
           Back
@@ -386,9 +386,9 @@ const submitForm = async () => {
 
   loading.value = true;
   try {
-    await task.insertTask(formData); // Assuming `insertTask` is the API call
+    await task.insertTask(formData); 
     showNotification('success', 'Task created successfully!');
-    router.push('/task'); // Navigate back to the task list
+    router.push('/task'); 
   } catch (error) {
     showNotification('error', 'Error creating task.');
   } finally {
