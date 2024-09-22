@@ -389,7 +389,7 @@ export const useDataStore = defineStore("dataStore", {
         }
       },
 
-      // Department Search
+      // Win Probability
       async getWinProbability(query) {
         !query && (query = "");
         this.isLead = true;
@@ -410,6 +410,51 @@ export const useDataStore = defineStore("dataStore", {
           showNotification("error", error?.message);
         }
       },
+
+      // Country
+      async getCountry(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/countries?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
+       // Zone
+       async getZone(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/zones?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
+
 
 
 
