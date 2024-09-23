@@ -205,11 +205,11 @@
 
           <div class="col-span-3">
             <!-- Attention Person -->
-            <label for="assign_to">Attention Person</label>
+            <label for="attention_person">Attention Person</label>
             <input
-              id="assign_to"
+              id="attention_person"
               type="text"
-              v-model="form.assign_to"
+              v-model="form.attention_person"
               class="input-text w-full"
               placeholder="Enter person name..."
             />
@@ -298,7 +298,7 @@ const initialFormState = {
   prospect_id: '',
   contact: '',
   lead_id: '',
-  assign_to: '',
+  attention_person: '',
   status: '', 
   description: '',
   attachment: null, // Store attachment file(s)
@@ -376,7 +376,7 @@ const submitForm = async () => {
   formData.append('contact', form.value.contact);
   formData.append('prospect_id', form.value.prospect_id);
   formData.append('lead_id', form.value.lead_id);
-  formData.append('assign_to', form.value.assign_to);
+  formData.append('attention_person', form.value.attention_person);
   formData.append('status', form.value.status);
   formData.append('description', form.value.description);
 
@@ -386,8 +386,8 @@ const submitForm = async () => {
 
   loading.value = true;
   try {
-    await task.insertTask(formData); 
-    showNotification('success', 'Task created successfully!');
+    await task.updateTask(formData,taskId); 
+    showNotification('success', 'Task Updated successfully!');
     router.push('/task'); 
   } catch (error) {
     showNotification('error', 'Error creating task.');

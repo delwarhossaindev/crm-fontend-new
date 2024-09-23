@@ -296,8 +296,8 @@ const fetchInitialData = async () => {
         important_note: response.data.supplier.important_note || "",
         concern_person_info:
           response.data.supplier.concern_person_info || "",
-          country: response.data.supplier.country || "",
-          zone: response.data.supplier.zone || "",
+          country: parseInt(response.data.supplier.country) || "",
+          zone: parseInt(response.data.supplier.zone) || "",
           zip_po: response.data.supplier.zip_po || "",
           address: response.data.supplier.address || "",
           phone: response.data.supplier.phone || "",
@@ -380,6 +380,7 @@ const submitForm = async () => {
   formData.append("fax", form.value.fax);
   formData.append("website", form.value.website);
   formData.append("social_network", form.value.social_network);
+  formData.append("id", supplierId);
 
   // If there are items
   form.value.items.forEach((item, index) => {
@@ -390,11 +391,10 @@ const submitForm = async () => {
   if (form.value.attachment) {
     formData.append("attachment", form.value.attachment);
   }
-      console.log('Hi........Frontend............!!!',formData);
       
   loading.value = true;
   try {
-    await supplier.updateSupplier(formData,supplierId); // Assuming insertSupplier is the API call
+    await supplier.updateSupplier(formData); // Assuming insertSupplier is the API call
     showNotification("success", "Supplier created successfully!");
     router.push("/supplier"); // Navigate back to the supplier list
   } catch (error) {

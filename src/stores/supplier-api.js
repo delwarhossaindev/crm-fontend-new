@@ -37,29 +37,16 @@ export default {
     return apiClientMultiple.delete(`/supplier/${id}`);
   },
 
-  updateSupplier(formdata, id) {
-    console.log('Updating supplier with ID:', id);
-  
-    // Extract text-based fields from formdata
-    const params = new URLSearchParams();
-    formdata.forEach((value, key) => {
-      if (!(value instanceof File)) { // Exclude files from URL parameters
-        params.append(key, value);
-      }
-    });
-  
-    // Create a new FormData object for the file
-    const fileFormData = new FormData();
-    if (formdata.get('attachment')) {
-      fileFormData.append('attachment', formdata.get('attachment'));
-    }
-  
-    // Send the PUT request, with text data as URL parameters and file in the body
-    return apiClientMultiple.put(`/supplier/${id}`, fileFormData, {
-      params: params,
+  updateSupplier(formdata) {
+    return apiClientMultiple.post(`/supplier-update`, formdata);
+  },
+
+  updateSupplierOld(formdata, id) {
+   
+    // Send the PUT request with combined text and file data
+    return apiClientMultiple.put(`/supplier/${id}`, formdata, {
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data', // Ensure this for the FormData
+        'Content-Type': 'multipart/form-data', // Ensures FormData is handled correctly
       },
     })
     .then(response => {
@@ -71,29 +58,5 @@ export default {
       throw error;
     });
   }
-  // updateSupplier(formdata, id) {
-  //   console.log('Updating supplier with ID:', id);
-  
-  //   // Convert formdata into plain object or query params
-  //   const params = new URLSearchParams();
-  //   for (const [key, value] of formdata.entries()) {
-  //     params.append(key, value);
-  //   }
-  
-  //   return apiClientMultiple.put(`/supplier/${id}`, null, {
-  //     params: params,
-  //     headers: {
-  //       'Authorization': `Bearer ${token}`,
-  //       'Content-Type': 'multipart/form-data',
-  //     },
-  //   })
-  //   .then(response => {
-  //     console.log('Supplier updated successfully:', response.data);
-  //     return response.data;
-  //   })
-  //   .catch(error => {
-  //     console.error('Error updating supplier:', error.response ? error.response.data : error.message);
-  //     throw error;
-  //   });
-  // }
+
 };

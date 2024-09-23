@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Create New Order</h6>
+        <h6 class="font-medium">Create Sale Order</h6>
         <button
           type="button"
           class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
@@ -13,101 +13,272 @@
       </div>
       <hr />
       <form @submit.prevent="submitForm">
-        <div class="lg:grid grid-cols-3 gap-4 items-center">
-          <!-- Date -->
-          <label for="date">Date <span class="text-red-600">*</span></label>
-          <div class="col-span-2">
+        <div class="lg:grid grid-cols-12 gap-4 items-center">
+
+          <div class="col-span-3">
+            <!-- sale_order_no -->
+            <label for="sale_order_no">
+              Sale Order No
+            </label>
             <input
-              id="date"
+              id="sale_order_no"
+              type="text"
+              v-model="form.sale_order_no"
+              :class="{ 'border-red-500': formErrors.sale_order_no }"
+              class="input-text w-full"
+              placeholder="Enter Sale Order No..."
+            />
+            <p v-if="formErrors.sale_order_no" class="text-red-500">
+              {{ formErrors.sale_order_no }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Sale Order Date -->
+            <label for="sale_order_date">
+              Sale Order Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="sale_order_date"
               type="date"
-              v-model="form.date"
-              :class="{ 'border-red-500': formErrors.date }"
+              v-model="form.sale_order_date"
+              :class="{ 'border-red-500': formErrors.sale_order_date }"
               class="input-text w-full"
+              placeholder="Enter Sale Order Date..."
+              required
             />
-            <p v-if="formErrors.date" class="text-red-500">
-              {{ formErrors.date }}
+            <p v-if="formErrors.sale_order_date" class="text-red-500">
+              {{ formErrors.sale_order_date }}
             </p>
           </div>
 
-          <!-- Employee ID -->
-          <label for="employee_id"
-            >Employee Name <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
+          <div class="col-span-3">
+            <!-- sale_order_no -->
+            <label for="client_order_no">
+              Client Order No<span class="text-red-600">*</span>
+            </label>
+            <input
+              id="client_order_no"
+              type="text"
+              v-model="form.client_order_no"
+              :class="{ 'border-red-500': formErrors.client_order_no }"
+              class="input-text w-full"
+              placeholder="Enter Client Order No..."
+            />
+            <p v-if="formErrors.client_order_no" class="text-red-500">
+              {{ formErrors.client_order_no }}
+            </p>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Client Order Date -->
+            <label for="client_order_date">
+              Client Order Date <span class="text-red-600">*</span>
+            </label>
+            <input
+              id="client_order_date"
+              type="date"
+              v-model="form.client_order_date"
+              :class="{ 'border-red-500': formErrors.client_order_date }"
+              class="input-text w-full"
+              placeholder="Enter Client Order Date..."
+              required
+            />
+            <p v-if="formErrors.client_order_date" class="text-red-500">
+              {{ formErrors.client_order_date }}
+            </p>
+          </div>
+
+          <div class="col-span-12">
+            <!-- Sale Order Subject -->
+            <label for="sale_order_subject">
+              Sale Order Subject<span class="text-red-600">*</span>
+            </label>
+            <input
+              id="sale_order_subject"
+              type="text"
+              v-model="form.sale_order_subject"
+              :class="{ 'border-red-500': formErrors.sale_order_subject }"
+              class="input-text w-full"
+              placeholder="Enter Sale Order Subject..."
+            />
+            <p v-if="formErrors.sale_order_subject" class="text-red-500">
+              {{ formErrors.sale_order_subject }}
+            </p>
+          </div>
+
+          <div class="col-span-4">
+            <!-- Prospect -->
+            <label for="prospect_id">Prospect Name<span class="text-red-600">*</span></label>
             <v-select
-              v-model="form.employee_id"
-              :options="allEmployee"
+              v-model="form.prospect_id"
+              :options="allProspects"
               label="name"
-              :reduce="(employee) => employee.id"
+              :reduce="(prospect) => prospect.id"
               class="common-select w-full rounded-lg"
-              placeholder="Select Employee..."
+              placeholder="Select prospect..."
             ></v-select>
-            <p v-if="formErrors.employee_id" class="text-red-500">
-              {{ formErrors.employee_id }}
-            </p>
           </div>
 
-          <label for="item_name">
-            Location <span class="text-red-600">*</span>
-          </label>
-          <input
-            id="location"
-            type="text"
-            placeholder="Enter here . . ."
-            v-model="form.location "
-            :class="{ 'border-red-500': formErrors.location  }"
-            class="input-text col-span-2"
-          />
-          <p v-if="formErrors.location" class="text-red-500">
-              {{ formErrors.location }}
-            </p>
+          <div class="col-span-4">
+            <label for="prospect_id">Lead Name</label>
+              <!-- Lead -->
+              <label for="lead_id">Lead</label>
+            <v-select
+              v-model="form.lead_id"
+              :options="allLeads"
+              label="lead_name"
+              :reduce="(lead) => lead.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select lead..."
+            ></v-select>
+          </div>
 
-          <!-- Check-In Latitude & Longitude -->
-          <label for="check_in_latitude">Check-In Latitude</label>
-          <div class="col-span-2">
+          <div class="col-span-4">
+            <!-- Quotation No -->
+            <label for="quotation_id">Quotation No</label>
+            <v-select
+              v-model="form.quotation_id"
+              :options="allQuotations"
+              label="name"
+              :reduce="(quotation) => quotation.id"
+              class="common-select w-full rounded-lg"
+              placeholder="Select quotation..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-12">
+            <!-- Attention Person -->
+            <label for="company_attention_person">Company Attention Person</label>
             <input
-              id="check_in_latitude"
+              id="company_attention_person"
+              type="text"
+              v-model="form.company_attention_person"
+              class="input-text w-full"
+              placeholder="Enter Attention Person..."
+            />
+          </div>
+
+          <div class="col-span-6">
+            <!-- Phone -->
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              type="text"
+              v-model="form.phone"
+              class="input-text w-full"
+              placeholder="Enter Phone..."
+            />
+          </div>
+
+          <div class="col-span-6">
+            <!-- email_address -->
+            <label for="email_address">Email Address</label>
+            <input
+              id="email_address"
+              type="text"
+              v-model="form.email_address"
+              class="input-text w-full"
+              placeholder="Enter Phone..."
+            />
+          </div>
+
+          <div class="col-span-6">
+            <!-- Designation -->
+            <label for="designation">Designation</label>
+            <input
+              id="designation"
+              type="text"
+              v-model="form.designation"
+              class="input-text w-full"
+              placeholder="Enter Designation..."
+            />
+          </div>
+
+          <div class="col-span-6">
+            <!-- department -->
+            <label for="department">Department</label>
+            <input
+              id="department"
+              type="text"
+              v-model="form.department"
+              class="input-text w-full"
+              placeholder="Enter Department..."
+            />
+          </div>
+
+          <div class="col-span-8">
+            <label for="items">Order Item</label>
+            <v-select
+              id="items"
+              v-model="form.items"
+              :options="allItems"
+              label="item_name"
+              multiple
+              class="input-text w-full"
+              placeholder="Select Supplier Items..."
+            ></v-select>
+          </div>
+
+          <div class="col-span-4">
+            <!-- ordered_amount -->
+            <label for="ordered_amount">Ordered Amount</label>
+            <input
+              id="ordered_amount"
               type="number"
-               step="0.00000000001"
-              placeholder="Enter check-in latitude..."
-              v-model="form.check_in_latitude"
+              v-model="form.ordered_amount"
               class="input-text w-full"
+              placeholder="Enter ordered_amount..."
             />
           </div>
 
-          <label for="check_in_longitude">Check-In Longitude</label>
-          <div class="col-span-2">
+          <div class="col-span-8">
+            <!--Key Account Person -->
+            <label for="key_account_person_id">Key Account Person</label>
             <input
-              id="check_in_longitude"
+              id="key_account_person_id"
               type="number"
-              step="0.00000000001"
-              placeholder="Enter check-in longitude..."
-              v-model="form.check_in_longitude"
+              v-model="form.key_account_person_id"
               class="input-text w-full"
+              placeholder="Enter Key Account Person..."
             />
           </div>
 
-          <!-- Check-In Time -->
-          <label for="check_in_time"
-            >Check-In Time <span class="text-red-600">*</span></label
-          >
-          <div class="col-span-2">
+          <div class="col-span-4">
+            <!--Delivered Status -->
+            <label for="delivered_status">Delivered Status</label>
+            <select
+              v-model="form.delivered_status"
+              id="delivered_status"
+              class="common-select w-full rounded-lg"
+            >
+              <option value="1">Delivered</option>
+              <option value="0">Not Delivered </option>
+            </select>
+          </div>
+
+          <div class="col-span-6">
+            <textarea
+              id="sale_order_description"
+              v-model="form.sale_order_description"
+              class="input-text w-full"
+              placeholder="Enter Sale Order Description..."
+            ></textarea>
+          </div>
+
+          <div class="col-span-6">
+            <!-- Attachments -->
+            <label for="attachment">Attachments Doc/Media</label>
             <input
-              id="check_in_time"
-              type="time"
-              v-model="form.check_in_time"
-              :class="{ 'border-red-500': formErrors.check_in_time }"
+              id="attachment"
+              type="file"
+              @change="handleFileUpload"
               class="input-text w-full"
             />
-            <p v-if="formErrors.check_in_time" class="text-red-500">
-              {{ formErrors.check_in_time }}
-            </p>
           </div>
-
-        
 
           <!-- Submit Button -->
-          <div class="col-span-3 flex justify-end mt-3">
+          <div class="col-span-12 flex justify-end mt-3">
             <button
               type="submit"
               :disabled="loading"
@@ -123,71 +294,138 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import MainLayout from "@/components/MainLayout.vue";
-import attendance from "@/stores/attendance-api.js";
+import task from "@/stores/task-api.js";
 import { showNotification } from "@/utilities/notification";
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { useDataStore } from "@/stores/data";
+import { Item } from "ant-design-vue/es/menu";
+
+// Initial form state
+const initialFormState = {
+  sale_order_no: "",
+  sale_order_date: "",
+  client_order_no: "",
+  client_order_date: "",
+  sale_order_subject: "",
+  prospect_id: "",
+  lead_id: "",
+  prospect_id: "",
+  quotation_id: "",
+  company_attention_person_id: "",
+  phone: "",
+  item:[],
+  email_address: "", 
+  designation: "",
+  ordered_amount: "",
+  key_account_person_id: "",
+  delivered_status: "", 
+  sale_order_description: "",
+  attachment: null, // Store attachment file(s)
+};
 
 const loading = ref(false);
-
-const initialFormState = {
-  date: "",
-  employee_id: "",
-  check_in_latitude: "",
-  check_in_longitude: "",
-  check_in_time: "",
-  location :""
-};
-
 const form = ref({ ...initialFormState });
 const formErrors = ref({});
-const allEmployee = ref([]);
+const allProspects = ref([]);
+const allLeads = ref([]);
+const allQuotations = ref([]);
 
 const router = useRouter();
-const dataStore = useDataStore();
-const { getEmployees } = dataStore;
+const {getProspects, getLeads, getQuotations} =
+  useDataStore();
 
+// Form validation
 const validateForm = () => {
-  const errors = {};
-  if (!form.value.date) errors.date = "Date is required";
-  if (!form.value.location) errors.location = "Location is required";
-  if (!form.value.employee_id) errors.employee_id = "Employee ID is required";
-  if (!form.value.check_in_time)
-    errors.check_in_time = "Check-In Time is required";
+  formErrors.value = {};
+  if (!form.value.sale_order_no)
+    formErrors.value.sale_order_no = "Sale Order No is required.";
+  if (!form.value.sale_order_date)
+    formErrors.value.sale_order_date = "Sale Order Date is required.";
+  if (!form.value.client_order_no)
+    formErrors.value.client_order_no = "Client Order No is required.";
+  if (!form.value.client_order_date)
+    formErrors.value.client_order_date = "Client Order Date is required.";
+  if (!form.value.sale_order_subject)
+    formErrors.value.sale_order_subject = "Sale Order Subject is required.";
+  if (!form.value.prospect_id)
+    formErrors.value.prospect_id = "Prospect Name is required.";
 
-  formErrors.value = errors;
-  return Object.keys(errors).length === 0;
+  return Object.keys(formErrors.value).length === 0;
 };
 
+// Handle file upload
+const handleFileUpload = (event) => {
+  form.value.attachment = event.target.files[0]; // Store the file in the form
+};
+
+// Fetching data on mount
+onMounted(() => {
+  getProspects().then((res) => (allProspects.value = res));
+  getLeads().then((res) => (allLeads.value = res));
+  getQuotations().then((res) => (allQuotations.value = res));
+});
+
+// Submitting the form
 const submitForm = async () => {
   if (!validateForm()) return;
 
-  loading.value = true;
-  try {
-    const response = await attendance.insertOrder(form.value);
+  const formData = new FormData();
+  formData.append("sale_order_no", form.value.sale_order_no);
+  formData.append("sale_order_date", form.value.sale_order_date);
+  formData.append("client_order_no", form.value.client_order_no);
+  formData.append("client_order_date", form.value.client_order_date);
+  formData.append("sale_order_subject", form.value.sale_order_subject);
+  formData.append("prospect_id", form.value.prospect_id);
+  formData.append("lead_id", form.value.lead_id);
+  formData.append("quotation_id", form.value.quotation_id);
+  formData.append("company_attention_person", form.value.company_attention_person);
+  formData.append("phone", form.value.phone);
+  formData.append("email_address", form.value.email_address);
+  formData.append("designation", form.value.designation);
+  formData.append("department", form.value.department);
+  formData.append("ordered_amount", form.value.ordered_amount);
+  formData.append("key_account_person_id", form.value.key_account_person_id);
+  formData.append("delivered_status", form.value.delivered_status);
+  formData.append("sale_order_description", form.value.sale_order_description);
 
-    if (response?.status === 201) {
-      showNotification(
-        "success",
-        response?.data?.message || "Order successfully created."
-      );
-      form.value = { ...initialFormState }; // Reset form
-      router.push({ name: "attendance" });
-    }
-  } catch (error) {
-    const message =
-      error.response?.data?.message || "Failed to create attendance.";
-    showNotification("error", message);
-  } finally {
+  // Handle file attachment
+  if (form.value.attachment) {
+    formData.append("attachment", form.value.attachment);
+  }
+
+   // If there are items
+   form.value.items.forEach((item, index) => {
+    // Append each item to formData with a unique key
+    formData.append(`items[${index}]`, JSON.stringify(item)); // Corrected here
+  });
+
+  try {
+    loading.value = true;
+    const response = await task.createSaleOrder(formData);
     loading.value = false;
+    showNotification("Sale Order created successfully", "success");
+    router.push({ name: "SaleOrderList" });
+  } catch (error) {
+    loading.value = false;
+    showNotification("Error creating Sale Order", "error");
+    console.error(error);
   }
 };
 
-onMounted(async () => {
-  allEmployee.value = await getEmployees();
-});
+
 </script>
+
+<style scoped>
+.input-text {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.common-select {
+  border: 1px solid #d1d5db;
+}
+</style>

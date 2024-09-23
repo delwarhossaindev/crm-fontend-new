@@ -36,7 +36,6 @@ export default {
     return apiClientMultiple.delete(`/lead/${id}`);
   },
   updateLead(formdata, id) {
-     console.log(formdata,JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/lead/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.post(`/lead-update/${id}`,formdata);
   }
 };
