@@ -140,7 +140,7 @@
             <v-select
               v-model="form.quotation_id"
               :options="allQuotations"
-              label="name"
+              label="quotation_number"
               :reduce="(quotation) => quotation.id"
               class="common-select w-full rounded-lg"
               placeholder="Select quotation..."
@@ -237,7 +237,7 @@
             <label for="key_account_person_id">Key Account Person</label>
             <input
               id="key_account_person_id"
-              type="number"
+              type="text"
               v-model="form.key_account_person_id"
               class="input-text w-full"
               placeholder="Enter Key Account Person..."
@@ -257,7 +257,7 @@
             </select>
           </div>
 
-          <div class="col-span-6">
+          <div class="col-span-12">
             <textarea
               id="sale_order_description"
               v-model="form.sale_order_description"
@@ -266,7 +266,7 @@
             ></textarea>
           </div>
 
-          <div class="col-span-6">
+          <div class="col-span-12">
             <!-- Attachments -->
             <label for="attachment">Attachments Doc/Media</label>
             <input
@@ -299,7 +299,7 @@ import { useRouter } from "vue-router";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import MainLayout from "@/components/MainLayout.vue";
-import task from "@/stores/task-api.js";
+import order from "@/stores/order-api.js";
 import { showNotification } from "@/utilities/notification";
 import { useDataStore } from "@/stores/data";
 import { Item } from "ant-design-vue/es/menu";
@@ -333,9 +333,10 @@ const formErrors = ref({});
 const allProspects = ref([]);
 const allLeads = ref([]);
 const allQuotations = ref([]);
+const allItems = ref([]);
 
 const router = useRouter();
-const {getProspects, getLeads, getQuotations} =
+const {getProspects, getLeads, getQuotations, getItems} =
   useDataStore();
 
 // Form validation
@@ -367,6 +368,10 @@ onMounted(() => {
   getProspects().then((res) => (allProspects.value = res));
   getLeads().then((res) => (allLeads.value = res));
   getQuotations().then((res) => (allQuotations.value = res));
+  getItems().then((res) => (allItems.value = res));
+
+  console.log(allQuotations,'Okay');
+  
 });
 
 // Submitting the form
@@ -403,17 +408,19 @@ const submitForm = async () => {
     formData.append(`items[${index}]`, JSON.stringify(item)); // Corrected here
   });
 
+
+  loading.value = true;
   try {
-    loading.value = true;
-    const response = await task.createSaleOrder(formData);
-    loading.value = false;
-    showNotification("Sale Order created successfully", "success");
-    router.push({ name: "SaleOrderList" });
+    await order.insertOrder(formData); // Assuming insertLead is the API call
+    showNotification("success", "Sale Order created successfully!");
+    router.push("/order"); // Navigate back to the order list
   } catch (error) {
+    showNotification("error", "Error creating order.");
+  } finally {
     loading.value = false;
-    showNotification("Error creating Sale Order", "error");
-    console.error(error);
   }
+
+
 };
 
 
