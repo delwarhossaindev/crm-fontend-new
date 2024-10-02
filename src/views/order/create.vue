@@ -302,7 +302,6 @@ import MainLayout from "@/components/MainLayout.vue";
 import order from "@/stores/order-api.js";
 import { showNotification } from "@/utilities/notification";
 import { useDataStore } from "@/stores/data";
-import { Item } from "ant-design-vue/es/menu";
 
 // Initial form state
 const initialFormState = {
@@ -317,7 +316,7 @@ const initialFormState = {
   quotation_id: "",
   company_attention_person_id: "",
   phone: "",
-  item:[],
+  items:[],
   email_address: "", 
   designation: "",
   ordered_amount: "",
@@ -342,6 +341,7 @@ const {getProspects, getLeads, getQuotations, getItems} =
 // Form validation
 const validateForm = () => {
   formErrors.value = {};
+
   if (!form.value.sale_order_no)
     formErrors.value.sale_order_no = "Sale Order No is required.";
   if (!form.value.sale_order_date)
@@ -369,9 +369,6 @@ onMounted(() => {
   getLeads().then((res) => (allLeads.value = res));
   getQuotations().then((res) => (allQuotations.value = res));
   getItems().then((res) => (allItems.value = res));
-
-  console.log(allQuotations,'Okay');
-  
 });
 
 // Submitting the form
@@ -391,15 +388,13 @@ const submitForm = async () => {
   formData.append("phone", form.value.phone);
   formData.append("email_address", form.value.email_address);
   formData.append("designation", form.value.designation);
-  formData.append("department", form.value.department);
   formData.append("ordered_amount", form.value.ordered_amount);
   formData.append("key_account_person_id", form.value.key_account_person_id);
   formData.append("delivered_status", form.value.delivered_status);
   formData.append("sale_order_description", form.value.sale_order_description);
 
-  // Handle file attachment
   if (form.value.attachment) {
-    formData.append("attachment", form.value.attachment);
+    formData.append("attachment", form.value.attachment); // Append attachment if exists
   }
 
    // If there are items
