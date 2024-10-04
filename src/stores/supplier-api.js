@@ -35,8 +35,27 @@ export default {
   deleteSupplier(id) {
     return apiClientMultiple.delete(`/supplier/${id}`);
   },
-  updateSupplier(formdata, id) {
+
+  updateSupplier(formdata) {
+    return apiClientMultiple.post(`/supplier-update`, formdata);
+  },
+
+  updateSupplierOld(formdata, id) {
    
-    return apiClientMultiple.patch(`/supplier/${id}`, formdata);
+    // Send the PUT request with combined text and file data
+    return apiClientMultiple.put(`/supplier/${id}`, formdata, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Ensures FormData is handled correctly
+      },
+    })
+    .then(response => {
+      console.log('Supplier updated successfully:', response.data);
+      return response.data;
+    })
+    .catch(error => {
+      console.error('Error updating supplier:', error.response ? error.response.data : error.message);
+      throw error;
+    });
   }
+
 };

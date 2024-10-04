@@ -263,7 +263,6 @@ const fetchInitialData = async () => {
       // Fetch the lead data using the show method
       const response = await lead.showLead(leadId);
 
-
       console.log(response.data.items);
       // Map response data to the form fields
       form.value = {
@@ -272,12 +271,16 @@ const fetchInitialData = async () => {
         lead_name: response.data.lead.lead_name || "",
         win_probability_id: response.data.lead.win_probability_id || "",
         items: response.data.items, // Ensure items are properly formatted
-        estimated_closing_date: response.data.lead.estimated_closing_date.split(' ')[0] || "",
+        estimated_closing_date: response.data.lead.estimated_closing_date
+          ? response.data.lead.estimated_closing_date.split(" ")[0]
+          : "",
         estimated_closing_amount:
           response.data.lead.estimated_closing_amount || "",
         attention_person: response.data.lead.attention_person || "",
         lead_stage: response.data.lead.lead_stage || "",
-        stage_date: response.data.lead.stage_date.split(' ')[0] || "",
+        stage_date: response.data.lead.stage_date
+          ? response.data.lead.stage_date.split(" ")[0]
+          : "",
         priority: response.data.lead.priority || "",
         comment: response.data.lead.comment || "",
         attachment: response.data.lead.attachment || null, // Handle attachment if needed
@@ -290,7 +293,7 @@ const fetchInitialData = async () => {
     }
   } catch (error) {
     console.error("Error fetching initial data:", error);
-    showNotification("Failed to fetch lead data", "error");
+    showNotification("error", "Error fetching task details.");
   }
 };
 
@@ -343,8 +346,7 @@ const submitForm = async () => {
 
   loading.value = true;
   try {
-
-    await lead.updateLead(formData,leadId); // Assuming insertLead is the API call
+    await lead.updateLead(formData, leadId); // Assuming insertLead is the API call
     showNotification("success", "Lead created successfully!");
     router.push("/lead"); // Navigate back to the lead list
   } catch (error) {

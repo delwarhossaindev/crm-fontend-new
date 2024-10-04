@@ -35,8 +35,7 @@ export default {
   deleteTask(id) {
     return apiClientMultiple.delete(`/task/${id}`);
   },
-  updateTask(formdata, id) {
-     console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/task/${id}`, JSON.parse(JSON.stringify(formdata)));
+  updateTask(formdata,id) {
+    return apiClientMultiple.post(`/task-update/${id}`, formdata);
   }
 };

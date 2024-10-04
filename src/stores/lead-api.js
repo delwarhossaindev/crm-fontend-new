@@ -43,51 +43,8 @@ export default {
   deleteLead(id) {
     return apiClientMultiple.delete(`/lead/${id}`);
   },
-  updateLead(id) {
-    const formData = new FormData();
-    formData.append('prospect_id', 1);
-    formData.append('lead_name', 'lead_name');
-    formData.append('_method', 'PUT');
-    
-    // No need to stringify FormData
-    console.log(Object.fromEntries(formData)); // View form data in plain object form for debugging
-
-    return apiClientMultiple.put(`/lead/${id}`, Object.fromEntries(formData), {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
-},
-  async updateLeadold(formdata1, id) {
-    try {
-      // Create FormData object and append form data
-      const formData = new FormData();
-      formData.append('prospect_id', 1);
-      formData.append('lead_name', 'lead_name');
-
-      const data = {
-        prospect_id: 1,
-        lead_name: 'lead_name',
-      };
-     
-      
-      // Make PUT/PATCH request using Axios
-      const response = await axios.patch(`/lead/${id}`, {
-        prospect_id: 1,
-        lead_name: 'lead_name',
-      }, {
-        baseURL: apiBase,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      alert('Lead updated successfully!');
-      console.log('Updated Lead:', response.data);
-    } catch (error) {
-      console.error('Error updating lead:', error);
-    }
+  updateLead(formdata, id) {
+    return apiClientMultiple.post(`/lead-update/${id}`,formdata);
   }
 
 };
