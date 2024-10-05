@@ -127,6 +127,12 @@ import QuotationCreate from "@/views/quotation/create.vue";
 import QuotationItemCreate from "@/views/quotation/item-wise-create.vue";
 import QuotationEdit from "@/views/quotation/edit.vue";
 
+//Prospect
+import ProspectList from "@/views/prospect/index.vue";
+import ProspectCreate from "@/views/prospect/create.vue";
+import ProspectItemCreate from "@/views/prospect/item-wise-create.vue";
+import ProspectEdit from "@/views/prospect/edit.vue";
+
 //Supplier
 import SupplierList from "@/views/supplier/index.vue";
 import SupplierCreate from "@/views/supplier/create.vue";
@@ -550,6 +556,27 @@ const routes = [
     path: "/quotation/edit/:id",
     name: "quotation-edit",
     component: QuotationEdit,
+  },
+
+  {
+    path: "/prospect",
+    name: "prospect",
+    component: ProspectList,
+  },
+  {
+    path: "/prospect/create",
+    name: "prospect-create",
+    component: ProspectCreate,
+  },
+  {
+    path: "/prospect/item/create",
+    name: "prospect-item-create",
+    component: ProspectItemCreate,
+  },
+  {
+    path: "/prospect/edit/:id",
+    name: "prospect-edit",
+    component: ProspectEdit,
   },
 
   {

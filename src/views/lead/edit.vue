@@ -2,7 +2,7 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Edit Lead</h6>
+        <h6 class="font-medium">Edit Sale Order</h6>
         <button
           type="button"
           class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
@@ -347,7 +347,7 @@ const submitForm = async () => {
   loading.value = true;
   try {
     await lead.updateLead(formData, leadId); // Assuming insertLead is the API call
-    showNotification("success", "Lead created successfully!");
+    showNotification("success", "Lead updated successfully!");
     router.push("/lead"); // Navigate back to the lead list
   } catch (error) {
     showNotification("error", "Error creating lead.");

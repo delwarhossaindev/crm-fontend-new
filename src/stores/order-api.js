@@ -36,7 +36,8 @@ export default {
     return apiClientMultiple.delete(`/sales-order/${id}`);
   },
   updateOrder(formdata, id) {
-     console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/sales-order/${id}`, JSON.parse(JSON.stringify(formdata)));
+    formdata.append('_method', 'PUT');
+    return apiClientMultiple.post(`/sales-order/${id}`, formdata);
+
   }
 };

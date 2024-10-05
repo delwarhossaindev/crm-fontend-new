@@ -50,7 +50,7 @@ export const useDataStore = defineStore("dataStore", {
         else showNotification("error", error?.message);
       }
     },
-  
+
     // Product Search
     async getProduct(query, branch) {
       this.isPurchasing = true;
@@ -255,8 +255,8 @@ export const useDataStore = defineStore("dataStore", {
       }
     },
 
-     // Employees Search
-     async getEmployees(query) {
+    // Employees Search
+    async getEmployees(query) {
       !query && (query = "");
       this.isEmployee = true;
       try {
@@ -277,8 +277,8 @@ export const useDataStore = defineStore("dataStore", {
       }
     },
 
-     // Prospects Search
-     async getProspects(query) {
+    // Prospects Search
+    async getProspects(query) {
       !query && (query = "");
       this.isProspect = true;
       try {
@@ -299,8 +299,8 @@ export const useDataStore = defineStore("dataStore", {
       }
     },
 
-     // Leads Search
-     async getLeads(query) {
+    // Leads Search
+    async getLeads(query) {
       !query && (query = "");
       this.isLead = true;
       try {
@@ -314,6 +314,183 @@ export const useDataStore = defineStore("dataStore", {
         this.isLead = false;
         if (response?.status == 200)
           console.log(response);
+        return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+
+    // Items Search
+    async getItems(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/items?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Designation Search
+    async getDesignation(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/designations?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Department Search
+    async getDepartment(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/departments?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Win Probability
+    async getWinProbability(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/win-probabilities?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Country
+    async getCountry(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/countries?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Zone
+    async getZone(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/zones?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    // Quotation
+    async getQuotations(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/quotations?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+
+    //Industry Types
+    async getIndustryTypes(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+        const response = await axios.get(`${apiBase}/industry-types?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
           return response?.data;
       } catch (error) {
         this.isLead = false;
@@ -323,161 +500,136 @@ export const useDataStore = defineStore("dataStore", {
     },
 
 
-      // Items Search
-      async getItems(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/items?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+    //Organization Type
+    async getOrganizationTypes(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
+        const response = await axios.get(`${apiBase}/organization-types?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
 
-      // Designation Search
-      async getDesignation(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/designations?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+    //Business Industry
+    async getBusinessIndustries(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
+        const response = await axios.get(`${apiBase}/business-industries?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
 
-      // Department Search
-      async getDepartment(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/departments?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+    //Influencing Role
+    async getInfluencingRoles(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
+        const response = await axios.get(`${apiBase}/influencing-roles?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
 
-      // Win Probability
-      async getWinProbability(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/win-probabilities?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+    //Win Probabilities
+    async getWinProbabilities(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
-
-      // Country
-      async getCountry(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/countries?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+        const response = await axios.get(`${apiBase}/win-probabilities?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
+    //Gender 
+    async getGender(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
+        const response = await axios.get(`${apiBase}/genders?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
 
-       // Zone
-       async getZone(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/zones?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
+    //user 
+    async getuser(query) {
+      !query && (query = "");
+      this.isLead = true;
+      try {
+        const token = Cookies.get("token");
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         }
-      },
-
-       // Quotation
-       async getQuotations(query) {
-        !query && (query = "");
-        this.isLead = true;
-        try {
-          const token = Cookies.get("token");
-          const config = {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-          const response = await axios.get(`${apiBase}/quotations?term=${query}`, config);
-          this.isLead = false;
-          if (response?.status == 200)
-            return response?.data;
-        } catch (error) {
-          this.isLead = false;
-          console.log(error);
-          showNotification("error", error?.message);
-        }
-      },
-
-
+        const response = await axios.get(`${apiBase}/user_list?term=${query}`, config);
+        this.isLead = false;
+        if (response?.status == 200)
+          return response?.data;
+      } catch (error) {
+        this.isLead = false;
+        console.log(error);
+        showNotification("error", error?.message);
+      }
+    },
 
 
   },

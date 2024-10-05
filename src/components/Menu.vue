@@ -44,6 +44,7 @@ const menu = ref([
   {
     title: "Prospect",
     icon: "bi bi-person-plus", // A person with a plus sign suggests potential customers or prospects
+    href: { name: "prospect" },
     isExpanded: false,
     class: "",
   },

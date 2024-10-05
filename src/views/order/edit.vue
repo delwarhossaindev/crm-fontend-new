@@ -2,12 +2,9 @@
   <MainLayout>
     <div class="bg-white p-3 rounded-md">
       <div class="flex justify-between items-center mb-3">
-        <h6 class="font-medium">Update Sale Order</h6>
-        <button
-          type="button"
-          class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
-          @click="$router.go(-1)"
-        >
+        <h6 class="font-medium">Edit Sale Order</h6>
+        <button type="button" class="px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
+          @click="$router.go(-1)">
           Back
         </button>
       </div>
@@ -20,14 +17,9 @@
             <label for="sale_order_no">
               Sale Order No
             </label>
-            <input
-              id="sale_order_no"
-              type="text"
-              v-model="form.sale_order_no"
-              :class="{ 'border-red-500': formErrors.sale_order_no }"
-              class="input-text w-full"
-              placeholder="Enter Sale Order No..."
-            />
+            <input id="sale_order_no" type="text" v-model="form.sale_order_no"
+              :class="{ 'border-red-500': formErrors.sale_order_no }" class="input-text w-full"
+              placeholder="Enter Sale Order No..." />
             <p v-if="formErrors.sale_order_no" class="text-red-500">
               {{ formErrors.sale_order_no }}
             </p>
@@ -38,15 +30,9 @@
             <label for="sale_order_date">
               Sale Order Date <span class="text-red-600">*</span>
             </label>
-            <input
-              id="sale_order_date"
-              type="date"
-              v-model="form.sale_order_date"
-              :class="{ 'border-red-500': formErrors.sale_order_date }"
-              class="input-text w-full"
-              placeholder="Enter Sale Order Date..."
-              required
-            />
+            <input id="sale_order_date" type="date" v-model="form.sale_order_date"
+              :class="{ 'border-red-500': formErrors.sale_order_date }" class="input-text w-full"
+              placeholder="Enter Sale Order Date..." required />
             <p v-if="formErrors.sale_order_date" class="text-red-500">
               {{ formErrors.sale_order_date }}
             </p>
@@ -57,14 +43,9 @@
             <label for="client_order_no">
               Client Order No<span class="text-red-600">*</span>
             </label>
-            <input
-              id="client_order_no"
-              type="text"
-              v-model="form.client_order_no"
-              :class="{ 'border-red-500': formErrors.client_order_no }"
-              class="input-text w-full"
-              placeholder="Enter Client Order No..."
-            />
+            <input id="client_order_no" type="text" v-model="form.client_order_no"
+              :class="{ 'border-red-500': formErrors.client_order_no }" class="input-text w-full"
+              placeholder="Enter Client Order No..." />
             <p v-if="formErrors.client_order_no" class="text-red-500">
               {{ formErrors.client_order_no }}
             </p>
@@ -75,215 +56,130 @@
             <label for="client_order_date">
               Client Order Date <span class="text-red-600">*</span>
             </label>
-            <input
-              id="client_order_date"
-              type="date"
-              v-model="form.client_order_date"
-              :class="{ 'border-red-500': formErrors.client_order_date }"
-              class="input-text w-full"
-              placeholder="Enter Client Order Date..."
-              required
-            />
+            <input id="client_order_date" type="date" v-model="form.client_order_date"
+              :class="{ 'border-red-500': formErrors.client_order_date }" class="input-text w-full"
+              placeholder="Enter Client Order Date..." required />
             <p v-if="formErrors.client_order_date" class="text-red-500">
               {{ formErrors.client_order_date }}
             </p>
           </div>
 
-          <div class="col-span-12">
+          <div class="col-span-6">
             <!-- Sale Order Subject -->
             <label for="sale_order_subject">
               Sale Order Subject<span class="text-red-600">*</span>
             </label>
-            <input
-              id="sale_order_subject"
-              type="text"
-              v-model="form.sale_order_subject"
-              :class="{ 'border-red-500': formErrors.sale_order_subject }"
-              class="input-text w-full"
-              placeholder="Enter Sale Order Subject..."
-            />
+            <input id="sale_order_subject" type="text" v-model="form.sale_order_subject"
+              :class="{ 'border-red-500': formErrors.sale_order_subject }" class="input-text w-full"
+              placeholder="Enter Sale Order Subject..." />
             <p v-if="formErrors.sale_order_subject" class="text-red-500">
               {{ formErrors.sale_order_subject }}
             </p>
           </div>
 
-          <div class="col-span-4">
-            <!-- Prospect -->
-            <label for="prospect_id">Prospect Name<span class="text-red-600">*</span></label>
-            <v-select
-              v-model="form.prospect_id"
-              :options="allProspects"
-              label="name"
-              :reduce="(prospect) => prospect.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select prospect..."
-            ></v-select>
+          <div class="col-span-6">
+            <!-- Attention Person -->
+            <label for="company_attention_person">Company Attention Person</label>
+            <input id="company_attention_person" type="text" v-model="form.company_attention_person"
+              class="input-text w-full" placeholder="Enter Attention Person..." />
           </div>
 
           <div class="col-span-4">
-            <label for="prospect_id">Lead Name</label>
-              <!-- Lead -->
-              <label for="lead_id">Lead</label>
-            <v-select
-              v-model="form.lead_id"
-              :options="allLeads"
-              label="lead_name"
-              :reduce="(lead) => lead.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select lead..."
-            ></v-select>
+            <!-- Prospect -->
+            <label for="prospect_id">Prospect Name<span class="text-red-600">*</span></label>
+            <v-select v-model="form.prospect_id" :options="allProspects" label="name"
+              :reduce="(prospect) => prospect.id" class="common-select w-full rounded-lg"
+              placeholder="Select prospect..."></v-select>
+          </div>
+
+          <div class="col-span-4">
+            <label for="lead_id">Lead Name</label>
+            <!-- Lead -->
+            <v-select v-model="form.lead_id" :options="allLeads" label="lead_name" :reduce="(lead) => lead.id"
+              class="common-select w-full rounded-lg" placeholder="Select lead..."></v-select>
           </div>
 
           <div class="col-span-4">
             <!-- Quotation No -->
             <label for="quotation_id">Quotation No</label>
-            <v-select
-              v-model="form.quotation_id"
-              :options="allQuotations"
-              label="quotation_number"
-              :reduce="(quotation) => quotation.id"
-              class="common-select w-full rounded-lg"
-              placeholder="Select quotation..."
-            ></v-select>
+            <v-select v-model="form.quotation_id" :options="allQuotations" label="quotation_number"
+              :reduce="(quotation) => quotation.id" class="common-select w-full rounded-lg"
+              placeholder="Select quotation..."></v-select>
           </div>
 
-          <div class="col-span-12">
-            <!-- Attention Person -->
-            <label for="company_attention_person">Company Attention Person</label>
-            <input
-              id="company_attention_person"
-              type="text"
-              v-model="form.company_attention_person"
-              class="input-text w-full"
-              placeholder="Enter Attention Person..."
-            />
-          </div>
 
-          <div class="col-span-6">
+
+          <div class="col-span-3">
             <!-- Phone -->
             <label for="phone">Phone</label>
-            <input
-              id="phone"
-              type="text"
-              v-model="form.phone"
-              class="input-text w-full"
-              placeholder="Enter Phone..."
-            />
+            <input id="phone" type="text" v-model="form.phone" class="input-text w-full" placeholder="Enter Phone..." />
           </div>
 
-          <div class="col-span-6">
+          <div class="col-span-3">
             <!-- email_address -->
             <label for="email_address">Email Address</label>
-            <input
-              id="email_address"
-              type="text"
-              v-model="form.email_address"
-              class="input-text w-full"
-              placeholder="Enter Phone..."
-            />
+            <input id="email_address" type="text" v-model="form.email_address" class="input-text w-full"
+              placeholder="Enter Phone..." />
           </div>
 
-          <div class="col-span-6">
+          <div class="col-span-3">
             <!-- Designation -->
             <label for="designation">Designation</label>
-            <input
-              id="designation"
-              type="text"
-              v-model="form.designation"
-              class="input-text w-full"
-              placeholder="Enter Designation..."
-            />
+            <input id="designation" type="text" v-model="form.designation" class="input-text w-full"
+              placeholder="Enter Designation..." />
           </div>
 
-          <div class="col-span-6">
+          <div class="col-span-3">
             <!-- department -->
             <label for="department">Department</label>
-            <input
-              id="department"
-              type="text"
-              v-model="form.department"
-              class="input-text w-full"
-              placeholder="Enter Department..."
-            />
+            <input id="department" type="text" v-model="form.department" class="input-text w-full"
+              placeholder="Enter Department..." />
           </div>
 
           <div class="col-span-8">
             <label for="items">Order Item</label>
-            <v-select
-              id="items"
-              v-model="form.items"
-              :options="allItems"
-              label="item_name"
-              multiple
-              class="input-text w-full"
-              placeholder="Select Supplier Items..."
-            ></v-select>
+            <v-select id="items" v-model="form.items" :options="allItems" label="item_name" multiple
+              class="input-text w-full" placeholder="Select Supplier Items..."></v-select>
           </div>
 
           <div class="col-span-4">
             <!-- ordered_amount -->
             <label for="ordered_amount">Ordered Amount</label>
-            <input
-              id="ordered_amount"
-              type="number"
-              v-model="form.ordered_amount"
-              class="input-text w-full"
-              placeholder="Enter ordered_amount..."
-            />
+            <input id="ordered_amount" type="number" v-model="form.ordered_amount" class="input-text w-full"
+              placeholder="Enter ordered_amount..." />
           </div>
 
           <div class="col-span-8">
             <!--Key Account Person -->
-            <label for="key_account_person_id">Key Account Person</label>
-            <input
-              id="key_account_person_id"
-              type="text"
-              v-model="form.key_account_person_id"
-              class="input-text w-full"
-              placeholder="Enter Key Account Person..."
-            />
+            <label for="key_account_person">Key Account Person</label>
+            <input id="key_account_person" type="text" v-model="form.key_account_person" class="input-text w-full"
+              placeholder="Enter Key Account Person..." />
           </div>
 
           <div class="col-span-4">
             <!--Delivered Status -->
             <label for="delivered_status">Delivered Status</label>
-            <select
-              v-model="form.delivered_status"
-              id="delivered_status"
-              class="common-select w-full rounded-lg"
-            >
+            <select v-model="form.delivered_status" id="delivered_status" class="common-select w-full rounded-lg">
               <option value="1">Delivered</option>
               <option value="0">Not Delivered </option>
             </select>
           </div>
 
-          <div class="col-span-12">
-            <textarea
-              id="sale_order_description"
-              v-model="form.sale_order_description"
-              class="input-text w-full"
-              placeholder="Enter Sale Order Description..."
-            ></textarea>
+          <div class="col-span-6">
+            <textarea id="sale_order_description" v-model="form.sale_order_description" class="input-text w-full"
+              placeholder="Enter Sale Order Description..."></textarea>
           </div>
 
-          <div class="col-span-12">
+          <div class="col-span-6">
             <!-- Attachments -->
             <label for="attachment">Attachments Doc/Media</label>
-            <input
-              id="attachment"
-              type="file"
-              @change="handleFileUpload"
-              class="input-text w-full"
-            />
+            <input id="attachment" type="file" @change="handleFileUpload" class="input-text w-full" />
           </div>
 
           <!-- Submit Button -->
           <div class="col-span-12 flex justify-end mt-3">
-            <button
-              type="submit"
-              :disabled="loading"
-              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600"
-            >
+            <button type="submit" :disabled="loading"
+              class="px-4 py-2 min-w-32 bg-[#000180] text-white rounded-lg hover:bg-indigo-600">
               {{ loading ? "Submitting..." : "Submit" }}
             </button>
           </div>
@@ -314,16 +210,17 @@ const initialFormState = {
   lead_id: "",
   prospect_id: "",
   quotation_id: "",
-  company_attention_person_id: "",
+  company_attention_person: "",
   phone: "",
-  items:[],
-  email_address: "", 
+  items: [],
+  email_address: "",
   designation: "",
   ordered_amount: "",
-  key_account_person_id: "",
-  delivered_status: "", 
+  key_account_person: "",
+  delivered_status: 1,
   sale_order_description: "",
-  attachment: null, // Store attachment file(s)
+  department: "",
+  attachment: null,
 };
 
 const loading = ref(false);
@@ -335,51 +232,55 @@ const allQuotations = ref([]);
 const allItems = ref([]);
 
 const router = useRouter();
-const {getProspects, getLeads, getQuotations, getItems} =
+const { getProspects, getLeads, getQuotations, getItems } =
   useDataStore();
 
-const orderId = router.currentRoute.value.params.id; // Assuming orderId is in route params
-
+const orderId = router.currentRoute.value.params.id;
 
 const fetchInitialData = async () => {
   try {
     if (orderId) {
       // Fetch the lead data using the show method
-      const response = await lead.showOrder(orderId);
+      const response = await order.showOrder(orderId);
 
       console.log(response.data.items);
       // Map response data to the form fields
       form.value = {
         ...form.value,
-        prospect_id: response.data.lead.prospect_id || "",
-        lead_name: response.data.lead.lead_name || "",
-        win_probability_id: response.data.lead.win_probability_id || "",
-        items: response.data.items, // Ensure items are properly formatted
-        estimated_closing_date: response.data.lead.estimated_closing_date
-          ? response.data.lead.estimated_closing_date.split(" ")[0]
-          : "",
-        estimated_closing_amount:
-          response.data.lead.estimated_closing_amount || "",
-        attention_person: response.data.lead.attention_person || "",
-        lead_stage: response.data.lead.lead_stage || "",
-        stage_date: response.data.lead.stage_date
-          ? response.data.lead.stage_date.split(" ")[0]
-          : "",
-        priority: response.data.lead.priority || "",
-        comment: response.data.lead.comment || "",
-        attachment: response.data.lead.attachment || null, // Handle attachment if needed
+        sale_order_no: response.data.order.sale_order_no || "",
+        sale_order_date: response.data.order.sale_order_date || "",
+        client_order_no: response.data.order.client_order_no || "",
+        client_order_date: response.data.order.client_order_date || "",
+        sale_order_subject: response.data.order.sale_order_subject || "",
+        prospect_id: response.data.order.prospect_id || "",
+        lead_id: response.data.order.lead_id || "",
+        quotation_id: response.data.order.quotation_id || "",
+        company_attention_person: response.data.order.company_attention_person || "",
+        phone: response.data.order.phone || "",
+        email_address: response.data.order.email_address || "",
+        designation: response.data.order.designation || "",
+        ordered_amount: response.data.order.ordered_amount || "",
+        key_account_person: response.data.order.key_account_person || "",
+        delivered_status: response.data.order.delivered_status || 1, // Default to 1 if no status provided
+        sale_order_description: response.data.order.sale_order_description || "",
+        department: response.data.order.department || "", // Handle attachment if needed
+        items: response.data.items || [],
+        attachment: response.data.order.attachment || null,
       };
 
-      // Optional: If you want to load other data like prospects, win probabilities, and items
-      allProspects.value = await getProspects();
-      allWinProbability.value = await getWinProbability();
-      allItems.value = await getItems();
+      // Optional: If you want to Sale Order other data like prospects, win probabilities, and items
+      getProspects().then((res) => (allProspects.value = res));
+      getLeads().then((res) => (allLeads.value = res));
+      getQuotations().then((res) => (allQuotations.value = res));
+      getItems().then((res) => (allItems.value = res));
+
     }
   } catch (error) {
     console.error("Error fetching initial data:", error);
-    showNotification("error", "Error fetching task details.");
+    showNotification("error", "Error fetching Sale Order details.");
   }
 };
+
 
 
 // Form validation
@@ -408,13 +309,7 @@ const handleFileUpload = (event) => {
 };
 
 // Fetching data on mount
-onMounted(() => {
-  fetchInitialData();
-  getProspects().then((res) => (allProspects.value = res));
-  getLeads().then((res) => (allLeads.value = res));
-  getQuotations().then((res) => (allQuotations.value = res));
-  getItems().then((res) => (allItems.value = res));
-});
+onMounted(fetchInitialData);
 
 // Submitting the form
 const submitForm = async () => {
@@ -433,31 +328,36 @@ const submitForm = async () => {
   formData.append("phone", form.value.phone);
   formData.append("email_address", form.value.email_address);
   formData.append("designation", form.value.designation);
-  formData.append("ordered_amount", form.value.ordered_amount);
-  formData.append("key_account_person_id", form.value.key_account_person_id);
+  formData.append("sale_order_description", form.value.sale_order_description);
   formData.append("delivered_status", form.value.delivered_status);
+  formData.append("ordered_amount", form.value.ordered_amount);
+  formData.append("department", form.value.department);
+  formData.append("key_account_person", form.value.key_account_person);
+  formData.append("id", orderId);
   formData.append("sale_order_description", form.value.sale_order_description);
 
   if (form.value.attachment) {
     formData.append("attachment", form.value.attachment); // Append attachment if exists
   }
 
-   // If there are items
-   form.value.items.forEach((item, index) => {
+  // If there are items
+  form.value.items.forEach((item, index) => {
+    // Append each item to formData with a unique key
     formData.append(`items[${index}]`, JSON.stringify(item)); // Corrected here
   });
 
 
   loading.value = true;
   try {
-    await order.insertOrder(formData); // Assuming insertLead is the API call
-    showNotification("success", "Sale Order created successfully!");
+    await order.updateOrder(formData); // Assuming insertLead is the API call
+    showNotification("success", "Sale Order updated successfully!");
     router.push("/order"); // Navigate back to the order list
   } catch (error) {
     showNotification("error", "Error creating order.");
   } finally {
     loading.value = false;
   }
+
 
 };
 
@@ -470,6 +370,7 @@ const submitForm = async () => {
   border-radius: 6px;
   padding: 8px 12px;
 }
+
 .common-select {
   border: 1px solid #d1d5db;
 }
