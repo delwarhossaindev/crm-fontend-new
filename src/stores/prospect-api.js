@@ -20,26 +20,26 @@ const apiClientMultiple = axios.create({
 });
 
 export default {
-  insertQuotation(formdata) {
-    return apiClientMultiple.post(`/quotations`, formdata);
+  insertProspect(formdata) {
+    return apiClientMultiple.post(`/individual-info`, formdata);
   },
-  insertItemWiseQuotation(formdata) {
-    return apiClientMultiple.post(`/item-wise-quotations`, formdata);
+  insertItemWiseProspect(formdata) {
+    return apiClientMultiple.post(`/item-wise-individual-info`, formdata);
   },
-  fetchQuotationList(page) {
-    return apiClient.get(`/all-quotations-paginated?page=${page}`);
+  fetchProspectList(page) {
+    return apiClient.get(`/all-individual-info-paginated?page=${page}`);
   },
-  searchQuotationList(search) {
-    return apiClient.get(`/all-quotations-paginated?search=${search}`);
+  searchProspectList(search) {
+    return apiClient.get(`/all-individual-info-paginated?search=${search}`);
   },
-  showQuotation(id) {
-    return apiClientMultiple.get(`/quotations/${id}`);
+  showProspect(id) {
+    return apiClientMultiple.get(`/individual-info/${id}`);
   },
-  deleteQuotation(id) {
-    return apiClientMultiple.delete(`/quotations/${id}`);
+  deleteProspect(id) {
+    return apiClientMultiple.delete(`/individual-info/${id}`);
   },
-  updateQuotation(formdata, id) {
+  updateProspect(formdata, id) {
      console.log(JSON.stringify(formdata),JSON.parse(JSON.stringify(formdata)));
-    return apiClientMultiple.put(`/quotations/${id}`, JSON.parse(JSON.stringify(formdata)));
+    return apiClientMultiple.put(`/individual-info/${id}`, JSON.parse(JSON.stringify(formdata)));
   }
 };

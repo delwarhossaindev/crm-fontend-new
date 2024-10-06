@@ -610,7 +610,7 @@ export const useDataStore = defineStore("dataStore", {
     },
 
     //user 
-    async getuser(query) {
+    async getUser(query) {
       !query && (query = "");
       this.isLead = true;
       try {
@@ -630,6 +630,28 @@ export const useDataStore = defineStore("dataStore", {
         showNotification("error", error?.message);
       }
     },
+
+       //Job Type
+       async getJobType(query) {
+        !query && (query = "");
+        this.isLead = true;
+        try {
+          const token = Cookies.get("token");
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          const response = await axios.get(`${apiBase}/job-types?term=${query}`, config);
+          this.isLead = false;
+          if (response?.status == 200)
+            return response?.data;
+        } catch (error) {
+          this.isLead = false;
+          console.log(error);
+          showNotification("error", error?.message);
+        }
+      },
 
 
   },
