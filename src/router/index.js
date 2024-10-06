@@ -130,7 +130,7 @@ import QuotationEdit from "@/views/quotation/edit.vue";
 //Prospect
 import ProspectList from "@/views/prospect/index.vue";
 import ProspectCreate from "@/views/prospect/create.vue";
-import ProspectItemCreate from "@/views/prospect/item-wise-create.vue";
+import ProspectOrganizationCreate from "@/views/prospect/organization-wise-create.vue";
 import ProspectEdit from "@/views/prospect/edit.vue";
 
 //Supplier
@@ -569,9 +569,9 @@ const routes = [
     component: ProspectCreate,
   },
   {
-    path: "/prospect/item/create",
-    name: "prospect-item-create",
-    component: ProspectItemCreate,
+    path: "/prospect/organization/create",
+    name: "prospect-organization-create",
+    component: ProspectOrganizationCreate,
   },
   {
     path: "/prospect/edit/:id",

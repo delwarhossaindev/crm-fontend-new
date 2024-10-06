@@ -87,7 +87,7 @@ onMounted(() => {
           </button>
         </router-link>
 
-        <router-link :to="{ name: 'prospect-item-create' }">
+        <router-link :to="{ name: 'prospect-organization-create' }">
           <button
             class="flex items-center px-4 py-2 bg-[#000180] text-white rounded hover:bg-indigo-600"
           >
