@@ -11,9 +11,10 @@
       <hr />
       <form @submit.prevent="submitForm">
         <!-- Initial Information Header -->
-        <div class="col-span-12 mb-6">
+        <div class="col-span-12 mb-6 mt-5">
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Initial Information
+            <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12 " /> Initial Information
           </h2>
         </div>
         <div class="lg:grid grid-cols-12 gap-4 items-center">
@@ -71,10 +72,11 @@
         </div>
 
         <!-- Basic Information -->
-        <div class="col-span-12 mb-6">
-          <br />
+        <div class="col-span-12 mb-6  mt-3">
+         
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Basic Information
+            <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12" />Basic Information
           </h2>
         </div>
 
@@ -175,10 +177,11 @@
 
 
         </div>
-        <div class="col-span-12 mb-6">
-          <br />
+        <div class="col-span-12 mb-6  mt-3">
+        
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i>Personal Information
+            <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12 " />Personal Information
           </h2>
         </div>
         <div class="lg:grid grid-cols-12 gap-4 items-center">
@@ -242,22 +245,195 @@
           </div>
 
         </div>
-        <div class="col-span-12 mb-6">
+        <div class="col-span-12 mb-6  mt-3">
           <br />
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Communication Information
+            <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12 " />Communication Information
+          </h2>
+        </div>
+        <div class="lg:grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-3">
+            <!-- Other Contact No -->
+            <label for="other_contact_no"> Other Contact No </label>
+            <input id="other_contact_no" type="text" v-model="form.communication_info.other_contact_no"
+              class="input-text w-full" placeholder="Enter Other Contact No..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Other Email -->
+            <label for="other_email"> Other Email </label>
+            <input id="other_email" type="text" v-model="form.communication_info.other_email" class="input-text w-full"
+              placeholder="Enter Other Email..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Fax -->
+            <label for="fax"> Fax </label>
+            <input id="fax" type="text" v-model="form.communication_info.fax" class="input-text w-full"
+              placeholder="Enter Fax..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Phone -->
+            <label for="organization_phone"> Phone </label>
+            <input id="organization_phone" type="text" v-model="form.communication_info.phone" class="input-text w-full"
+              placeholder="Enter Phone..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- website -->
+            <label for="organization_website"> Website </label>
+            <input id="organization_website" type="text" v-model="form.communication_info.website"
+              class="input-text w-full" placeholder="Enter Website..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Social Network -->
+            <label for="social_network"> Social Network </label>
+            <input id="social_network" type="text" v-model="form.communication_info.social_network"
+              class="input-text w-full" placeholder="Enter Social Network..." />
+          </div>
+
+        </div>
+        <div class="col-span-12 mb-6  mt-3">
+          <br />
+          <h2 class="text-2xl font-semibold text-gray-800">
+            <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12 " />Service Information
           </h2>
         </div>
         <div class="lg:grid grid-cols-12 gap-4 items-center">
 
-        </div>
-        <div class="col-span-12 mb-6">
-          <br />
-          <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i>  Service Information
-          </h2>
-        </div>
-        <div class="lg:grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-3">
+            <!-- Organization Name -->
+            <label for="organization_name">Organization Name<span class="text-red-600">*</span>
+            </label>
+            <input id="organization_name" type="text" v-model="form.service_info.organization_name"
+              class="input-text w-full" placeholder="Enter Organization Name..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Department -->
+            <label for="department">Department</label>
+            <v-select v-model="form.service_info.department" :options="allDepartments" label="name"
+              :reduce="(department) => department.name" class="common-select w-full rounded-lg"
+              placeholder="Select department..."></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Designation -->
+            <label for="designation">Designation</label>
+            <v-select v-model="form.service_info.designation" :options="allDesignations" label="name"
+              :reduce="(designation) => designation.id" class="common-select w-full rounded-lg"
+              placeholder="Select Designation..."></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- Income Range -->
+            <label for="income_range">Income Range<span class="text-red-600">*</span>
+            </label>
+            <input id="income_range" type="text" v-model="form.service_info.income_range" class="input-text w-full"
+              placeholder="Enter Income Range..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Industry Type -->
+            <label for="industry_type">Industry Type</label>
+            <v-select v-model="form.service_info.industry_type" :options="allIndustryTypes" label="name"
+              :reduce="(industry_type) => industry_type.name" class="common-select w-full rounded-lg"
+              placeholder="Select Industry Type..."></v-select>
+          </div>
+
+          <div class="col-span-3">
+            <!-- address -->
+            <label for="address">Address</label>
+            <input id="address" type="text" v-model="form.service_info.address" class="input-text w-full"
+              placeholder="Enter amount..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Country -->
+            <label for="country">Country
+            </label>
+            <input id="country" type="text" v-model="form.service_info.country" class="input-text w-full"
+              placeholder="Enter country..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Division -->
+            <label for="division">Division<span class="text-red-600">*</span>
+            </label>
+            <input id="division" type="text" v-model="form.service_info.division" class="input-text w-full"
+              placeholder="Enter Division..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- district -->
+            <label for="district">District<span class="text-red-600">*</span>
+            </label>
+            <input id="district" type="text" v-model="form.service_info.district" class="input-text w-full"
+              placeholder="Enter District..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- thana -->
+            <label for="thana">Thana<span class="text-red-600">*</span>
+            </label>
+            <input id="thana" type="text" v-model="form.service_info.thana" class="input-text w-full"
+              placeholder="Enter Thana..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Zip/PO -->
+            <label for="organization_zip"> Zip/PO </label>
+            <input id="organization_zip" type="text" v-model="form.service_info.zip" class="input-text w-full"
+              placeholder="Enter Zip/PO..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- website -->
+            <label for="organization_website"> Website </label>
+            <input id="organization_website" type="text" v-model="form.service_info.website" class="input-text w-full"
+              placeholder="Enter Website..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- latitude -->
+            <label for="latitude"> Latitude </label>
+            <input id="latitude" type="text" v-model="form.service_info.latitude" class="input-text w-full"
+              placeholder="Enter Latitude..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- longitude -->
+            <label for="longitude"> longitude </label>
+            <input id="longitude" type="text" v-model="form.service_info.Longitude" class="input-text w-full"
+              placeholder="Enter latitude..." />
+          </div>
+
+
+          <div class="col-span-3">
+            <!-- Phone -->
+            <label for="organization_phone"> Phone </label>
+            <input id="organization_phone" type="text" v-model="form.service_info.phone" class="input-text w-full"
+              placeholder="Enter Phone..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- skype -->
+            <label for="skype"> Skype </label>
+            <input id="skype" type="text" v-model="form.service_info.skype" class="input-text w-full"
+              placeholder="Enter Website..." />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Social Network -->
+            <label for="social_network"> Social Network </label>
+            <input id="social_network" type="text" v-model="form.service_info.social_network" class="input-text w-full"
+              placeholder="Enter Social Network..." />
+          </div>
+
 
 
           <div class="col-span-12 flex justify-end mt-3">
@@ -315,19 +491,18 @@ const initialFormState = {
     marital_status: "",
   },
   communication_info: {
-    contact_no: "",
+    other_contact_no: "",
     fax: "",
     social_network: "",
-    email: "",
-    website: "",
-    image: ""
+    other_email: "",
+    website: ""
   },
   service_info: {
     name: "",
-    designation_id: "",
+    designation: "",
     industry_id: "",
-    country_id: "",
-    district_id: "",
+    country: "",
+    district: "",
     zip: "",
     latitude: "",
     skype: "",
@@ -335,12 +510,12 @@ const initialFormState = {
     department_id: "",
     income_range_id: "",
     address: "",
-    division_id: "",
-    thana_id: "",
+    division: "",
+    thana: "",
     website: "",
     longitude: "",
     phone: "",
-    image: ""
+
 
   }
 };

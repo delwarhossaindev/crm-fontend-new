@@ -14,9 +14,10 @@
       <hr />
       <form @submit.prevent="submitForm">
         <!-- Initial Information Header -->
-        <div class="col-span-12 mb-6">
+        <div class="col-span-12 mb-6 mt-5">
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Initial Information
+             <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12" /> Initial Information
           </h2>
         </div>
         <div class="lg:grid grid-cols-12 gap-4 items-center">
@@ -189,10 +190,10 @@
         </div>
 
         <!-- Concern Person Header -->
-        <div class="col-span-12 mb-6">
-          <br />
+        <div class="col-span-12 mb-6 mt-3">
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Concern Person Information
+             <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12" /> Concern Person Information
           </h2>
         </div>
 
@@ -345,13 +346,15 @@
             />
           </div>
         </div>
-        <div class="col-span-12 mb-6">
+        <div class="col-span-12 mb-6 mt-3">
           <br />
           <h2 class="text-2xl font-semibold text-gray-800">
-            <i class="bi bi-receipt"></i> Organization Address
+             <img src="/sign-form.gif" alt="Service Information"
+              class="inline-block w-12 h-12" /> Organization Address
           </h2>
         </div>
         <div class="lg:grid grid-cols-12 gap-4 items-center">
+
           <div class="col-span-3">
             <!-- organization_address -->
             <label for="organization_address"> Organization Address </label>
@@ -386,6 +389,42 @@
               v-model="form.organization_address.zip"
               class="input-text w-full"
               placeholder="Enter Zip/PO..."
+            />
+          </div>
+
+          <div class="col-span-3">
+            <!-- Phone -->
+            <label for="organization_phone"> Phone </label>
+            <input
+              id="organization_phone"
+              type="text"
+              v-model="form.organization_address.phone"
+              class="input-text w-full"
+              placeholder="Enter phone..."
+            />
+          </div>
+
+          <div class="col-span-3">
+            <!-- latitude -->
+            <label for="latitude"> Latitude </label>
+            <input
+              id="latitude"
+              type="text"
+              v-model="form.organization_address.latitude"
+              class="input-text w-full"
+              placeholder="Enter Latitude..."
+            />
+          </div>
+
+          <div class="col-span-3">
+            <!-- longitude -->
+            <label for="longitude"> Longitude </label>
+            <input
+              id="longitude"
+              type="text"
+              v-model="form.organization_address.Longitude"
+              class="input-text w-full"
+              placeholder="Enter Longitude..."
             />
           </div>
 
